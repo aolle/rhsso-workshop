@@ -1,0 +1,7 @@
+name: ROOT
+title: Red Hat Single Sign-On Workshop
+version: master
+nav:
+  - modules/ROOT/nav.adoc
+
+start_page: ROOT:index.adoc
