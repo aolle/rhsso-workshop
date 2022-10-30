@@ -23,15 +23,11 @@ asciidoc:
 
 ui:
   bundle:
-    url: https://github.com/redhat-developer-demos/rhd-tutorial-ui/releases/download/v0.1.9/ui-bundle.zip
+    url: https://github.com/aolle/rhd-tutorial-ui/releases/download/v0.1.10/ui-bundle.zip
     snapshot: true
   supplemental_files:
     - path: partials/toolbar.hbs
       contents: ./supplemental-ui/partials/toolbar.hbs
-    - path: img/favicon.ico
-      contents: ./supplemental-ui/img/favicon.ico
-    - path: partials/head-icons.hbs
-      contents: ./supplemental-ui/partials/head-icons.hbs
     - path: .nojekyll
     - path: ui.yml
       contents: "static_files: [ .nojekyll ]"
