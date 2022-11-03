@@ -12,5 +12,5 @@ run:
 	$(IMAGE_NAME)
 
 clean:
-	podman rmi "$$(podman images -f "dangling=true" -q)" -f 2>/dev/null
-	podman rmi $(IMAGE_NAME) 2>/dev/null
+	podman rmi $$(podman images -f 'dangling=true' -q) -f 2>/dev/null || true
+	podman rmi $(IMAGE_NAME) 2>/dev/null || true
