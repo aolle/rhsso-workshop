@@ -1,0 +1,8 @@
+|===
+|**Tool**|**Fedora**|**Debian**
+
+| `OpenShift CLI (oc)`
+| https://access.redhat.com/downloads/content/290[OpenShift Container Platform downloads page]
+| https://access.redhat.com/downloads/content/290[OpenShift Container Platform downloads page]
+
+|===
