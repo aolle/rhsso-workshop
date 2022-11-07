@@ -1,7 +1,7 @@
 {
   "name": "sso-workshop",
   "description": "Red Hat Single Sign-On Workshop",
-  "homepage": "https://olleb.com/sso-workshop",
+  "homepage": "https://olleb.com/rhsso-workshop",
   "author": {
     "email": "angel@olleb.com",
     "name": "Àngel Ollé Blázquez",

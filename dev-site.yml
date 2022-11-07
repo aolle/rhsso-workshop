@@ -3,7 +3,7 @@ runtime:
 
 site:
   title: Red Hat Single Sign-On Workshop (Dev Mode)
-  url: http://localhost:8080/sso-workshop
+  url: http://localhost:8080/rhsso-workshop
   start_page: sso-workshop::index.adoc
 
 content:

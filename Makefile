@@ -1,4 +1,4 @@
-IMAGE_NAME=sso-workshop
+IMAGE_NAME=rhsso-workshop
 
 all: build run
 

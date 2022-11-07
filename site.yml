@@ -3,7 +3,7 @@ runtime:
 
 site:
   title: Red Hat Single Sign-On Workshop
-  url: https://olleb.com/sso-workshop
+  url: https://olleb.com/rhsso-workshop
   start_page: sso-workshop::index.adoc
 
 content:
