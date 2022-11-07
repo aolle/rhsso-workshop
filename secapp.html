@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Securing your application with Red Hat Single Sign-On :: Red Hat Single Sign-On Workshop</title>
+    <link rel="canonical" href="https://olleb.com/sso-workshop/secapp.html">
+    <link rel="prev" href="setup.html">
+    <meta name="generator" content="Antora 3.0.3">
+    <link rel="stylesheet" href="./_/css/site.css">
+<link rel="icon" href="./_/img/favicon.ico" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img src="./_/img/NewRHDFullLogo_4-color_white-wordmark.png" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="https://olleb.com/sso-workshop">Red Hat Single Sign-On Workshop</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
+        <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
+        <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/kafka-tutorial/" target="_blank">Kafka</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="ROOT" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html"></a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="setup.html">1. Environment Setup</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="setup.html#tools">1.1. Workshop Tools</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="setup.html#deployrhsso">1.2. Deploying Red Hat Single Sign-On for OpenShift</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="setup.html#deployrhsso-operator">1.2.1 Deploying Red Hat Single Sign-On for OpenShift using the Operator</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="setup.html#deployrhsso-templates">1.2.2 Deploying Red Hat Single Sign-On for OpenShift using the templates</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">2. Red Hat Single Sign-On</span>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="secapp.html">2.1 Securing your application with Red Hat Single Sign-On</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#presetup">2.1.1 Configuring the realm, roles and users</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#quarkus-app">2.1.2 Securing a Quarkus application using OpenID Connect (OIDC)</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Red Hat Single Sign-On Workshop</a></li>
+    <li>2. Red Hat Single Sign-On</li>
+    <li><a href="secapp.html">2.1 Securing your application with Red Hat Single Sign-On</a></li>
+  </ul>
+</nav>
+  <div style="padding: 0 0.5rem 0 0.75rem;"><a href="https://www.linkedin.com/in/angelolle/" target="_blank" rel="noopener noreferrer"> Àngel Ollé Blázquez | Specialist Solution Architect </a></div>
+</div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Securing your application with Red Hat Single Sign-On</h1>
+<div class="sect1">
+<h2 id="presetup"><a class="anchor" href="#presetup"></a>Configuring the Realm, roles and users</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Before proceeding with the next sections, we have to configure the realm, roles and users in our Red Hat Single Sign-On instance.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Open a browser window and log in to the Red Hat Single Sign-On administration web console.</p>
+</li>
+<li>
+<p>Create the <code>demo</code> realm. Point to the default <code>Master</code> realm, and click <code>Add realm</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/addrealm.png" alt="addrealm">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Set the realm name and click <code>Create</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/add-demo-realm.png" alt="add demo realm">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create the role <code>vet</code>. Click <code>Roles</code> → <code>Add Role</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/demo-roles.png" alt="demo roles">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/demo-add-role.png" alt="demo add role">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Set the Role name and click <code>Save</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/demo-save-new-role.png" alt="demo save new role">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Repeat the same steps for creating a role named <code>assistant</code>.</p>
+</li>
+<li>
+<p>Create the user <code>angel</code>. Click <code>Users</code> → <code>Add user</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/demo-users.png" alt="demo users">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/demo-add-user.png" alt="demo add user">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Set the username and click <code>Save</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/add-new-user.png" alt="add new user">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Open the <code>Credentials</code> tab and set the password for the user. Set <code>Temporary</code> to <code>OFF</code> before setting the password.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/user-setting-password.png" alt="user setting password">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Open the <code>Role Mappings</code> tab and set the <code>vet</code> role to the user.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/user-roles.png" alt="user roles">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Repeat the same steps for creating a user named <code>elisa</code> but assign the <code>assistant</code> role.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="quarkus-app"><a class="anchor" href="#quarkus-app"></a>Securing a Quarkus application using OpenID Connect (OIDC)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The sample application that we use on this section is the <code>Quarkus Petclinic project</code>.</p>
+</div>
+<div class="paragraph">
+<p>Original Red Hat Developers source: <a href="https://github.com/redhat-developer-demos/quarkus-petclinic" class="bare">https://github.com/redhat-developer-demos/quarkus-petclinic</a></p>
+</div>
+<div class="paragraph">
+<p>But for this tutorial, we will start working with the following prepared fork and <code>sso-base</code> branch:</p>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/aolle/quarkus-petclinic.git" class="bare">https://github.com/aolle/quarkus-petclinic.git</a></p>
+</div>
+<div class="paragraph">
+<p>Then, clone and start working from this branch instead:</p>
+</div>
+<div class="listingblock lines_space console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone -b sso-base <a href="https://github.com/aolle/quarkus-petclinic.git" class="bare">https://github.com/aolle/quarkus-petclinic.git</a></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The application is prepared to be deployed on top of OpenShift (aka OCP). The application project contains the Quarkus OpenShift extension (k8s + s2i) to automatically generate the OCP resources and deploy it.</p>
+</div>
+<div class="paragraph">
+<p>Test the application by following the those steps:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Log into your OCP cluster.</p>
+</li>
+<li>
+<p>Change from the current project to <code>sso</code> project in case you are not currently using it.</p>
+</li>
+<li>
+<p>Deploy the application by executing the <code>petclinic.sh</code> script or alternatively:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock lines_space console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">./mvnw install -Dquarkus.kubernetes.deploy=true</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Open a browser window and visit the application URL.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/petclinic-main.png" alt="petclinic main">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Write down the application URL; it will be required during the security configuration process.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Before starting securing the application, let&#8217;s configure a new client in our RH-SSO realm.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Open a browser window and log in to the Red Hat Single Sign-On administration web console.</p>
+</li>
+<li>
+<p>Select our <code>demo</code> realm and click <code>Clients</code>. Click <code>Create</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/client.png" alt="client">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/create-new-client.png" alt="create new client">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Set <code>quarkus-petclinic</code> as <code>Client ID</code>. Click <code>Save</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/quarkus-petclinic-client.png" alt="quarkus petclinic client">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>On the <code>quarkus-petclinic</code> client configuration page:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Change the <code>Access Type</code> from <code>public</code> to <code>confidential</code>.</p>
+</li>
+<li>
+<p>Set <code>Authorization Enabled</code> to <code>ON</code>.</p>
+</li>
+<li>
+<p>Set <code>Valid Redirect URIs</code> as any root context of your application, for example, if your petclinic application is available at <code><a href="http://domain.example.com/" class="bare">http://domain.example.com/</a></code>, write <code><a href="http://domain.example.com/*" class="bare">http://domain.example.com/*</a></code>.</p>
+</li>
+<li>
+<p>Click <code>Save</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/quarkus-petclinic-client-cfg.png" alt="quarkus petclinic client cfg">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Click <code>Credentials</code> tab and write down the <code>Secret</code> value, we will need it later.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/client-secret.png" alt="client secret">
+</div>
+</div>
+<div class="paragraph">
+<p>At this point, we have the <code>demo</code> realm with the <code>quarkus-petclinic</code> client; additionally, we created two roles and users: the user <code>angel</code> that has the <code>vet</code> role and the user <code>elisa</code> that has the role <code>assistant</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The authorization granularity that we want to configure based on our application is the following:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Any user that belongs to the <code>demo</code> realm, like <code>elisa</code>, can browse the application except the <code>VETERINARIANS</code> resource.</p>
+</li>
+<li>
+<p>Only the users with the role <code>vet</code> can view the <code>VETERINARIANS</code> resource.</p>
+</li>
+<li>
+<p>Any other user access outside the realm will be rejected.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/quarkus-petclinic-menu.png" alt="quarkus petclinic menu">
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s configure our client athorization.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Open a browser window and log in to the Red Hat Single Sign-On administration web console. Browse to our <code>quarkus-petclinic</code> client and click the <code>Authorization</code> → <code>Resources</code> tabs.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/auth-resource-tab.png" alt="auth resource tab">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Click <code>Create Permission</code> of the <code>Default Resource</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/quarkus-petclinic-auth-create-permission-default.png" alt="quarkus petclinic auth create permission default">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Set <code>User Resource Permission</code> as Name. <code>Default Resource</code> as <code>Resources</code>. Apply the <code>Default Policy</code>. Click <code>Save</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/quarkus-petclinic-default-resource-permission.png" alt="quarkus petclinic default resource permission">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create a new one resource. Click <code>Create</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/quarkus-petclinic-create-new-resource.png" alt="quarkus petclinic create new resource">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Set <code>Vets Resource</code> as Name and Display name. <code>/vets.html</code> as URI. Click <code>Save</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/quarkus-petclinic-new-resource.png" alt="quarkus petclinic new resource">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Browse to <code>Authorization</code> → <code>Policies</code> tabs. Click <code>Create Policy&#8230;&#8203;</code> → <code>Role</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/quarkus-petclinic-new-policy.png" alt="quarkus petclinic new policy">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Set <code>Vet Role Policy</code> as the Name. <code>vet</code> as <code>Realm Roles</code>. Check required. Click <code>Save</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/quarkus-petclinic-role-policy.png" alt="quarkus petclinic role policy">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Browse to <code>Authorization</code> → <code>Resources</code> tabs.</p>
+</li>
+<li>
+<p>Click <code>Create Permission</code> of the <code>Vets Resource</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/quarkus-petclinic-create-perms-vets.png" alt="quarkus petclinic create perms vets">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Set <code>Vets Resource Permission</code> as Name. Apply the <code>Vet Role Policy</code>. Click <code>Save</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/quarkus-petclinic-resource-permission.png" alt="quarkus petclinic resource permission">
+</div>
+</div>
+<div class="paragraph">
+<p>At this point, the RH-SSO client is properly configured.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s configure the application side.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create the ConfigMap with the <code>SSO_HOST</code> environment variable. Replace the <code>{YOUR_SSO_HOST}</code> with the correct value.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock lines_space console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create configmap quarkus-petclinic-config --from-literal=SSO_HOST={YOUR_SSO_HOST} -n sso</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create the secret with the OIDC client credentials. Replace the <code>{YOUR_SSO_CLIENT_SECRET}</code> with the correct value.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock lines_space console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc create secret generic quarkus-petclinic-secret --from-literal=SSO_CLIENT_SECRET={YOUR_SSO_CLIENT_SECRET} -n sso</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Add the following configuration in <code>application.properties</code> as shown:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock lines_space console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">quarkus.openshift.env.secrets=quarkus-petclinic-secret
+quarkus.openshift.env.configmaps=quarkus-petclinic-config
+
+quarkus.oidc.auth-server-url=https://${SSO_HOST:localhost}/auth/realms/demo
+quarkus.oidc.client-id=quarkus-petclinic
+quarkus.oidc.credentials.secret=${SSO_CLIENT_SECRET:secret}
+quarkus.oidc.tls.verification=none
+quarkus.oidc.roles.source=accesstoken
+
+quarkus.oidc.application-type=web-app
+quarkus.oidc.webapp.auth-server-url=${quarkus.oidc.auth-server-url}
+quarkus.oidc.webapp.client-id=${quarkus.oidc.client-id}
+quarkus.oidc.webapp.credentials.secret=${quarkus.oidc.credentials.secret}
+quarkus.oidc.webapp.roles.source=${quarkus.oidc.roles.source}
+
+quarkus.keycloak.policy-enforcer.enable=true</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Redeploy and test the application accesses:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Open a new incognito browser session.</p>
+</li>
+<li>
+<p>Browse to the context root of the Quarkus Petclinic application. The request will be redirected to the RH-SSO login page. Here, we checked that the anonymous access to the application is forbidden.</p>
+</li>
+<li>
+<p>Log in as <code>elisa</code>. The request will be redirected to the application after a sucessful login.</p>
+</li>
+<li>
+<p>Browse through the application, try the access to the VETERINARIANS section; the access should be denied, as <code>elisa</code> has the <code>assistant</code> role and the access is restricted to the <code>vet</code> role. An error on the application page will shown.</p>
+</li>
+<li>
+<p>Close the browser and open a new one incognito session.</p>
+</li>
+<li>
+<p>Visit again the context root of the application.</p>
+</li>
+<li>
+<p>Login as <code>angel</code>.</p>
+</li>
+<li>
+<p>Browse through the application, try the access to the VETERINARIANS section; the access should be granted, as <code>angel</code> has the <code>vet</code> role.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="setup.html">1. Environment Setup</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="./_/js/vendor/clipboard.js"></script>
+<script src="./_/js/site.js"></script>
+<script async src="./_/js/vendor/highlight.js"></script>
+  </body>
+</html>
