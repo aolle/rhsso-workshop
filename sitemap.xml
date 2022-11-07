@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>https://olleb.com/sso-workshop/index.html</loc>
-<lastmod>2022-11-07T12:49:36.135Z</lastmod>
+<loc>https://olleb.com/rhsso-workshop/index.html</loc>
+<lastmod>2022-11-07T12:54:56.063Z</lastmod>
 </url>
 <url>
-<loc>https://olleb.com/sso-workshop/secapp.html</loc>
-<lastmod>2022-11-07T12:49:36.135Z</lastmod>
+<loc>https://olleb.com/rhsso-workshop/secapp.html</loc>
+<lastmod>2022-11-07T12:54:56.063Z</lastmod>
 </url>
 <url>
-<loc>https://olleb.com/sso-workshop/setup.html</loc>
-<lastmod>2022-11-07T12:49:36.135Z</lastmod>
+<loc>https://olleb.com/rhsso-workshop/setup.html</loc>
+<lastmod>2022-11-07T12:54:56.063Z</lastmod>
 </url>
 </urlset>
