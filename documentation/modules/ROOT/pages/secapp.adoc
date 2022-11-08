@@ -2,7 +2,7 @@
 include::_attributes.adoc[]
 
 [#presetup]
-== Configuring the Realm, roles and users
+== Configuring the Realm, roles, groups and users
 
 Before proceeding with the next sections, we have to configure the realm, roles and users in our Red Hat Single Sign-On instance.
 
@@ -47,6 +47,22 @@ image::secapp/user-setting-password.png[]
 image::secapp/user-roles.png[]
 
 * Repeat the same steps for creating a user named `elisa` but assign the `assistant` role.
+
+* Create the `staff` group. Click `Groups`.
+
+image::secapp/groups.png[]
+
+* Click `New`.
+
+image::secapp/new-group.png[]
+
+* Set `staff` as the name group. Click `Save`.
+
+image::secapp/staff-group.png[]
+
+* Click the `Role Mappings` tab. Add `assistant` and `vet` as `Assigned Roles`.
+
+image::secapp/staff-roles.png[]
 
 [#quarkus-app]
 == Securing a Quarkus application using OpenID Connect (OIDC)
@@ -106,14 +122,10 @@ image::secapp/quarkus-petclinic-client.png[]
 * On the `quarkus-petclinic` client configuration page:
 ** Change the `Access Type` from `public` to `confidential`.
 ** Set `Authorization Enabled` to `ON`.
-** Set `Valid Redirect URIs` as any root context of your application, for example, if your petclinic application is available at `http://domain.example.com/`, write `http://domain.example.com/*`.
+** Set `Valid Redirect URIs` to include any root context of your application, for example, if your petclinic application is available at `http://domain.example.com/`, write `http://domain.example.com/*`.
 ** Click `Save`.
 
 image::secapp/quarkus-petclinic-client-cfg.png[]
-
-** Click `Credentials` tab and write down the `Secret` value, we will need it later.
-
-image::secapp/client-secret.png[]
 
 At this point, we have the `demo` realm with the `quarkus-petclinic` client; additionally, we created two roles and users: the user `angel` that has the `vet` role and the user `elisa` that has the role `assistant`.
 
@@ -128,13 +140,24 @@ Let's configure our client athorization.
 
 * Open a browser window and log in to the Red Hat Single Sign-On administration web console. Browse to our `quarkus-petclinic` client and click the `Authorization` → `Resources` tabs.
 
+// due: https://github.com/keycloak/keycloak/discussions/12041
+//for the export: Delete the `Default Policy`, click `Delete` and confirm.
+
 image::secapp/auth-resource-tab.png[]
 
 * Click `Create Permission` of the `Default Resource`.
 
 image::secapp/quarkus-petclinic-auth-create-permission-default.png[]
 
-* Set `User Resource Permission` as Name. `Default Resource` as `Resources`. Apply the `Default Policy`. Click `Save`.
+*  Click `Create Policy...` → `Group`.
+
+image::secapp/new-group-policy.png[]
+
+* Set `Default Group Policy` as the `Name`. Select `staff` from the `Groups` list, click `Select`. Be sure that the `Logic` is set to `Negative`. Finally, click `Save`.
+
+image::secapp/group-policy.png[]
+
+* You will be redirected back again to the `Add Resource Permission` page. Set `User Resource Permission` as `Name`. `Default Resource` as `Resources`. The recently created policy should have been added automatically. Click `Save`.
 
 image::secapp/quarkus-petclinic-default-resource-permission.png[]
 
@@ -167,6 +190,10 @@ image::secapp/quarkus-petclinic-resource-permission.png[]
 At this point, the RH-SSO client is properly configured.
 
 Let's configure the application side.
+
+* Open a browser window and log in to the Red Hat Single Sign-On administration web console. Browse to our `quarkus-petclinic` client and click the `Credentials` tab. Write down the `Secret` value, we will need it soon.
+
+image::secapp/client-secret.png[]
 
 * Create the ConfigMap with the `SSO_HOST` environment variable. Replace the `{YOUR_SSO_HOST}` with the correct value.
 

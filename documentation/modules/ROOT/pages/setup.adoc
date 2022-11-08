@@ -73,6 +73,8 @@ image::install/keycloak-tile.png[]
 
 * Create the templates and install the RH-SSO image stream.
 
+// https://github.com/jboss-container-images/redhat-sso-7-openshift-image/pull/268
+
 NOTE: For this workshop, we will use the `sso76-ocp4-x509-https` template; which is Red Hat Single Sign-On 7.6 on OpenJDK (Ephemeral), with re-encrypt TLS termination. The template does not require the manual creation of the keystores or truststores.
 
 [.lines_space]

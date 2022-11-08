@@ -6,5 +6,5 @@
 
 * 2. Red Hat Single Sign-On
 ** xref:secapp.adoc[2.1 Securing your application with Red Hat Single Sign-On]
-*** xref:secapp.adoc#presetup[2.1.1 Configuring the realm, roles and users]
+*** xref:secapp.adoc#presetup[2.1.1 Configuring the realm, roles, groups and users]
 *** xref:secapp.adoc#quarkus-app[2.1.2 Securing a Quarkus application using OpenID Connect (OIDC)]
