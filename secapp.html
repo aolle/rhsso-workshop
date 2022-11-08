@@ -79,7 +79,7 @@
     <a class="nav-link" href="secapp.html">2.1 Securing your application with Red Hat Single Sign-On</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="#presetup">2.1.1 Configuring the realm, roles and users</a>
+    <a class="nav-link" href="#presetup">2.1.1 Configuring the realm, roles, groups and users</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="#quarkus-app">2.1.2 Securing a Quarkus application using OpenID Connect (OIDC)</a>
@@ -112,7 +112,7 @@
 <article class="doc">
 <h1 class="page">Securing your application with Red Hat Single Sign-On</h1>
 <div class="sect1">
-<h2 id="presetup"><a class="anchor" href="#presetup"></a>Configuring the Realm, roles and users</h2>
+<h2 id="presetup"><a class="anchor" href="#presetup"></a>Configuring the Realm, roles, groups and users</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Before proceeding with the next sections, we have to configure the realm, roles and users in our Red Hat Single Sign-On instance.</p>
@@ -234,7 +234,51 @@
 <li>
 <p>Repeat the same steps for creating a user named <code>elisa</code> but assign the <code>assistant</code> role.</p>
 </li>
+<li>
+<p>Create the <code>staff</code> group. Click <code>Groups</code>.</p>
+</li>
 </ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/groups.png" alt="groups">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Click <code>New</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/new-group.png" alt="new group">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Set <code>staff</code> as the name group. Click <code>Save</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/staff-group.png" alt="staff group">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Click the <code>Role Mappings</code> tab. Add <code>assistant</code> and <code>vet</code> as <code>Assigned Roles</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/staff-roles.png" alt="staff roles">
+</div>
 </div>
 </div>
 </div>
@@ -357,7 +401,7 @@ Write down the application URL; it will be required during the security configur
 <p>Set <code>Authorization Enabled</code> to <code>ON</code>.</p>
 </li>
 <li>
-<p>Set <code>Valid Redirect URIs</code> as any root context of your application, for example, if your petclinic application is available at <code><a href="http://domain.example.com/" class="bare">http://domain.example.com/</a></code>, write <code><a href="http://domain.example.com/*" class="bare">http://domain.example.com/*</a></code>.</p>
+<p>Set <code>Valid Redirect URIs</code> to include any root context of your application, for example, if your petclinic application is available at <code><a href="http://domain.example.com/" class="bare">http://domain.example.com/</a></code>, write <code><a href="http://domain.example.com/*" class="bare">http://domain.example.com/*</a></code>.</p>
 </li>
 <li>
 <p>Click <code>Save</code>.</p>
@@ -370,18 +414,6 @@ Write down the application URL; it will be required during the security configur
 <div class="imageblock">
 <div class="content">
 <img src="_images/secapp/quarkus-petclinic-client-cfg.png" alt="quarkus petclinic client cfg">
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Click <code>Credentials</code> tab and write down the <code>Secret</code> value, we will need it later.</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/secapp/client-secret.png" alt="client secret">
 </div>
 </div>
 <div class="paragraph">
@@ -442,7 +474,31 @@ Write down the application URL; it will be required during the security configur
 <div class="ulist">
 <ul>
 <li>
-<p>Set <code>User Resource Permission</code> as Name. <code>Default Resource</code> as <code>Resources</code>. Apply the <code>Default Policy</code>. Click <code>Save</code>.</p>
+<p>Click <code>Create Policy&#8230;&#8203;</code> → <code>Group</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/new-group-policy.png" alt="new group policy">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Set <code>Default Group Policy</code> as the <code>Name</code>. Select <code>staff</code> from the <code>Groups</code> list, click <code>Select</code>. Be sure that the <code>Logic</code> is set to <code>Negative</code>. Finally, click <code>Save</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/group-policy.png" alt="group policy">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You will be redirected back again to the <code>Add Resource Permission</code> page. Set <code>User Resource Permission</code> as <code>Name</code>. <code>Default Resource</code> as <code>Resources</code>. The recently created policy should have been added automatically. Click <code>Save</code>.</p>
 </li>
 </ul>
 </div>
@@ -531,6 +587,18 @@ Write down the application URL; it will be required during the security configur
 </div>
 <div class="paragraph">
 <p>Let&#8217;s configure the application side.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Open a browser window and log in to the Red Hat Single Sign-On administration web console. Browse to our <code>quarkus-petclinic</code> client and click the <code>Credentials</code> tab. Write down the <code>Secret</code> value, we will need it soon.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/secapp/client-secret.png" alt="client secret">
+</div>
 </div>
 <div class="ulist">
 <ul>
