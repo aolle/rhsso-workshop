@@ -176,7 +176,7 @@ Please have them installed and configured before you get started with any of the
 <p>Red Hat Single Sign-On (aka RH-SSO) can be deployed using the Operator or the application template.</p>
 </div>
 <div class="paragraph">
-<p>The Operator automates and simplifies the administration tasks in OpenShift using the custom resources (CRs). It means that we can create RH-SSO resoures using these custom resources instead of using the RH SSO admin console.</p>
+<p>The Operator automates and simplifies the administration tasks in OpenShift using the custom resources (CRs). It means that we can create RH-SSO resoures using these custom resources instead of using the RH-SSO admin console.</p>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -185,7 +185,7 @@ Please have them installed and configured before you get started with any of the
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-The Operator performs a one-way syncronitzation of the CRs. If we modify a CR directly (for example, using <code>oc</code>) the changes show up in the RH SSO admin console; however, if the same resource is modified using the admin console, those changes have no effect on the CR.
+The Operator performs a one-way syncronitzation of the CRs. If we modify a CR directly (for example, using <code>oc</code>) the changes show up in the RH-SSO admin console; however, if the same resource is modified using the admin console, those changes have no effect on the CR.
 </td>
 </tr>
 </table>
@@ -197,7 +197,7 @@ The Operator performs a one-way syncronitzation of the CRs. If we modify a CR di
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-If the RH SSO fails during deployment, check if a <code>LimitRange</code> exists in the current <code>OCP</code> project. Sometimes, the <code>RHPDS</code> environment creates a <code>LimitRange</code> automatically when a new project is created. Check also the liveness probe, the initial delay may require a higher value.
+If the RH-SSO fails during deployment, check if a <code>LimitRange</code> exists in the current <code>OCP</code> project. Sometimes, the <code>RHPDS</code> environment creates a <code>LimitRange</code> automatically when a new project is created. Check also the health checks probes, the initial delay may require a higher value.
 </td>
 </tr>
 </table>
@@ -218,7 +218,13 @@ Additionally, for convenience and simplication purposes, the applications and se
 <div class="sect2">
 <h3 id="deployrhsso-operator"><a class="anchor" href="#deployrhsso-operator"></a>Deploying Red Hat Single Sign-On for OpenShift using the Operator</h3>
 <div class="paragraph">
-<p>You can use the OpenShift Container Platform web console to suscribe and deploy the <code>Red Hat Single Sign-on Operator</code>.</p>
+<p>You can use the OpenShift Container Platform web console to suscribe and deploy the <code>Red Hat Single Sign-on Operator</code>. The RH-SSO Operator simplifies the deployment process and its ease to use, but less flexible than the template based deployment.</p>
+</div>
+<div class="paragraph">
+<p>Check the supported CR here:</p>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/keycloak/keycloak-operator#supported-custom-resources" class="bare">https://github.com/keycloak/keycloak-operator#supported-custom-resources</a></p>
 </div>
 <div class="ulist">
 <ul>
@@ -300,7 +306,7 @@ Additionally, for convenience and simplication purposes, the applications and se
 <div class="ulist">
 <ul>
 <li>
-<p>Create the templates and install the RH SSO image stream.</p>
+<p>Create the templates and install the RH-SSO image stream.</p>
 </li>
 </ul>
 </div>
@@ -311,7 +317,7 @@ Additionally, for convenience and simplication purposes, the applications and se
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-For this workshop, we will use the <code>sso76-x509-https</code> template; which is Red Hat Single Sign-On 7.6 on OpenJDK (Ephemeral), with re-encrypt TLS termination. The template does not require the manual creation of the keystores or truststores.
+For this workshop, we will use the <code>sso76-ocp4-x509-https</code> template; which is Red Hat Single Sign-On 7.6 on OpenJDK (Ephemeral), with re-encrypt TLS termination. The template does not require the manual creation of the keystores or truststores.
 </td>
 </tr>
 </table>
@@ -322,7 +328,7 @@ For this workshop, we will use the <code>sso76-x509-https</code> template; which
   <a href="https://raw.githubusercontent.com/jboss-container-images/redhat-sso-7-openshift-image/sso76-dev/templates/sso76-image-stream.json" class="bare">https://raw.githubusercontent.com/jboss-container-images/redhat-sso-7-openshift-image/sso76-dev/templates/sso76-image-stream.json</a>
 
 oc replace -n openshift --force -f \
-  <a href="https://raw.githubusercontent.com/jboss-container-images/redhat-sso-7-openshift-image/sso76-dev/templates/sso76-x509-https.json" class="bare">https://raw.githubusercontent.com/jboss-container-images/redhat-sso-7-openshift-image/sso76-dev/templates/sso76-x509-https.json</a>
+  <a href="https://raw.githubusercontent.com/jboss-container-images/redhat-sso-7-openshift-image/sso76-dev/templates/reencrypt/ocp-4.x/sso76-ocp4-x509-https.json" class="bare">https://raw.githubusercontent.com/jboss-container-images/redhat-sso-7-openshift-image/sso76-dev/templates/reencrypt/ocp-4.x/sso76-ocp4-x509-https.json</a>
 
 oc -n openshift import-image rh-sso-7/sso76-openshift-rhel8:7.6 --from=registry.redhat.io/rh-sso-7/sso76-openshift-rhel8:7.6 --confirm</code></pre>
 </div>
@@ -360,7 +366,7 @@ oc -n openshift import-image rh-sso-7/sso76-openshift-rhel8:7.6 --from=registry.
 </div>
 <div class="listingblock lines_space console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc new-app --template=sso76-x509-https</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc new-app --template=sso76-ocp4-x509-https</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -370,7 +376,7 @@ oc -n openshift import-image rh-sso-7/sso76-openshift-rhel8:7.6 --from=registry.
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Write down the autogenerated <code>RH-SSO Administrator Username</code> and <code>RH-SSO Administrator Password</code> required for login into the RH SSO admin console.
+Write down the autogenerated <code>RH-SSO Administrator Username</code> and <code>RH-SSO Administrator Password</code> required for login into the RH-SSO admin console.
 </td>
 </tr>
 </table>
