@@ -85,7 +85,7 @@ oc replace -n openshift --force -f \
   https://raw.githubusercontent.com/jboss-container-images/redhat-sso-7-openshift-image/sso76-dev/templates/sso76-image-stream.json
 
 oc replace -n openshift --force -f \
-  https://raw.githubusercontent.com/jboss-container-images/redhat-sso-7-openshift-image/sso76-dev/templates/reencrypt/ocp-4.x/sso76-ocp4-x509-https.json
+  https://raw.githubusercontent.com/jboss-container-images/redhat-sso-7-openshift-image/sso76-dev/templates/reencrypt/ocp-4.x/sso76-ocp4-x509-postgresql-persistent.json
 
 oc -n openshift import-image rh-sso-7/sso76-openshift-rhel8:7.6 --from=registry.redhat.io/rh-sso-7/sso76-openshift-rhel8:7.6 --confirm
 ----
@@ -114,7 +114,7 @@ oc policy add-role-to-user view -z default -n sso
 [.console-input]
 [source,bash, subs="+macros,+attributes"]
 ----
-oc new-app --template=sso76-ocp4-x509-https
+oc new-app --template=sso76-ocp4-x509-postgresql-persistent
 ----
 
 NOTE: Write down the auto generated `RH-SSO Administrator Username` and `RH-SSO Administrator Password` required for login into the RH-SSO admin console.
