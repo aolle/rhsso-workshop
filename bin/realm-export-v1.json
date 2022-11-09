@@ -852,7 +852,7 @@
           },
           {
             "id": "2eacbf57-89d6-476f-af6b-c28657288647",
-            "name": "User Resource Permission",
+            "name": "Default Resource Permission",
             "type": "resource",
             "logic": "POSITIVE",
             "decisionStrategy": "UNANIMOUS",

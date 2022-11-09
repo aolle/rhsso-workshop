@@ -157,7 +157,7 @@ image::secapp/new-group-policy.png[]
 
 image::secapp/group-policy.png[]
 
-* You will be redirected back again to the `Add Resource Permission` page. Set `User Resource Permission` as `Name`. `Default Resource` as `Resources`. The recently created policy should have been added automatically. Click `Save`.
+* You will be redirected back again to the `Add Resource Permission` page. Set `Default Resource Permission` as `Name`. `Default Resource` as `Resources`. The recently created policy should have been added automatically. Click `Save`.
 
 image::secapp/quarkus-petclinic-default-resource-permission.png[]
 
