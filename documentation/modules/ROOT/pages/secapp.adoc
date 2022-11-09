@@ -136,7 +136,7 @@ At this point, we have the `demo` realm with the `quarkus-petclinic` client; add
 
 image::secapp/quarkus-petclinic-menu.png[]
 
-Let's configure our client athorization.
+Let's configure our client authorization.
 
 * Open a browser window and log in to the Red Hat Single Sign-On administration web console. Browse to our `quarkus-petclinic` client and click the `Authorization` → `Resources` tabs.
 
@@ -240,7 +240,7 @@ quarkus.keycloak.policy-enforcer.enable=true
 * Redeploy and test the application accesses:
 ** Open a new incognito browser session.
 ** Browse to the context root of the Quarkus Petclinic application. The request will be redirected to the RH-SSO login page. Here, we checked that the anonymous access to the application is forbidden.
-** Log in as `elisa`. The request will be redirected to the application after a sucessful login.
+** Log in as `elisa`. The request will be redirected to the application after a successful login.
 ** Browse through the application, try the access to the VETERINARIANS section; the access should be denied, as `elisa` has the `assistant` role and the access is restricted to the `vet` role. An error on the application page will shown.
 ** Close the browser and open a new one incognito session.
 ** Visit again the context root of the application.
