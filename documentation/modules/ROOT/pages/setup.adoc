@@ -48,7 +48,7 @@ https://github.com/keycloak/keycloak-operator#supported-custom-resources
 
 image::install/operatorhub-sso.png[]
 
-* Select the Red Hat Quay tile and click `Install`.
+* Select the Red Hat Single Sign-On Operator tile and click `Install`.
 
 image::install/install-sso-operator.png[]
 
