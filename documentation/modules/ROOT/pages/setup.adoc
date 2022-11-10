@@ -75,7 +75,7 @@ image::install/keycloak-tile.png[]
 
 // https://github.com/jboss-container-images/redhat-sso-7-openshift-image/pull/268
 
-NOTE: For this workshop, we will use the `sso76-ocp4-x509-https` template; which is Red Hat Single Sign-On 7.6 on OpenJDK (Ephemeral), with re-encrypt TLS termination. The template does not require the manual creation of the keystores or truststores.
+NOTE: For this workshop, we will use the `sso76-ocp4-x509-postgresql-persistent` template; which is Red Hat Single Sign-On 7.6 on OpenJDK + PostgreSQL (Persistent) for OpenShift 4.X. The template does not require the manual creation of the keystores or truststores.
 
 [.lines_space]
 [.console-input]
