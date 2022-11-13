@@ -1,4 +1,4 @@
-# Red Hat Single Sign-On
+# Red Hat Single Sign-On Workshop
 
 RH-SSO is based on the Keycloak project, and enables you to secure your web applications by providing Web SSO capabilities based on popular standards such as OpenID Connect, OAuth 2.0, and SAML 2.0. 
 
