@@ -118,3 +118,41 @@ oc new-app --template=sso76-ocp4-x509-postgresql-persistent
 ----
 
 NOTE: Write down the auto generated `RH-SSO Administrator Username` and `RH-SSO Administrator Password` required for login into the RH-SSO admin console.
+
+[#deploy-ipa]
+== 1.3 Deploying an Identity Management (IdM/FreeIPA) on OpenShift
+
+This section explains how to install FreeIPA, an Identity Management (IdM) that combines Linux, 389 Directory Server, MIT Kerberos, NTP, DNS and Dogtag.
+
+https://www.freeipa.org/page/About
+
+FreeIPA is the upstream version of Red Hat Identity Management.
+
+Later, we will see how we can integrate RH-SSO with IdM/FreeIPA.
+
+Staying logged in into your OCP platform, and for convenience, select the `sso` project that has been created previously. Follow those steps for deploying a FreeIPA instance on top of OpenShift.
+
+[.lines_space]
+[.console-input]
+[source,bash, subs="+macros,+attributes"]
+----
+# export the image that we are going to deploy
+export IMG=quay.io/freeipa/freeipa-openshift-container:latest
+export IMG_BASE=${IMG}
+
+# clone the repository and deploy the roles and scc
+# if preferred, a remote build could be performed instead of cloning the repository
+git clone https://github.com/freeipa/freeipa-openshift-container.git
+cd freeipa-openshift-container/
+kustomize build deploy/admin | oc create -f -
+
+# create the ocp template and deploy it
+make template-create
+make template-new-app
+----
+
+Write down the `IPA_ADMIN_PASSWORD` and `IPA_DM_PASSWORD` shown on the terminal, we will need it later.
+
+Open the FreeIPA administration console, check the access and credentials are working properly.
+
+image::install/freeIPAconsole.png[]

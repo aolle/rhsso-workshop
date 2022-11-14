@@ -3,6 +3,7 @@
 ** xref:setup.adoc#deployrhsso[1.2. Deploying Red Hat Single Sign-On for OpenShift]
 *** xref:setup.adoc#deployrhsso-operator[1.2.1 Deploying Red Hat Single Sign-On for OpenShift using the Operator]
 *** xref:setup.adoc#deployrhsso-templates[1.2.2 Deploying Red Hat Single Sign-On for OpenShift using the templates]
+** xref:setup.adoc#deploy-ipa[1.3 Deploying an Identity Management (IdM/FreeIPA) on OpenShift]
 
 * 2. Red Hat Single Sign-On
 ** xref:secapp.adoc[2.1 Securing your application with Red Hat Single Sign-On]
