@@ -17,6 +17,7 @@ asciidoc:
     page-pagination: true
     openshift-version: v4.10
     sso-version: v7.6
+    freeipa-version: 4.9.8
   extensions:
     - ./lib/tab-block.js
     - ./lib/remote-include-processor.js
