@@ -60,9 +60,15 @@ image::secapp/new-group.png[]
 
 image::secapp/staff-group.png[]
 
-* Click the `Role Mappings` tab. Add `assistant` and `vet` as `Assigned Roles`.
+* Create the subgroup named `Personal staff`. Click again on `Groups`.
 
-image::secapp/staff-roles.png[]
+* Select `staff` and click `New`.
+
+image::secapp/new-subgroup.png[]
+
+* Set `Personal Staff` as the Name and click `Save`.
+
+image::secapp/subgroup.png[]
 
 [#quarkus-app]
 == Securing a Quarkus application using OpenID Connect (OIDC)
@@ -153,7 +159,7 @@ image::secapp/quarkus-petclinic-auth-create-permission-default.png[]
 
 image::secapp/new-group-policy.png[]
 
-* Set `Default Group Policy` as the `Name`. Select `staff` from the `Groups` list, click `Select`. Be sure that the `Logic` is set to `Negative`. Finally, click `Save`.
+* Set `Default Group Policy` as the `Name`. Select `staff` from the `Groups` list, click `Select`. Be sure that the `Logic` is set to `Negative`. Extend to Children checked (we will use this logic in later chapters). Finally, click `Save`.
 
 image::secapp/group-policy.png[]
 
