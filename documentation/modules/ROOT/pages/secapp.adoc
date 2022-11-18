@@ -159,7 +159,7 @@ image::secapp/quarkus-petclinic-auth-create-permission-default.png[]
 
 image::secapp/new-group-policy.png[]
 
-* Set `Default Group Policy` as the `Name`. Select `staff` from the `Groups` list, click `Select`. Be sure that the `Logic` is set to `Negative`. Extend to Children checked (we will use this logic in later chapters). Finally, click `Save`.
+* Set `Default Group Policy` as the `Name`. Select `staff` from the `Groups` list, click `Select`. Be sure that the `Logic` is set to `Negative`. `Extend to Children` checked (we will use this logic in later chapters). Finally, click `Save`.
 
 image::secapp/group-policy.png[]
 
