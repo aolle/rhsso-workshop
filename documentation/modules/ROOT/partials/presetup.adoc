@@ -1,0 +1,65 @@
+Before proceeding with the next sections, we have to configure the realm, roles and users in our Red Hat Single Sign-On instance.
+
+* Open a browser window and log in to the Red Hat Single Sign-On administration web console.
+
+* Create the `demo` realm. Point to the default `Master` realm, and click `Add realm`.
+
+image::secapp/addrealm.png[]
+
+* Set the realm name and click `Create`.
+
+image::secapp/add-demo-realm.png[]
+
+* Create the role `vet`. Click `Roles` → `Add Role`.
+
+image::secapp/demo-roles.png[]
+
+image::secapp/demo-add-role.png[]
+
+* Set the Role name and click `Save`.
+
+image::secapp/demo-save-new-role.png[]
+
+* Repeat the same steps for creating a role named `assistant`.
+
+* Create the user `angel`. Click `Users` → `Add user`.
+
+image::secapp/demo-users.png[]
+
+image::secapp/demo-add-user.png[]
+
+* Set the username and click `Save`.
+
+image::secapp/add-new-user.png[]
+
+* Open the `Credentials` tab and set the password for the user. Set `Temporary` to `OFF` before setting the password.
+
+image::secapp/user-setting-password.png[]
+
+* Open the `Role Mappings` tab and set the `vet` role to the user.
+
+image::secapp/user-roles.png[]
+
+* Repeat the same steps for creating a user named `elisa` but assign the `assistant` role.
+
+* Create the `staff` group. Click `Groups`.
+
+image::secapp/groups.png[]
+
+* Click `New`.
+
+image::secapp/new-group.png[]
+
+* Set `staff` as the name group. Click `Save`.
+
+image::secapp/staff-group.png[]
+
+* Create the subgroup named `Personal staff`. Click again on `Groups`.
+
+* Select `staff` and click `New`.
+
+image::secapp/new-subgroup.png[]
+
+* Set `Personal Staff` as the Name and click `Save`.
+
+image::secapp/subgroup.png[] 

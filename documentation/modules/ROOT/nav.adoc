@@ -9,8 +9,9 @@
 ** xref:secapp.adoc[2.1 Securing web applications and services with Red Hat Single Sign-On]
 *** xref:secapp.adoc#presetup[2.1.1 Configuring the realm, roles, groups and users]
 *** xref:secapp.adoc#quarkus-app[2.1.2 Securing Quarkus web applications using OpenID Connect (OIDC)]
-*** xref:secapp.adoc#quarkus-app[2.1.2 Securing Spring Boot web applications using OpenID Connect (OIDC)]
-*** xref:secapp.adoc#api[2.1 Securing REST APIs with Red Hat Single Sign-On]
+//*** xref:secapp.adoc#quarkus-app[2.1.3 Securing Spring Boot web applications using OpenID Connect (OIDC)]
+//*** xref:secapp.adoc#api[2.1.4 Securing REST APIs]
+//*** xref:secapp.adoc#x509[2.1.5 X.509 client certificate authentication]
 
 ** xref:federation.adoc[2.2 User Federation]
 *** xref:federation.adoc#ldap[2.2.1 LDAP User Federation]
