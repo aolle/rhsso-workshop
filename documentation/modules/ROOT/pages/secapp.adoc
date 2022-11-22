@@ -105,6 +105,8 @@ Test the application by following the those steps:
 ./mvnw install -Dquarkus.kubernetes.deploy=true
 ----
 
+NOTE: During the build you may find the `SSLHandshakeException/ValidatorException` exception due to self-signed certificate. To solve this, just add `-Dquarkus.kubernetes-client.trust-certs=true`.
+
 * Open a browser window and visit the application URL.
 
 image::secapp/petclinic-main.png[]
