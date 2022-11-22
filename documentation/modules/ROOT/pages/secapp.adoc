@@ -1,4 +1,4 @@
-= Securing your application with Red Hat Single Sign-On
+= Securing web applications and services with Red Hat Single Sign-On
 include::_attributes.adoc[]
 
 [#presetup]
@@ -71,7 +71,7 @@ image::secapp/new-subgroup.png[]
 image::secapp/subgroup.png[]
 
 [#quarkus-app]
-== Securing a Quarkus application using OpenID Connect (OIDC)
+== Securing Quarkus web applications using OpenID Connect (OIDC)
 
 The sample application that we use on this section is the `Quarkus Petclinic project`.
 
