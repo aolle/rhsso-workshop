@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Securing your application with Red Hat Single Sign-On :: Red Hat Single Sign-On Workshop</title>
+    <title>Securing web applications and services with Red Hat Single Sign-On :: Red Hat Single Sign-On Workshop</title>
     <link rel="canonical" href="https://olleb.com/rhsso-workshop/secapp.html">
     <link rel="prev" href="setup.html">
     <link rel="next" href="federation.html">
@@ -80,13 +80,13 @@
 <ul class="nav-list">
   <li class="nav-item is-current-page" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="secapp.html">2.1 Securing your application with Red Hat Single Sign-On</a>
+    <a class="nav-link" href="secapp.html">2.1 Securing web applications and services with Red Hat Single Sign-On</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="#presetup">2.1.1 Configuring the realm, roles, groups and users</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="#quarkus-app">2.1.2 Securing a Quarkus application using OpenID Connect (OIDC)</a>
+    <a class="nav-link" href="#quarkus-app">2.1.2 Securing Quarkus web applications using OpenID Connect (OIDC)</a>
   </li>
 </ul>
   </li>
@@ -116,14 +116,14 @@
   <ul>
     <li><a href="index.html">Red Hat Single Sign-On Workshop</a></li>
     <li>2. Red Hat Single Sign-On</li>
-    <li><a href="secapp.html">2.1 Securing your application with Red Hat Single Sign-On</a></li>
+    <li><a href="secapp.html">2.1 Securing web applications and services with Red Hat Single Sign-On</a></li>
   </ul>
 </nav>
   <div style="padding: 0 0.5rem 0 0.75rem;"><a href="https://www.linkedin.com/in/angelolle/" target="_blank" rel="noopener noreferrer"> Àngel Ollé Blázquez | Specialist Solution Architect </a></div>
 </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Securing your application with Red Hat Single Sign-On</h1>
+<h1 class="page">Securing web applications and services with Red Hat Single Sign-On</h1>
 <div class="sect1">
 <h2 id="presetup"><a class="anchor" href="#presetup"></a>Configuring the Realm, roles, groups and users</h2>
 <div class="sectionbody">
@@ -311,7 +311,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="quarkus-app"><a class="anchor" href="#quarkus-app"></a>Securing a Quarkus application using OpenID Connect (OIDC)</h2>
+<h2 id="quarkus-app"><a class="anchor" href="#quarkus-app"></a>Securing Quarkus web applications using OpenID Connect (OIDC)</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The sample application that we use on this section is the <code>Quarkus Petclinic project</code>.</p>
@@ -356,6 +356,18 @@
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">./mvnw install -Dquarkus.kubernetes.deploy=true</code></pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+During the build you may find the <code>SSLHandshakeException/ValidatorException</code> exception due to self-signed certificate. To solve this, just add <code>-Dquarkus.kubernetes-client.trust-certs=true</code>.
+</td>
+</tr>
+</table>
 </div>
 <div class="ulist">
 <ul>
