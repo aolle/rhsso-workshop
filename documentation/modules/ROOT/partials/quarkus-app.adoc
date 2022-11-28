@@ -155,7 +155,7 @@ oc create secret generic quarkus-petclinic-secret --from-literal=SSO_CLIENT_SECR
 quarkus.openshift.env.secrets=quarkus-petclinic-secret
 quarkus.openshift.env.configmaps=quarkus-petclinic-config
 
-quarkus.oidc.auth-server-url=https://${SSO_HOST:localhost}/auth/realms/demo
+quarkus.oidc.auth-server-url=https://${SSO_HOST:localhost:8080}/auth/realms/demo
 quarkus.oidc.client-id=quarkus-petclinic
 quarkus.oidc.credentials.secret=${SSO_CLIENT_SECRET:secret}
 quarkus.oidc.tls.verification=none
