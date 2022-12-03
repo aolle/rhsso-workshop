@@ -1,7 +1,7 @@
 |===
 |**Tool**|**Reference**
 
-| `OpenShift CLI (oc)`
+| `OpenShift CLI`
 | https://access.redhat.com/downloads/content/290[OpenShift Container Platform downloads page]
 
 | `kubectl`
@@ -10,13 +10,16 @@
 | `kustomize`
 | https://kubectl.docs.kubernetes.io/installation/kustomize/[Install Kustomize]
 
-| `Apache Maven (mvn)`
+| `Apache Maven`
 | https://maven.apache.org/install.html[Installing Apache Maven]
 
-| `OpenJDK 11 (java)`
+| `OpenJDK 11`
 | https://openjdk.org/install/[How to download and install prebuilt OpenJDK packages]
 
-| `VSCodium -optional-`
+| `VSCodium`
 | https://vscodium.com/#install[VSCodium]
+
+| `httpie`
+| https://httpie.io/[httpie]
 
 |===
