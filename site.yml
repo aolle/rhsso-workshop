@@ -15,8 +15,8 @@ asciidoc:
   attributes:
     release-version: main
     page-pagination: true
-    openshift-version: v4.10
-    sso-version: v7.6
+    openshift-version: 4.10
+    sso-version: 7.6
     freeipa-version: 4.9.8
   extensions:
     - ./lib/tab-block.js
