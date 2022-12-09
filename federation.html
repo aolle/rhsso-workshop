@@ -6,6 +6,7 @@
     <title>User Federation :: Red Hat Single Sign-On Workshop</title>
     <link rel="canonical" href="https://olleb.com/rhsso-workshop/federation.html">
     <link rel="prev" href="secapp.html">
+    <link rel="next" href="troubleshooting.html">
     <meta name="generator" content="Antora 3.0.3">
     <link rel="stylesheet" href="./_/css/site.css">
 <link rel="icon" href="./_/img/favicon.ico" type="image/x-icon">
@@ -51,30 +52,6 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="setup.html">1. Environment Setup</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="setup.html#tools">1.1. Workshop Tools</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="setup.html#deployrhsso">1.2. Deploying Red Hat Single Sign-On for OpenShift</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="setup.html#deployrhsso-operator">1.2.1 Deploying Red Hat Single Sign-On for OpenShift using the Operator</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="setup.html#deployrhsso-templates">1.2.2 Deploying Red Hat Single Sign-On for OpenShift using the templates</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="setup.html#deploy-ipa">1.3 Deploying an Identity Management (IdM/FreeIPA) on OpenShift</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
     <span class="nav-text">2. Red Hat Single Sign-On</span>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
@@ -95,6 +72,24 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="#ldap">2.2.1 LDAP User Federation</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="#user-storage-spi">2.2.2 User Storage SPI</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="troubleshooting.html">2.3 FAQs &amp; Troubleshooting</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="troubleshooting.html">2.3.1 How to Extend Red Hat Single Sign-On OpenShift Image</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="troubleshooting.html">2.3.2 How to Register Provider Implementations</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="troubleshooting.html">2.3.3 How to Obtain the RH-SSO Admin Credentials</a>
   </li>
 </ul>
   </li>
@@ -380,8 +375,167 @@ The <code>Bind Credential</code> is the <code>Directory manager password</code> 
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="user-storage-spi"><a class="anchor" href="#user-storage-spi"></a>User Storage SPI</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We have an external system that stores and manage users, the data is available through a REST API.</p>
+</div>
+<div class="paragraph">
+<p>Due some constraints, we don&#8217;t want to migrate that existing system to RH-SSO data model, because of that, we are interested in expanding and integrate our RH-SSO deployment with this external user storage system.</p>
+</div>
+<div class="paragraph">
+<p>The REST API has been coded in Quarkus, the project name is <code>jaxrs-user-store</code> and it provides the following two endpoints:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>/api/v1/users</code>, returns a set of all the users in the system.</p>
+</li>
+<li>
+<p><code>/api/v1/users/{id}</code>, returns the user that <code>userId</code> matches with <code>id</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Both endpoints expects a <code>GET</code> request.</p>
+</div>
+<div class="paragraph">
+<p>The application is prepared to be deployed on top of OpenShift. Deploy it by executing the <code>ocp-deploy.sh</code> script or alternatively:</p>
+</div>
+<div class="listingblock lines_space console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">./mvnw install -Dquarkus.kubernetes.deploy=true</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Test the application endpoints:</p>
+</div>
+<div class="listingblock lines_space console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ http ${APP_HOSTNAME}/api/v1/users
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+content-length: 731
+
+[
+&lt;..&gt;
+    {
+        "email": "<a href="mailto:abel@example.com">abel@example.com</a>",
+        "firstName": "Abel",
+        "lastName": null,
+        "password": "abelpassword",
+        "userId": "5",
+        "username": "abel"
+    },
+    {
+        "email": "<a href="mailto:mao@example.com">mao@example.com</a>",
+        "firstName": "Mao",
+        "lastName": null,
+        "password": "maopassword",
+        "userId": "3",
+        "username": "mao"
+    }
+&lt;..&gt;
+]</code></pre>
+</div>
+</div>
+<div class="listingblock lines_space console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ http localhost:8081/api/v1/users/1
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+content-length: 120
+
+{
+    "email": "<a href="mailto:nata@example.com">nata@example.com</a>",
+    "firstName": "Nata",
+    "lastName": null,
+    "password": "natapassword",
+    "userId": "1",
+    "username": "nata"
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For extending RH-SSO to connect it to the external system we use the <code>User Storage SPI</code> (<code>Service Provider Interface</code>).</p>
+</div>
+<div class="paragraph">
+<p>The provider implementation is <code>rh-sso-custom-spi</code> and can be deployed in some different ways:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Extending the RH-SSO image.</p>
+</li>
+<li>
+<p>Mounting a volume with the file.</p>
+</li>
+<li>
+<p>Using a configmap (not recommended, as the configmap has a limited size and should be used for storing metadata mainly).</p>
+</li>
+<li>
+<p>Copying it into the pod (ephemeral).</p>
+</li>
+<li>
+<p>Others.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The provider checks the value of the <code>USER_STORAGE_CUSTOM_SPI_TARGET_HOST</code> environment variable in the following format: <code>HOST:PORT</code> or <code>HOST</code> if the port defaults to http/80. The value can be provided as an environment variable in the <code>DeploymentConfig</code>.</p>
+</div>
+<div class="paragraph">
+<p>Once the environment variable and the package is correctly deployed, we will see the new provider listed under the <code>User Federation</code> of the Red Hat Single Sign-On administration web console.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Click <code>demo-user-provider</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/federation/user-storage-spi-provider-listed.png" alt="user storage spi provider listed">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Verify that it is <code>Enabled</code> and <code>Save</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/federation/add-new-user-storage-spi.png" alt="add new user storage spi">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/federation/custom-user-storage-spi-enabled.png" alt="custom user storage spi enabled">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Click <code>Users</code>. The external storage users should be loaded into RH-SSO.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/federation/users-loaded.png" alt="users loaded">
+</div>
+</div>
+</div>
+</div>
 <nav class="pagination">
   <span class="prev"><a href="secapp.html">2.1 Securing web applications and services with Red Hat Single Sign-On</a></span>
+  <span class="next"><a href="troubleshooting.html">2.3 FAQs &amp; Troubleshooting</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

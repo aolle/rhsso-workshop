@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Red Hat Single Sign-On Workshop :: Red Hat Single Sign-On Workshop</title>
-    <link rel="canonical" href="https://olleb.com/rhsso-workshop/index.html">
-    <link rel="next" href="secapp.html">
+    <title>FAQs &amp; Troubleshooting :: Red Hat Single Sign-On Workshop</title>
+    <link rel="canonical" href="https://olleb.com/rhsso-workshop/troubleshooting.html">
+    <link rel="prev" href="federation.html">
     <meta name="generator" content="Antora 3.0.3">
     <link rel="stylesheet" href="./_/css/site.css">
 <link rel="icon" href="./_/img/favicon.ico" type="image/x-icon">
@@ -77,17 +77,17 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="troubleshooting.html">2.3 FAQs &amp; Troubleshooting</a>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item is-current-page" data-depth="3">
     <a class="nav-link" href="troubleshooting.html">2.3.1 How to Extend Red Hat Single Sign-On OpenShift Image</a>
   </li>
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item is-current-page" data-depth="3">
     <a class="nav-link" href="troubleshooting.html">2.3.2 How to Register Provider Implementations</a>
   </li>
-  <li class="nav-item" data-depth="3">
+  <li class="nav-item is-current-page" data-depth="3">
     <a class="nav-link" href="troubleshooting.html">2.3.3 How to Obtain the RH-SSO Admin Credentials</a>
   </li>
 </ul>
@@ -108,21 +108,53 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Red Hat Single Sign-On Workshop</a></li>
+    <li>2. Red Hat Single Sign-On</li>
+    <li><a href="troubleshooting.html">2.3 FAQs &amp; Troubleshooting</a></li>
   </ul>
 </nav>
   <div style="padding: 0 0.5rem 0 0.75rem;"><a href="https://www.linkedin.com/in/angelolle/" target="_blank" rel="noopener noreferrer"> Àngel Ollé Blázquez | Specialist Solution Architect </a></div>
 </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Red Hat Single Sign-On Workshop</h1>
-<div class="sect1 text-center strong">
-<h2>Introduction</h2>
+<h1 class="page">FAQs &amp; Troubleshooting</h1>
+<div class="sect1">
+<h2 id="_how_to_extend_red_hat_single_sign_on_openshift_image"><a class="anchor" href="#_how_to_extend_red_hat_single_sign_on_openshift_image"></a>How to Extend Red Hat Single Sign-On OpenShift Image</h2>
 <div class="sectionbody">
-
+<div class="paragraph">
+<p>For properly customizing the RH-SSO OpenShift Image using s2i strategy:</p>
+</div>
+<div class="paragraph">
+<p><a href="https://access.redhat.com/solutions/3911211">Running JBoss CLI commands on extended JBoss EAP 7 OpenShift Image</a></p>
+</div>
+<div class="paragraph">
+<p><a href="https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.4/html-single/getting_started_with_jboss_eap_for_openshift_container_platform/index#s2i_modules_drivers_deployments">Configuring the JBoss EAP for OpenShift Image for Your Java Application</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_how_to_register_provider_implementations"><a class="anchor" href="#_how_to_register_provider_implementations"></a>How to Register Provider Implementations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The provider implementations can be registered using the deployer or module approaches.</p>
+</div>
+<div class="paragraph">
+<p>Check out the documentation below, it offers some recommendations on how to do it:</p>
+</div>
+<div class="paragraph">
+<p><a href="https://access.redhat.com/documentation/en-us/red_hat_single_sign-on/7.6/html/server_developer_guide/providers#registering_provider_implementations">Registering provider implementations</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_how_to_obtain_the_rh_sso_admin_credentials"><a class="anchor" href="#_how_to_obtain_the_rh_sso_admin_credentials"></a>How to Obtain the RH-SSO Admin Credentials</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The admin credentials are stored in the <code>SSO_ADMIN_USERNAME</code> and <code>SSO_ADMIN_PASSWORD</code>, <code>DeploymentConfig</code> (or POD) environment variables.</p>
+</div>
 </div>
 </div>
 <nav class="pagination">
-  <span class="next"><a href="secapp.html">2.1 Securing web applications and services with Red Hat Single Sign-On</a></span>
+  <span class="prev"><a href="federation.html">2.2 User Federation</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

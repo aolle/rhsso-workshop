@@ -2,18 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://olleb.com/rhsso-workshop/federation.html</loc>
-<lastmod>2022-12-04T00:15:37.576Z</lastmod>
+<lastmod>2022-12-09T12:50:50.498Z</lastmod>
 </url>
 <url>
 <loc>https://olleb.com/rhsso-workshop/index.html</loc>
-<lastmod>2022-12-04T00:15:37.576Z</lastmod>
+<lastmod>2022-12-09T12:50:50.498Z</lastmod>
 </url>
 <url>
 <loc>https://olleb.com/rhsso-workshop/secapp.html</loc>
-<lastmod>2022-12-04T00:15:37.576Z</lastmod>
+<lastmod>2022-12-09T12:50:50.498Z</lastmod>
 </url>
 <url>
 <loc>https://olleb.com/rhsso-workshop/setup.html</loc>
-<lastmod>2022-12-04T00:15:37.576Z</lastmod>
+<lastmod>2022-12-09T12:50:50.498Z</lastmod>
+</url>
+<url>
+<loc>https://olleb.com/rhsso-workshop/troubleshooting.html</loc>
+<lastmod>2022-12-09T12:50:50.498Z</lastmod>
 </url>
 </urlset>
