@@ -15,9 +15,9 @@ asciidoc:
   attributes:
     release-version: main
     page-pagination: true
-    openshift-version: 4.10
-    sso-version: 7.6
-    freeipa-version: 4.9.8
+    openshift-version: '4.10'
+    sso-version: '7.6'
+    freeipa-version: '4.9.8'
   extensions:
     - ./lib/tab-block.js
     - ./lib/remote-include-processor.js
