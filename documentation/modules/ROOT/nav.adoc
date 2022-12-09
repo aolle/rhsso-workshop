@@ -16,3 +16,8 @@
 ** xref:federation.adoc[2.2 User Federation]
 *** xref:federation.adoc#ldap[2.2.1 LDAP User Federation]
 *** xref:federation.adoc#user-storage-spi[2.2.2 User Storage SPI]
+
+** xref:troubleshooting.adoc[2.3 FAQs & Troubleshooting]
+*** xref:troubleshooting.adoc[2.3.1 How to Extend Red Hat Single Sign-On OpenShift Image]
+*** xref:troubleshooting.adoc[2.3.2 How to Register Provider Implementations]
+*** xref:troubleshooting.adoc[2.3.3 How to Obtain the RH-SSO Admin Credentials]

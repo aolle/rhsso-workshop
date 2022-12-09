@@ -1,0 +1,22 @@
+= FAQs & Troubleshooting
+include::_attributes.adoc[]
+
+== How to Extend Red Hat Single Sign-On OpenShift Image
+
+For properly customizing the RH-SSO OpenShift Image using s2i strategy:
+
+https://access.redhat.com/solutions/3911211[Running JBoss CLI commands on extended JBoss EAP 7 OpenShift Image]
+
+https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.4/html-single/getting_started_with_jboss_eap_for_openshift_container_platform/index#s2i_modules_drivers_deployments[Configuring the JBoss EAP for OpenShift Image for Your Java Application]
+
+== How to Register Provider Implementations
+
+The provider implementations can be registered using the deployer or module approaches.
+
+Check out the documentation below, it offers some recommendations on how to do it:
+
+https://access.redhat.com/documentation/en-us/red_hat_single_sign-on/7.6/html/server_developer_guide/providers#registering_provider_implementations[Registering provider implementations]
+
+== How to Obtain the RH-SSO Admin Credentials
+
+The admin credentials are stored in the `SSO_ADMIN_USERNAME` and `SSO_ADMIN_PASSWORD`, `DeploymentConfig` (or POD) environment variables.
