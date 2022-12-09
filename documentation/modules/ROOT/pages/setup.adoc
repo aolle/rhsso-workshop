@@ -37,7 +37,7 @@ Additionally, for convenience and simplification purposes, the applications and 
 
 You can use the OpenShift Container Platform web console to subscribe and deploy the `Red Hat Single Sign-on Operator`. The RH-SSO Operator simplifies the deployment process and its ease to use, but less flexible than the template based deployment.
 
-Check the supported CR here:
+Check the supported CRs here:
 
 https://github.com/keycloak/keycloak-operator#supported-custom-resources
 

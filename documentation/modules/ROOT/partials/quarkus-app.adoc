@@ -21,7 +21,7 @@ Test the application by following the those steps:
 
 * Log into your OCP cluster.
 * Change from the current project to `sso` project in case you are not currently using it.
-* Deploy the application by executing the `petclinic.sh` script or alternatively:
+* Deploy the application by executing the `ocp-deploy.sh` script or alternatively:
 
 [.lines_space]
 [.console-input]
@@ -179,3 +179,5 @@ quarkus.keycloak.policy-enforcer.enable=true
 ** Visit again the context root of the application.
 ** Login as `angel`.
 ** Browse through the application, try the access to the VETERINARIANS section; the access should be granted, as `angel` has the `vet` role. 
+
+NOTE: A complete OIDC working Petclinic Quarkus application is available at `sso-oidc` branch.
