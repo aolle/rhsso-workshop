@@ -1,0 +1,102 @@
+We have an external system that stores and manage users, the data is available through a REST API.
+
+Due some constraints, we don't want to migrate that existing system to RH-SSO data model, because of that, we are interested in expanding and integrate our RH-SSO deployment with this external user storage system.
+
+The REST API has been coded in Quarkus, the project name is `jaxrs-user-store` and it provides the following two endpoints:
+
+* `/api/v1/users`, returns a set of all the users in the system.
+
+* `/api/v1/users/{id}`, returns the user that `userId` matches with `id`.
+
+Both endpoints expects a `GET` request.
+
+The application is prepared to be deployed on top of OpenShift. Deploy it by executing the `ocp-deploy.sh` script or alternatively:
+
+[.lines_space]
+[.console-input]
+[source,bash, subs="+macros,+attributes"]
+----
+./mvnw install -Dquarkus.kubernetes.deploy=true
+----
+
+Test the application endpoints:
+
+[.lines_space]
+[.console-output]
+[source,bash, subs="+macros,+attributes"]
+----
+$ http ${APP_HOSTNAME}/api/v1/users
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+content-length: 731
+
+[
+<..>
+    {
+        "email": "abel@example.com",
+        "firstName": "Abel",
+        "lastName": null,
+        "password": "abelpassword",
+        "userId": "5",
+        "username": "abel"
+    },
+    {
+        "email": "mao@example.com",
+        "firstName": "Mao",
+        "lastName": null,
+        "password": "maopassword",
+        "userId": "3",
+        "username": "mao"
+    }
+<..>
+]
+----
+
+[.lines_space]
+[.console-output]
+[source,bash, subs="+macros,+attributes"]
+----
+$ http localhost:8081/api/v1/users/1
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+content-length: 120
+
+{
+    "email": "nata@example.com",
+    "firstName": "Nata",
+    "lastName": null,
+    "password": "natapassword",
+    "userId": "1",
+    "username": "nata"
+}
+----
+
+For extending RH-SSO to connect it to the external system we use the `User Storage SPI` (`Service Provider Interface`).
+
+The provider implementation is `rh-sso-custom-spi` and can be deployed in some different ways:
+
+* Extending the RH-SSO image.
+* Mounting a volume with the file.
+* Using a configmap (not recommended, as the configmap has a limited size and should be used for storing metadata mainly).
+* Copying it into the pod (ephemeral).
+* Others.
+
+The provider checks the value of the `USER_STORAGE_CUSTOM_SPI_TARGET_HOST` environment variable in the following format: `HOST:PORT` or `HOST` if the port defaults to http/80. The value can be provided as an environment variable in the `DeploymentConfig`.
+
+Once the environment variable and the package is correctly deployed, we will see the new provider listed under the `User Federation` of the Red Hat Single Sign-On administration web console.
+
+* Click `demo-user-provider`.
+
+image::federation/user-storage-spi-provider-listed.png[]
+
+* Verify that it is `Enabled` and `Save`.
+
+image::federation/add-new-user-storage-spi.png[]
+
+image::federation/custom-user-storage-spi-enabled.png[]
+
+* Click `Users`. The external storage users should be loaded into RH-SSO.
+
+image::federation/users-loaded.png[]

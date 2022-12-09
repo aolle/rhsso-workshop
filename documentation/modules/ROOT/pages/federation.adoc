@@ -5,3 +5,8 @@ include::_attributes.adoc[]
 == LDAP User Federation
 
 include::partial$ldap-federation.adoc[]
+
+[#user-storage-spi]
+== User Storage SPI
+
+include::partial$user-storage-spi.adoc[]
