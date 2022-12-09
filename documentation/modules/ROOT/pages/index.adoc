@@ -1,4 +1,4 @@
-= Red Hat Single Sign-On Workshop
+= Red Hat Single Sign-On {sso-version} Workshop
 :page-layout: home
 :!sectids:
 

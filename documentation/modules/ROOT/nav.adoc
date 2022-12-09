@@ -1,4 +1,4 @@
-º* xref:setup.adoc[1. Environment Setup]
+* xref:setup.adoc[1. Environment Setup]
 ** xref:setup.adoc#tools[1.1. Workshop Tools]
 ** xref:setup.adoc#deployrhsso[1.2. Deploying Red Hat Single Sign-On for OpenShift]
 *** xref:setup.adoc#deployrhsso-operator[1.2.1 Deploying Red Hat Single Sign-On for OpenShift using the Operator]
