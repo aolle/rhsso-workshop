@@ -75,7 +75,7 @@ content-length: 120
 
 For extending RH-SSO to connect it to the external system we use the `User Storage SPI` (`Service Provider Interface`).
 
-The provider implementation is `rh-sso-custom-spi` and can be deployed in some different ways:
+The provider implementation is `custom-user-storage-spi` and can be deployed in some different ways:
 
 * Extending the RH-SSO image.
 * Mounting a volume with the file.
