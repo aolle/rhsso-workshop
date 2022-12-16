@@ -1,6 +1,12 @@
 = FAQs & Troubleshooting
 include::_attributes.adoc[]
 
+== Which Keycloak version is Red Hat Single Sign-On based on?
+
+Check:
+
+https://access.redhat.com/articles/2342881[Red Hat Single Sign-On Component Details]
+
 == How to Extend Red Hat Single Sign-On OpenShift Image
 
 For properly customizing the RH-SSO OpenShift Image using s2i strategy:
@@ -20,3 +26,7 @@ https://access.redhat.com/documentation/en-us/red_hat_single_sign-on/7.6/html/se
 == How to Obtain the RH-SSO Admin Credentials
 
 The admin credentials are stored in the `SSO_ADMIN_USERNAME` and `SSO_ADMIN_PASSWORD`, `DeploymentConfig` (or POD) environment variables.
+
+== How to Enable TRACE Logging
+
+https://access.redhat.com/solutions/3234951
