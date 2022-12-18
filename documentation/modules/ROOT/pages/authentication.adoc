@@ -1,0 +1,7 @@
+= Authentication
+include::_attributes.adoc[] 
+
+[#authentication-spi]
+== Authentication SPI
+
+include::partial$authentication-spi.adoc[]

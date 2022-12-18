@@ -17,7 +17,12 @@
 *** xref:federation.adoc#ldap[2.2.1 LDAP User Federation]
 *** xref:federation.adoc#user-storage-spi[2.2.2 User Storage SPI]
 
-** xref:troubleshooting.adoc[2.3 FAQs & Troubleshooting]
-*** xref:troubleshooting.adoc[2.3.1 How to Extend Red Hat Single Sign-On OpenShift Image]
-*** xref:troubleshooting.adoc[2.3.2 How to Register Provider Implementations]
-*** xref:troubleshooting.adoc[2.3.3 How to Obtain the RH-SSO Admin Credentials]
+** xref:authentication.adoc[2.3 Authentication]
+*** xref:federation.adoc#ldap[2.3.1 Authentication SPI]
+
+** xref:troubleshooting.adoc[2.4 FAQs & Troubleshooting]
+*** xref:troubleshooting.adoc[2.4.1 Which Keycloak version is Red Hat Single Sign-On based on?]
+*** xref:troubleshooting.adoc[2.4.2 How to Extend Red Hat Single Sign-On OpenShift Image]
+*** xref:troubleshooting.adoc[2.4.3 How to Register Provider Implementations]
+*** xref:troubleshooting.adoc[2.4.4 How to Obtain the RH-SSO Admin Credentials]
+*** xref:troubleshooting.adoc[2.4.5 How to Enable TRACE Logging]
