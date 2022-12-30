@@ -60,11 +60,11 @@ image::secapp/quarkus-petclinic-client.png[]
 
 image::secapp/quarkus-petclinic-client-cfg.png[]
 
-At this point, we have the `demo` realm with the `quarkus-petclinic` client; additionally, we created two roles and users: the user `angel` that has the `vet` role and the user `elisa` that has the role `assistant`.
+At this point, we have the `demo` realm with the `quarkus-petclinic` client; additionally, we created two roles and users: the user `angel` that has the `vet` role and the user `elisabeth` that has the role `assistant`.
 
 * The authorization granularity that we want to configure based on our application is the following:
-** Any user that belongs to the `demo` realm, like `elisa`, can browse the application except the `VETERINARIANS` resource.
-** Only the users with the role `vet` can view the `VETERINARIANS` resource.
+** Any user that belongs to the `demo` realm, like `elisabeth`, can browse the application except the `VETERINARIANS` resource.
+** Only the users with the role `vet` can view the `VETERINARIANS` resource (which has the `/vets.html` context).
 ** Any other user access outside the realm will be rejected.
 
 image::secapp/quarkus-petclinic-menu.png[]
@@ -86,7 +86,7 @@ image::secapp/quarkus-petclinic-auth-create-permission-default.png[]
 
 image::secapp/new-group-policy.png[]
 
-* Set `Default Group Policy` as the `Name`. Select `staff` from the `Groups` list, click `Select`. Be sure that the `Logic` is set to `Negative`. `Extend to Children` checked (we will use this logic in later chapters). Finally, click `Save`.
+* Set `Default Group Policy` as the `Name`. Select `staff` from the `Groups` list, click `Select`. Be sure that the `Logic` is set to `Positive`. `Extend to Children` checked (we will use this logic in later chapters). Finally, click `Save`.
 
 image::secapp/group-policy.png[]
 
@@ -173,8 +173,8 @@ quarkus.keycloak.policy-enforcer.enable=true
 * Redeploy and test the application accesses:
 ** Open a new incognito browser session.
 ** Browse to the context root of the Quarkus Petclinic application. The request will be redirected to the RH-SSO login page. Here, we checked that the anonymous access to the application is forbidden.
-** Log in as `elisa`. The request will be redirected to the application after a successful login.
-** Browse through the application, try the access to the VETERINARIANS section; the access should be denied, as `elisa` has the `assistant` role and the access is restricted to the `vet` role. An error on the application page will shown.
+** Log in as `elisabeth`. The request will be redirected to the application after a successful login.
+** Browse through the application, try the access to the VETERINARIANS section; the access should be denied, as `elisabeth` has the `assistant` role and the access is restricted to the `vet` role. An error on the application page will shown.
 ** Close the browser and open a new one incognito session.
 ** Visit again the context root of the application.
 ** Login as `angel`.

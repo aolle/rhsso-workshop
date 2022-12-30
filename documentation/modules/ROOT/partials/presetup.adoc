@@ -10,6 +10,28 @@ image::secapp/addrealm.png[]
 
 image::secapp/add-demo-realm.png[]
 
+* Create the `staff` group. Click `Groups`.
+
+image::secapp/groups.png[]
+
+* Click `New`.
+
+image::secapp/new-group.png[]
+
+* Set `staff` as the name group. Click `Save`.
+
+image::secapp/staff-group.png[]
+
+* Create the subgroup named `Personal staff`. Click again on `Groups`.
+
+* Select `staff` and click `New`.
+
+image::secapp/new-subgroup.png[]
+
+* Set `Personal staff` as the Name and click `Save`.
+
+image::secapp/subgroup.png[]
+
 * Create the role `vet`. Click `Roles` → `Add Role`.
 
 image::secapp/demo-roles.png[]
@@ -40,26 +62,12 @@ image::secapp/user-setting-password.png[]
 
 image::secapp/user-roles.png[]
 
-* Repeat the same steps for creating a user named `elisa` but assign the `assistant` role.
+* Open the `Groups` tab and assign the user `angel` in the `Personal staff` group by clicking the group and `Join` button.
 
-* Create the `staff` group. Click `Groups`.
+image::secapp/join-group.png[]
 
-image::secapp/groups.png[]
+image::secapp/joined-group.png[]
 
-* Click `New`.
+* Repeat the same steps for creating a user named `elisabeth` but assign the `assistant` role. Remember also to incude the user in the `Personal staff` group.
 
-image::secapp/new-group.png[]
-
-* Set `staff` as the name group. Click `Save`.
-
-image::secapp/staff-group.png[]
-
-* Create the subgroup named `Personal staff`. Click again on `Groups`.
-
-* Select `staff` and click `New`.
-
-image::secapp/new-subgroup.png[]
-
-* Set `Personal Staff` as the Name and click `Save`.
-
-image::secapp/subgroup.png[] 
+NOTE: Red Hat Single Sign-On allows to define a group(s) as a default group(s), where any new user will automatically join to that group; for taking care of repetitive and time-consuming tasks like assign users to the same group. The Option is available by clicking `Groups` → `Default Groups`.
