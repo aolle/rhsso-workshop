@@ -70,4 +70,4 @@ image::secapp/joined-group.png[]
 
 * Repeat the same steps for creating a user named `elisabeth` but assign the `assistant` role. Remember also to incude the user in the `Personal staff` group.
 
-NOTE: Red Hat Single Sign-On allows to define a group(s) as a default group(s), where any new user will automatically join to that group; for taking care of repetitive and time-consuming tasks like assign users to the same group. The Option is available by clicking `Groups` → `Default Groups`.
+TIP: Red Hat Single Sign-On allows to define a group(s) as a default group(s), where any new user will automatically join to that group; for taking care of repetitive and time-consuming tasks like assign users to the same group. The Option is available by clicking `Groups` → `Default Groups`.
