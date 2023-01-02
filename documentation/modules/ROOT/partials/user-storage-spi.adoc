@@ -1,6 +1,6 @@
 We have an external system that stores and manage users, the data is available through a REST API.
 
-Due some constraints, we don't want to migrate that existing system to RH-SSO data model, because of that, we are interested in expanding and integrate our RH-SSO deployment with this external user storage system.
+Due some constraints, we don't want to migrate that existing system to Red Hat Single Sign-On data model, because of that, we are interested in expanding and integrate our Red Hat Single Sign-On deployment with this external user storage system.
 
 The REST API has been coded in Quarkus, the project name is `jaxrs-user-store` and it provides the following two endpoints:
 
@@ -73,11 +73,11 @@ content-length: 120
 }
 ----
 
-For extending RH-SSO to connect it to the external system we use the `User Storage SPI` (`Service Provider Interface`).
+For extending Red Hat Single Sign-On to connect it to the external system we use the `User Storage SPI` (`Service Provider Interface`).
 
 The provider implementation is `custom-user-storage-spi` and can be deployed in some different ways:
 
-* Extending the RH-SSO image.
+* Extending the Red Hat Single Sign-On image.
 * Mounting a volume with the file.
 * Using a configmap (not recommended, as the configmap has a limited size and should be used for storing metadata mainly).
 * Copying it into the pod (ephemeral).
@@ -97,6 +97,6 @@ image::federation/add-new-user-storage-spi.png[]
 
 image::federation/custom-user-storage-spi-enabled.png[]
 
-* Click `Users`. The external storage users should be loaded into RH-SSO.
+* Click `Users`. The external storage users should be loaded into Red Hat Single Sign-On.
 
 image::federation/users-loaded.png[]

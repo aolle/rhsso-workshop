@@ -9,7 +9,7 @@ https://access.redhat.com/articles/2342881[Red Hat Single Sign-On Component Deta
 
 == How to Extend Red Hat Single Sign-On OpenShift Image
 
-For properly customizing the RH-SSO OpenShift Image using s2i strategy:
+For properly customizing the Red Hat Single Sign-On OpenShift Image using s2i strategy:
 
 https://access.redhat.com/solutions/3911211[Running JBoss CLI commands on extended JBoss EAP 7 OpenShift Image]
 
@@ -23,7 +23,7 @@ Check out the documentation below, it offers some recommendations on how to do i
 
 https://access.redhat.com/documentation/en-us/red_hat_single_sign-on/7.6/html/server_developer_guide/providers#registering_provider_implementations[Registering provider implementations]
 
-== How to Obtain the RH-SSO Admin Credentials
+== How to Obtain the Red Hat Single Sign-On Admin Credentials
 
 The admin credentials are stored in the `SSO_ADMIN_USERNAME` and `SSO_ADMIN_PASSWORD`, `DeploymentConfig` (or POD) environment variables.
 

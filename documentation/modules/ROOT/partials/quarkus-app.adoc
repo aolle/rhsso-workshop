@@ -1,12 +1,10 @@
 The sample application that we use on this section is the `Quarkus Petclinic project`.
 
-Original Red Hat Developers source: https://github.com/redhat-developer-demos/quarkus-petclinic
-
-But for this tutorial, we will start working with the following prepared fork and `sso-base` branch:
+In this tutorial, we will work with a version ready for the tutorial.
 
 https://github.com/aolle/quarkus-petclinic.git
 
-Then, clone and start working from this branch instead:
+Then, clone and start working from the `sso-base` branch:
 
 [.lines_space]
 [.console-input]
@@ -15,11 +13,11 @@ Then, clone and start working from this branch instead:
 git clone -b sso-base https://github.com/aolle/quarkus-petclinic.git
 ----
 
-The application is prepared to be deployed on top of OpenShift (aka OCP). The application project contains the Quarkus OpenShift extension (k8s + s2i) to automatically generate the OCP resources and deploy it.
+The application is prepared to be deployed on top of Red Hat OpenShift. The application project contains the Quarkus OpenShift extension (`k8s` with `s2i`) to automatically generate the OpenShift resources and deploy it.
 
 Test the application by following the those steps:
 
-* Log into your OCP cluster.
+* Log into your Red Hat OpenShift cluster.
 * Change from the current project to `sso` project in case you are not currently using it.
 * Deploy the application by executing the `ocp-deploy.sh` script or alternatively:
 
@@ -38,7 +36,7 @@ image::secapp/petclinic-main.png[]
 
 NOTE: Write down the application URL; it will be required during the security configuration process.
 
-Before starting securing the application, let's configure a new client in our RH-SSO realm.
+Before starting securing the application, let's configure a new client in our Red Hat Single Sign-On realm.
 
 * Open a browser window and log in to the Red Hat Single Sign-On administration web console.
 
@@ -120,7 +118,7 @@ image::secapp/quarkus-petclinic-create-perms-vets.png[]
 
 image::secapp/quarkus-petclinic-resource-permission.png[]
 
-At this point, the RH-SSO client is properly configured.
+At this point, the Red Hat Single Sign-On client is properly configured.
 
 Let's configure the application side.
 
@@ -172,7 +170,7 @@ quarkus.keycloak.policy-enforcer.enable=true
 
 * Redeploy and test the application accesses:
 ** Open a new incognito browser session.
-** Browse to the context root of the Quarkus Petclinic application. The request will be redirected to the RH-SSO login page. Here, we checked that the anonymous access to the application is forbidden.
+** Browse to the context root of the Quarkus Petclinic application. The request will be redirected to the Red Hat Single Sign-On login page. Here, we checked that the anonymous access to the application is forbidden.
 ** Log in as `elisabeth`. The request will be redirected to the application after a successful login.
 ** Browse through the application, try the access to the VETERINARIANS section; the access should be denied, as `elisabeth` has the `assistant` role and the access is restricted to the `vet` role. An error on the application page will shown.
 ** Close the browser and open a new one incognito session.

@@ -3,7 +3,7 @@
 ** xref:setup.adoc#deployrhsso[1.2. Deploying Red Hat Single Sign-On for OpenShift]
 *** xref:setup.adoc#deployrhsso-operator[1.2.1 Deploying Red Hat Single Sign-On for OpenShift using the Operator]
 *** xref:setup.adoc#deployrhsso-templates[1.2.2 Deploying Red Hat Single Sign-On for OpenShift using the templates]
-** xref:setup.adoc#deploy-ipa[1.3 Deploying an Identity Management (IdM/FreeIPA) on OpenShift]
+** xref:setup.adoc#deploy-ipa[1.3 Deploying an Identity Management (IdM/FreeIPA) on Red Hat OpenShift]
 
 * 2. Red Hat Single Sign-On
 ** xref:secapp.adoc[2.1 Securing web applications and services with Red Hat Single Sign-On]
@@ -24,5 +24,5 @@
 *** xref:troubleshooting.adoc[2.4.1 Which Keycloak version is Red Hat Single Sign-On based on?]
 *** xref:troubleshooting.adoc[2.4.2 How to Extend Red Hat Single Sign-On OpenShift Image]
 *** xref:troubleshooting.adoc[2.4.3 How to Register Provider Implementations]
-*** xref:troubleshooting.adoc[2.4.4 How to Obtain the RH-SSO Admin Credentials]
+*** xref:troubleshooting.adoc[2.4.4 How to Obtain the Red Hat Single Sign-On Admin Credentials]
 *** xref:troubleshooting.adoc[2.4.5 How to Enable TRACE Logging]

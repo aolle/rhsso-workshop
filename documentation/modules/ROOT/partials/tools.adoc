@@ -1,7 +1,7 @@
 |===
 |**Tool**|**Reference**
 
-| `OpenShift CLI`
+| `Red Hat OpenShift CLI`
 | https://access.redhat.com/downloads/content/290[OpenShift Container Platform downloads page]
 
 | `kubectl`
