@@ -6,7 +6,7 @@
     <title>Authentication :: Red Hat Single Sign-On Workshop</title>
     <link rel="canonical" href="https://olleb.com/rhsso-workshop/authentication.html">
     <link rel="prev" href="federation.html">
-    <link rel="next" href="federation.html#ldap">
+    <link rel="next" href="federation.html#authentication-spi">
     <meta name="generator" content="Antora 3.0.3">
     <link rel="stylesheet" href="./_/css/site.css">
 <link rel="icon" href="./_/img/favicon.ico" type="image/x-icon">
@@ -34,6 +34,9 @@
             <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
             <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
             <a class="navbar-item" href="https://redhat-developer-demos.github.io/kafka-tutorial/" target="_blank">Kafka</a>
+            <a class="navbar-item" href="https://devsecops-workshop.github.io/" target="_blank">DevSecOps</a>
+            <a class="navbar-item" href="https://acidonper.github.io/redhat-workshop-cicd-gitops/redhat-workshop-cicd-gitops/" target="_blank">CI/CD & GitOps</a>
+            <a class="navbar-item" href="https://atarazana.github.io/gramola-gitops-guide/gramola-gitops-guide/" target="_blank">Gramola GitOps Guide</a>
           </div>
         </div>
       </div>
@@ -70,7 +73,7 @@
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="setup.html#deploy-ipa">1.3 Deploying an Identity Management (IdM/FreeIPA) on OpenShift</a>
+    <a class="nav-link" href="setup.html#deploy-ipa">1.3 Deploying an Identity Management (IdM/FreeIPA) on Red Hat OpenShift</a>
   </li>
 </ul>
   </li>
@@ -107,7 +110,16 @@
     <a class="nav-link" href="authentication.html">2.3 Authentication</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="federation.html#ldap">2.3.1 Authentication SPI</a>
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="federation.html#authentication-spi">2.3.1 Authentication SPI</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="federation.html#presetup">2.3.1.1 Configuring the plugin and flows</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="federation.html#telegram2fa">2.3.1.2 Telegram two-factor authentication with authentication SPI</a>
+  </li>
+</ul>
   </li>
 </ul>
   </li>
@@ -125,7 +137,7 @@
     <a class="nav-link" href="troubleshooting.html">2.4.3 How to Register Provider Implementations</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="troubleshooting.html">2.4.4 How to Obtain the RH-SSO Admin Credentials</a>
+    <a class="nav-link" href="troubleshooting.html">2.4.4 How to Obtain the Red Hat Single Sign-On Admin Credentials</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="troubleshooting.html">2.4.5 How to Enable TRACE Logging</a>
@@ -160,12 +172,324 @@
 <div class="sect1">
 <h2 id="authentication-spi"><a class="anchor" href="#authentication-spi"></a>Authentication SPI</h2>
 <div class="sectionbody">
-
+<div class="paragraph">
+<p>Red Hat Single Sign-On provides an authentication SPI that can be used to create new authentication mechanisms. In this example, we will see a simple demo implementation of a two factor authentication that uses Red Hat Single Sign-On and a Telegram bot.</p>
+</div>
+<div class="paragraph">
+<p>The custom authenticator consists of three components:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Authenticator. The component that requires that a user enter the two factor authentication code provided via Telegram.</p>
+</li>
+<li>
+<p>A Required Action. The component that provides an enrollment process to the user. If during the authentication flow the user telegram id is not informed in the user profile the enrollment process is triggered as required.</p>
+</li>
+<li>
+<p>The Telegram Service. It handles the communication with the external Telegram API.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="presetup"><a class="anchor" href="#presetup"></a>2.3.1.1 Configuring the plugin and flows</h3>
+<div class="paragraph">
+<p>The plugin implementation is <code>telegram-authentication-spi</code> and can be deployed in some different ways:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Extending the Red Hat Single Sign-On image.</p>
+</li>
+<li>
+<p>Mounting a volume with the file.</p>
+</li>
+<li>
+<p>Using a configmap (not recommended, as the configmap has a limited size and should be used for storing metadata mainly).</p>
+</li>
+<li>
+<p>Copying it into the pod (ephemeral).</p>
+</li>
+<li>
+<p>Others.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+the previous chapter 2.1.1 workshop steps are required to continue with the setup.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Once deployed, follow the steps below:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Open a browser window and log in to the Red Hat Single Sign-On administration web console.</p>
+</li>
+<li>
+<p>Go to <code>Authentication</code> → <code>Flows</code>, select <code>Browser</code> in the drop down list, and click <code>Copy</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/authentication/authentication-menu.png" alt="authentication menu">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/authentication/copy-browser-flow.png" alt="copy browser flow">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Set the desired name for the new browser authentication flow.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/authentication/new-browser-authentication-flow-name.png" alt="new browser authentication flow name">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Select <code>Actions</code> → <code>Add execution</code> of the  <code>Browser With Telegram Browser - Conditional OTP</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/authentication/add-execution.png" alt="add execution">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Select <code>Telegram Authentication</code>. Click <code>Save</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/authentication/telegram-authentication-exec.png" alt="telegram authentication exec">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Set <code>Browser With Telegram Browser - Conditional OTP</code> as <code>REQURIED</code>, <code>OTP Form</code> as <code>DISABLED</code> and <code>Telegram Authentication</code> as <code>REQUIRED</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/authentication/authentication-flow-cfg.png" alt="authentication flow cfg">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Click <code>Actions</code> of the <code>Telegram Authentication</code> and select <code>Config</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/authentication/telegram-authentication-action-config.png" alt="telegram authentication action config">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Set an alias and click <code>Save</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/authentication/telegram-authentication-config.png" alt="telegram authentication config">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Navigate to <code>Authentication</code> → <code>Required Actions</code>. Click <code>Register</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/authentication/default-required-actions.png" alt="default required actions">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Select <code>Telegram ID</code> in the drop down list. Click <code>Ok</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/authentication/telegram-id-ra.png" alt="telegram id ra">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Go to <code>Authentication</code> → <code>Bindings</code>. In the <code>Browser Flow</code> drop down list select <code>Browser with Telegram</code>. Click <code>Save</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/authentication/telegram-binding.png" alt="telegram binding">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="telegram2fa"><a class="anchor" href="#telegram2fa"></a>Telegram two-factor authentication with authentication SPI</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Open a new incognito browser session.</p>
+</li>
+<li>
+<p>Browse to the context root of the Quarkus Petclinic application. The request will be redirected to the Red Hat Single Sign-On login page.</p>
+</li>
+<li>
+<p>Login as <code>angel</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/authentication/user-first-login.png" alt="user first login">
+</div>
+</div>
+<div class="paragraph">
+<p>As it is the first time that the user <code>angel</code> logs in into the system since the 2FA has been implemented, the 2fa enrollment process is presented to the user.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/authentication/2fa-enroll.png" alt="2fa enroll">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Open the Telegram and send the enrollment code to the Telegram bot. The bot will respond with the enrollment code, submit the code.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/authentication/telegram-enroll.png" alt="telegram enroll">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/authentication/2fa-enrollment-code-submit.png" alt="2fa enrollment code submit">
+</div>
+</div>
+<div class="paragraph">
+<p>We will be logged in into the application successfully.</p>
+</div>
+<div class="paragraph">
+<p>The enrollment process (the required action SPI) updates the user profile adding the Telegram attributes on it&#8217;s profile. Let&#8217;s check it:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Open a browser window and log in to the Red Hat Single Sign-On administration web console.</p>
+</li>
+<li>
+<p>Navigate to <code>Demo</code> realm → <code>Users</code>, click <code>View all users</code> and select the <code>angel</code> user ID.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/authentication/user-id.png" alt="user id">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Click <code>Attributes</code>.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/authentication/telegram-user-attributes.png" alt="telegram user attributes">
+</div>
+</div>
+<div class="paragraph">
+<p>We will see the new added <code>telegram_id</code> and <code>telegram_username</code> attributes of the <code>angel</code> user.</p>
+</div>
+<div class="paragraph">
+<p>The next login attempts for the same user will require the 2FA code. Let&#8217;s try it.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Open a new incognito browser session.</p>
+</li>
+<li>
+<p>Browse to the context root of the Quarkus Petclinic application. The request will be redirected to the Red Hat Single Sign-On login page.</p>
+</li>
+<li>
+<p>Login as <code>angel</code>. We will be asked for the 2FA code.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/authentication/2fa-code-form.png" alt="2fa code form">
+</div>
+</div>
+<div class="paragraph">
+<p>The 2FA code will be sent to us via the Telegram bot.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/authentication/2fa-telegram-code.png" alt="2fa telegram code">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Submit the 2FA code.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/authentication/submit-2fa.png" alt="submit 2fa">
+</div>
+</div>
+<div class="paragraph">
+<p>We will be logged in into the application successfully.</p>
+</div>
+</div>
 </div>
 </div>
 <nav class="pagination">
   <span class="prev"><a href="federation.html">2.2 User Federation</a></span>
-  <span class="next"><a href="federation.html#ldap">2.3.1 Authentication SPI</a></span>
+  <span class="next"><a href="federation.html#authentication-spi">2.3.1 Authentication SPI</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

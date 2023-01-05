@@ -34,6 +34,9 @@
             <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
             <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
             <a class="navbar-item" href="https://redhat-developer-demos.github.io/kafka-tutorial/" target="_blank">Kafka</a>
+            <a class="navbar-item" href="https://devsecops-workshop.github.io/" target="_blank">DevSecOps</a>
+            <a class="navbar-item" href="https://acidonper.github.io/redhat-workshop-cicd-gitops/redhat-workshop-cicd-gitops/" target="_blank">CI/CD & GitOps</a>
+            <a class="navbar-item" href="https://atarazana.github.io/gramola-gitops-guide/gramola-gitops-guide/" target="_blank">Gramola GitOps Guide</a>
           </div>
         </div>
       </div>
@@ -70,7 +73,7 @@
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="setup.html#deploy-ipa">1.3 Deploying an Identity Management (IdM/FreeIPA) on OpenShift</a>
+    <a class="nav-link" href="setup.html#deploy-ipa">1.3 Deploying an Identity Management (IdM/FreeIPA) on Red Hat OpenShift</a>
   </li>
 </ul>
   </li>
@@ -107,7 +110,16 @@
     <a class="nav-link" href="authentication.html">2.3 Authentication</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="federation.html#ldap">2.3.1 Authentication SPI</a>
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="federation.html#authentication-spi">2.3.1 Authentication SPI</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="federation.html#presetup">2.3.1.1 Configuring the plugin and flows</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="federation.html#telegram2fa">2.3.1.2 Telegram two-factor authentication with authentication SPI</a>
+  </li>
+</ul>
   </li>
 </ul>
   </li>
@@ -125,7 +137,7 @@
     <a class="nav-link" href="troubleshooting.html">2.4.3 How to Register Provider Implementations</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="troubleshooting.html">2.4.4 How to Obtain the RH-SSO Admin Credentials</a>
+    <a class="nav-link" href="troubleshooting.html">2.4.4 How to Obtain the Red Hat Single Sign-On Admin Credentials</a>
   </li>
   <li class="nav-item" data-depth="3">
     <a class="nav-link" href="troubleshooting.html">2.4.5 How to Enable TRACE Logging</a>
@@ -383,16 +395,13 @@ Red Hat Single Sign-On allows to define a group(s) as a default group(s), where 
 <p>The sample application that we use on this section is the <code>Quarkus Petclinic project</code>.</p>
 </div>
 <div class="paragraph">
-<p>Original Red Hat Developers source: <a href="https://github.com/redhat-developer-demos/quarkus-petclinic" class="bare">https://github.com/redhat-developer-demos/quarkus-petclinic</a></p>
-</div>
-<div class="paragraph">
-<p>But for this tutorial, we will start working with the following prepared fork and <code>sso-base</code> branch:</p>
+<p>In this tutorial, we will work with a version ready for the tutorial.</p>
 </div>
 <div class="paragraph">
 <p><a href="https://github.com/aolle/quarkus-petclinic.git" class="bare">https://github.com/aolle/quarkus-petclinic.git</a></p>
 </div>
 <div class="paragraph">
-<p>Then, clone and start working from this branch instead:</p>
+<p>Then, clone and start working from the <code>sso-base</code> branch:</p>
 </div>
 <div class="listingblock lines_space console-input">
 <div class="content">
@@ -400,7 +409,7 @@ Red Hat Single Sign-On allows to define a group(s) as a default group(s), where 
 </div>
 </div>
 <div class="paragraph">
-<p>The application is prepared to be deployed on top of OpenShift (aka OCP). The application project contains the Quarkus OpenShift extension (k8s + s2i) to automatically generate the OCP resources and deploy it.</p>
+<p>The application is prepared to be deployed on top of Red Hat OpenShift. The application project contains the Quarkus OpenShift extension (<code>k8s</code> with <code>s2i</code>) to automatically generate the OpenShift resources and deploy it.</p>
 </div>
 <div class="paragraph">
 <p>Test the application by following the those steps:</p>
@@ -408,7 +417,7 @@ Red Hat Single Sign-On allows to define a group(s) as a default group(s), where 
 <div class="ulist">
 <ul>
 <li>
-<p>Log into your OCP cluster.</p>
+<p>Log into your Red Hat OpenShift cluster.</p>
 </li>
 <li>
 <p>Change from the current project to <code>sso</code> project in case you are not currently using it.</p>
@@ -460,7 +469,7 @@ Write down the application URL; it will be required during the security configur
 </table>
 </div>
 <div class="paragraph">
-<p>Before starting securing the application, let&#8217;s configure a new client in our RH-SSO realm.</p>
+<p>Before starting securing the application, let&#8217;s configure a new client in our Red Hat Single Sign-On realm.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -689,7 +698,7 @@ Write down the application URL; it will be required during the security configur
 </div>
 </div>
 <div class="paragraph">
-<p>At this point, the RH-SSO client is properly configured.</p>
+<p>At this point, the Red Hat Single Sign-On client is properly configured.</p>
 </div>
 <div class="paragraph">
 <p>Let&#8217;s configure the application side.</p>
@@ -767,7 +776,7 @@ quarkus.keycloak.policy-enforcer.enable=true</code></pre>
 <p>Open a new incognito browser session.</p>
 </li>
 <li>
-<p>Browse to the context root of the Quarkus Petclinic application. The request will be redirected to the RH-SSO login page. Here, we checked that the anonymous access to the application is forbidden.</p>
+<p>Browse to the context root of the Quarkus Petclinic application. The request will be redirected to the Red Hat Single Sign-On login page. Here, we checked that the anonymous access to the application is forbidden.</p>
 </li>
 <li>
 <p>Log in as <code>elisabeth</code>. The request will be redirected to the application after a successful login.</p>
