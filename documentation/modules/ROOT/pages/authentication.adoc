@@ -1,5 +1,5 @@
 = Authentication
-include::_attributes.adoc[] 
+include::_attributes.adoc[]
 
 [#authentication-spi]
 == Authentication SPI

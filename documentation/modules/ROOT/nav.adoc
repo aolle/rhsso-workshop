@@ -18,7 +18,9 @@
 *** xref:federation.adoc#user-storage-spi[2.2.2 User Storage SPI]
 
 ** xref:authentication.adoc[2.3 Authentication]
-*** xref:federation.adoc#ldap[2.3.1 Authentication SPI]
+*** xref:federation.adoc#authentication-spi[2.3.1 Authentication SPI]
+**** xref:federation.adoc#presetup[2.3.1.1 Configuring the plugin and flows]
+**** xref:federation.adoc#telegram2fa[2.3.1.2 Telegram two-factor authentication with authentication SPI]
 
 ** xref:troubleshooting.adoc[2.4 FAQs & Troubleshooting]
 *** xref:troubleshooting.adoc[2.4.1 Which Keycloak version is Red Hat Single Sign-On based on?]
