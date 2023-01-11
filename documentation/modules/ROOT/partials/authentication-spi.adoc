@@ -9,7 +9,7 @@ The custom authenticator consists of three components:
 * The Telegram Service. It handles the communication with the external Telegram API.
 
 [#presetup]
-=== 2.3.1.1 Configuring the plugin and flows
+=== Configuring the plugin and flows
 
 The plugin implementation is `telegram-authentication-spi` and can be deployed in some different ways:
 
@@ -80,7 +80,7 @@ As it is the first time that the user `angel` logs in into the system since the 
 
 image::authentication/2fa-enroll.png[]
 
-* Open the Telegram and send the enrollment code to the Telegram bot. The bot will respond with the enrollment code, submit the code.
+* Open Telegram and send the enrollment code to the Telegram bot. The bot will respond with the enrollment code, submit the code.
 
 image::authentication/telegram-enroll.png[]
 
