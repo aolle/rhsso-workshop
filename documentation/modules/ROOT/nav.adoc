@@ -22,6 +22,10 @@
 **** xref:authentication.adoc#presetup[2.3.1.1 Configuring the plugin and flows]
 **** xref:authentication.adoc#telegram2fa[2.3.1.2 Telegram two-factor authentication with authentication SPI]
 
+** xref:vault.adoc[2.4 Vault]
+*** xref:vault.adoc[2.4.1 Vault SPI]
+**** xref:vault.adoc#vault-spi-conjur[2.4.1.1 Integrating Red Hat Single Sign-On with CyberArk Conjur for secrets management]
+
 ** xref:troubleshooting.adoc[2.4 FAQs & Troubleshooting]
 *** xref:troubleshooting.adoc[2.4.1 Which Keycloak version is Red Hat Single Sign-On based on?]
 *** xref:troubleshooting.adoc[2.4.2 How to Extend Red Hat Single Sign-On OpenShift Image]

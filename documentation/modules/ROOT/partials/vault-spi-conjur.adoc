@@ -1,0 +1,94 @@
+This chapter explains how to integrate Red Hat Single Sign-On with Conjur using the Vault SPI. For the demo, we will obtain the 389 Directory Server credentials of the `cn=Directory Manager` user stored in Conjur that has to be used by Red Hat Single Sign-On for the user federation.
+
+Setup steps:
+
+* Run the provided Conjur OSS community collection provided with this workshop.
+
+image::vault/conjur.png[]
+
+* Create the admin account "demoAccount".
+
+[.lines_space]
+[.console-input]
+[source,bash, subs="+macros,+attributes"]
+----
+conjurctl account create demoAccount > /tmp/admin_data
+----
+
+The `admin_data` file contains the public key and the API key of the admin user on that account.
+
+* Load the provided Conjur policy and create a secret for the demo.
+
+[.lines_space]
+[.console-input]
+[source,bash, subs="+macros,+attributes"]
+----
+APIKEY=$(sed -n '/API/ s/.*: *//p' /tmp/admin_data)
+
+TOKEN=$(curl --header "Accept-Encoding: base64" -d $APIKEY https://$CONJUR_HOST/authn/demoAccount/admin/authenticate)
+
+curl -H "Authorization: Token token=\"${TOKEN}\"" -d "$(< policy.yml)" https://$CONJUR_HOST/policies/demoAccount/policy/root
+
+curl -H "Authorization: Token token=\"${TOKEN}\"" -d "password" https://$CONJUR_HOST/secrets/demoAccount/variable/ldap/password
+----
+
+NOTE: we are using the REST API, but other approach like Conjur CLI (or others) can be used either.
+
+* Export the required environment variables.
+
+NOTE: instead of exporting the Conjur API required configuration as environment variables, it can also be configured with SPI provider properties.
+
+[.lines_space]
+[.console-input]
+[source,bash, subs="+macros,+attributes"]
+----
+export CONJUR_ACCOUNT=demoAccount
+export CONJUR_AUTHN_API_KEY=$APIKEY
+export CONJUR_APPLIANCE_URL=https://$CONJUR_HOST
+export CONJUR_AUTHN_LOGIN=admin
+----
+
+* Deploy the extension and configure the SPI.
+
+[.lines_space]
+[.console-input]
+[source,bash, subs="+macros,+attributes"]
+----
+/subsystem=keycloak-server/spi=vault:add
+/subsystem=keycloak-server/spi=vault/provider=conjur-vault:add(enabled=true)
+/subsystem=keycloak-server/spi=vault:write-attribute(name=default-provider,value=conjur-vault)
+:reload
+----
+
+Ensure that 389 Directory Server is up and running.
+
+[.lines_space]
+[.console-input]
+[source,bash, subs="+macros,+attributes"]
+----
+</dev/tcp/<389_HOST>/3389
+----
+
+* Open a browser window and log in to the Red Hat Single Sign-On administration web console.
+
+* Select the `Demo` realm.
+
+* Click `User Federation`.
+
+image::federation/sso-user-federation.png[]
+
+* Select `ldap` as the provider.
+
+image::federation/sso-ldap-provider.png[]
+
+* Fill the user federation provider settings. If we haven't done it before, the connection can be tested clicking `Test connection` button.
+
+image::federation/ldap-conn-test.png[]
+
+* Test the authentication with a random wrong password, it should fail.
+
+image::federation/ldap-failed-auth.png[]
+
+* Introduce the field as the vault value, `${vault.ldap/password}`. Check that the authentication now works.
+
+image::federation/ldap-ok-auth.png[]

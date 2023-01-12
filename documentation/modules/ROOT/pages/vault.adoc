@@ -1,0 +1,10 @@
+= Vault
+include::_attributes.adoc[]
+
+== Vault SPI
+You can use the vault SPI to write custom extension for Red Hat Single Sign-On to connect to arbitrary vault implementation.
+
+[#vault-spi-conjur]
+=== Integrating Red Hat Single Sign-On with CyberArk Conjur for secrets management
+
+include::partial$vault-spi-conjur.adoc[]
