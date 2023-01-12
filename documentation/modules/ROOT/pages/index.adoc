@@ -4,3 +4,5 @@
 
 [.text-center.strong]
 == Introduction
+
+Red Hat Single Sign-On enables you to secure your web applications by providing Web SSO capabilities based on popular standards such as OpenID Connect, OAuth 2.0, and SAML 2.0.
