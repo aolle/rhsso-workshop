@@ -54,7 +54,7 @@ image::federation/sso-user-federation.png[]
 
 image::federation/sso-ldap-provider.png[]
 
-* Fill the user federation provide configuration. Click `Save`.
+* Fill the user federation provider required settings. Click `Save`.
 
 image::federation/sso-ldap-config.png[]
 
