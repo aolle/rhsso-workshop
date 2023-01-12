@@ -83,12 +83,12 @@ image::federation/sso-ldap-provider.png[]
 
 * Fill the user federation provider settings. If we haven't done it before, the connection can be tested clicking `Test connection` button.
 
-image::federation/ldap-conn-test.png[]
+image::vault/ldap-conn-test.png[]
 
 * Test the authentication with a random wrong password, it should fail.
 
-image::federation/ldap-failed-auth.png[]
+image::vault/ldap-failed-auth.png[]
 
 * Introduce the field as the vault value, `${vault.ldap/password}`. Check that the authentication now works.
 
-image::federation/ldap-ok-auth.png[]
+image::vault/ldap-ok-auth.png[]
