@@ -80,7 +80,7 @@ As it is the first time that the user `angel` logs in into the system since the 
 
 image::authentication/2fa-enroll.png[]
 
-* Open Telegram and send the enrollment code to the Telegram bot. The bot will respond with the enrollment code, submit the code.
+* Open Telegram and send the enrollment code to the Telegram bot. The bot will respond with the enrollment secure code, submit that secure code.
 
 image::authentication/telegram-enroll.png[]
 
