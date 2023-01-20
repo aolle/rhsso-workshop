@@ -6,7 +6,7 @@ Setup steps:
 
 image::vault/conjur.png[]
 
-* Create the admin account "demoAccount".
+* Create the admin account `demoAccount`.
 
 [.lines_space]
 [.console-input]
