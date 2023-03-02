@@ -17,7 +17,7 @@ conjurctl account create demoAccount > /tmp/admin_data
 
 The `admin_data` file contains the public key and the API key of the admin user on that account.
 
-* Load the provided Conjur policy and create a secret for the demo.
+* Load the provided Conjur policy and create a secret for the demo by running the following commands in the terminal:
 
 [.lines_space]
 [.console-input]
@@ -32,7 +32,7 @@ curl -H "Authorization: Token token=\"${TOKEN}\"" -d "$(< policy.yml)" https://$
 curl -H "Authorization: Token token=\"${TOKEN}\"" -d "password" https://$CONJUR_HOST/secrets/demoAccount/variable/ldap/password
 ----
 
-NOTE: we are using the REST API, but other approach like Conjur CLI (or others) can be used either.
+NOTE: we are using the REST API, but other approaches like Conjur CLI (or others) can also be used.
 
 * Export the required environment variables.
 
@@ -60,7 +60,7 @@ export CONJUR_AUTHN_LOGIN=admin
 :reload
 ----
 
-Ensure that 389 Directory Server is up and running.
+Ensure that the 389 Directory Server is up and running and that you have deployed the Conjur extension and configured the Vault SPI as described in the previous steps.
 
 [.lines_space]
 [.console-input]
@@ -81,14 +81,14 @@ image::federation/sso-user-federation.png[]
 
 image::federation/sso-ldap-provider.png[]
 
-* Fill the user federation provider settings. If we haven't done it before, the connection can be tested clicking `Test connection` button.
+* Fill in the user federation provider settings with the appropiate values for your LDAP server. Click the `Test connection` button to check the connection. If successful, you should see a message saying "Success! LDAP connection successful".
 
 image::vault/ldap-conn-test.png[]
 
-* Test the authentication with a random wrong password, it should fail.
+* Test the authentication with a random wrong password. It should fail.
 
 image::vault/ldap-failed-auth.png[]
 
-* Introduce the field as the vault value, `${vault.ldap/password}`. Check that the authentication now works.
+* Enter the field as the vault value, `${vault.ldap/password}` for the `Bind Credential` field. Test the authentication again. It should now work.
 
 image::vault/ldap-ok-auth.png[]

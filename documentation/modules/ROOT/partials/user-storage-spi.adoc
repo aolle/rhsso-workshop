@@ -1,16 +1,16 @@
-We have an external system that stores and manage users, the data is available through a REST API.
+We have an external system that stores and manages user data which is accessible via a REST API.
 
-Due some constraints, we don't want to migrate that existing system to Red Hat Single Sign-On data model, because of that, we are interested in expanding and integrate our Red Hat Single Sign-On deployment with this external user storage system.
+However, due to certain constraints, we do not want to migrate this existing system to Red Hat Single Sign-On data model. Therefore, we are interested in expanding and integrate our Red Hat Single Sign-On deployment with this external user storage system.
 
-The REST API has been coded in Quarkus, the project name is `jaxrs-user-store` and it provides the following two endpoints:
+The REST API has been developed using Quarkus and is named `jaxrs-user-store`. It provides two endpoints:
 
-* `/api/v1/users`, returns a set of all the users in the system.
+* `/api/v1/users`, which returns a set of all the users in the system.
 
-* `/api/v1/users/{id}`, returns the user that `userId` matches with `id`.
+* `/api/v1/users/{id}`, which returns the user that matches the `userId` with `id`.
 
-Both endpoints expects a `GET` request.
+Both endpoints accept `GET` requests.
 
-The application is prepared to be deployed on top of OpenShift. Deploy it by executing the `ocp-deploy.sh` script or alternatively:
+The application is designed to be deployed on top of OpenShift. You can deploy it by running the `ocp-deploy.sh` script or alternatively:
 
 [.lines_space]
 [.console-input]
@@ -73,30 +73,30 @@ content-length: 120
 }
 ----
 
-For extending Red Hat Single Sign-On to connect it to the external system we use the `User Storage SPI` (`Service Provider Interface`).
+For extending Red Hat Single Sign-On to connect to the external system, we use the `User Storage SPI` (`Service Provider Interface`).
 
-The provider implementation is `custom-user-storage-spi` and can be deployed in some different ways:
+The provider implementation is `custom-user-storage-spi` and can be deployed in several ways:
 
-* Extending the Red Hat Single Sign-On image.
-* Mounting a volume with the file.
-* Using a configmap (not recommended, as the configmap has a limited size and should be used for storing metadata mainly).
-* Copying it into the pod (ephemeral).
-* Others.
+* By extending the Red Hat Single Sign-On image.
+* By mounting a volume with the file.
+* By using a configmap (although this is not recommended as the configmap has a limited size and should be used mainly for storing metadata).
+* By copying it into the pod (which is ephemeral).
+* And others ways as well.
 
-The provider checks the value of the `USER_STORAGE_CUSTOM_SPI_TARGET_HOST` environment variable in the following format: `HOST:PORT` or `HOST` if the port defaults to http/80. The value can be provided as an environment variable in the `DeploymentConfig`.
+The provider checks the value of the `USER_STORAGE_CUSTOM_SPI_TARGET_HOST` environment variable in the following format: `HOST:PORT` or `HOST` if the port defaults to `http/80`. The value can be provided as an environment variable in the `DeploymentConfig`.
 
-Once the environment variable and the package is correctly deployed, we will see the new provider listed under the `User Federation` of the Red Hat Single Sign-On administration web console.
+Once the environment variable and the package are correctly deployed, we will see the new provider listed under the `User Federation` section of the Red Hat Single Sign-On administration web console.
 
 * Click `demo-user-provider`.
 
 image::federation/user-storage-spi-provider-listed.png[]
 
-* Verify that it is `Enabled` and `Save`.
+* Verify that it is `Enabled` and click `Save`.
 
 image::federation/add-new-user-storage-spi.png[]
 
 image::federation/custom-user-storage-spi-enabled.png[]
 
-* Click `Users`. The external storage users should be loaded into Red Hat Single Sign-On.
+* Click `Users`. The external storage users should now be loaded into Red Hat Single Sign-On.
 
 image::federation/users-loaded.png[]
