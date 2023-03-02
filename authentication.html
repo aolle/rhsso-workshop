@@ -37,6 +37,8 @@
             <a class="navbar-item" href="https://devsecops-workshop.github.io/" target="_blank">DevSecOps</a>
             <a class="navbar-item" href="https://acidonper.github.io/redhat-workshop-cicd-gitops/redhat-workshop-cicd-gitops/" target="_blank">CI/CD & GitOps</a>
             <a class="navbar-item" href="https://atarazana.github.io/gramola-gitops-guide/gramola-gitops-guide/" target="_blank">Gramola GitOps Guide</a>
+            <a class="navbar-item" href="https://luisarizmendi.github.io/tutorial-secure-onboarding/" target="_blank">Secure Edge device onboarding with RHEL and FDO</a>
+            <a class="navbar-item" href="https://xbryan1.github.io/rhte-2023-acm-docs/" target="_blank">Multicluster Application Deployment with Advanced Cluster Management and GitOps</a>
           </div>
         </div>
       </div>
@@ -188,7 +190,7 @@
 <h2 id="authentication-spi"><a class="anchor" href="#authentication-spi"></a>Authentication SPI</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Red Hat Single Sign-On provides an authentication SPI that can be used to create new authentication mechanisms. In this example, we will see a simple demo implementation of a two factor authentication that uses Red Hat Single Sign-On and a Telegram bot.</p>
+<p>Red Hat Single Sign-On provides an authentication SPI that can be used to create new authentication mechanisms. In this example, we will demonstrate a simple implementation of two-factor authentication that uses Red Hat Single Sign-On and a Telegram bot.</p>
 </div>
 <div class="paragraph">
 <p>The custom authenticator consists of three components:</p>
@@ -196,37 +198,37 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Authenticator. The component that requires that a user enter the two factor authentication code provided via Telegram.</p>
+<p>Authenticator: The component that requires the user to enter the two-factor authentication code provided via Telegram.</p>
 </li>
 <li>
-<p>A Required Action. The component that provides an enrollment process to the user. If during the authentication flow the user telegram id is not informed in the user profile the enrollment process is triggered as required.</p>
+<p>A Required Action: The component that provides an enrollment process to the user. If the user&#8217;s Telegram ID is not present in their user profile during the authentication flow, the enrollment process is triggered as required.</p>
 </li>
 <li>
-<p>The Telegram Service. It handles the communication with the external Telegram API.</p>
+<p>The Telegram Service: The component that handles communication with the external Telegram API.</p>
 </li>
 </ul>
 </div>
 <div class="sect2">
 <h3 id="presetup"><a class="anchor" href="#presetup"></a>Configuring the plugin and flows</h3>
 <div class="paragraph">
-<p>The plugin implementation is <code>telegram-authentication-spi</code> and can be deployed in some different ways:</p>
+<p>The plugin implementation is <code>telegram-authentication-spi</code> and it can be deployed in several different ways:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Extending the Red Hat Single Sign-On image.</p>
+<p>By extending the Red Hat Single Sign-On image.</p>
 </li>
 <li>
-<p>Mounting a volume with the file.</p>
+<p>By mounting a volume with the file.</p>
 </li>
 <li>
-<p>Using a configmap (not recommended, as the configmap has a limited size and should be used for storing metadata mainly).</p>
+<p>By using a configmap (although this is not recommended as the configmap has a limited size and should be used mainly for storing metadata).</p>
 </li>
 <li>
-<p>Copying it into the pod (ephemeral).</p>
+<p>By copying it into the pod (which is ephemeral).</p>
 </li>
 <li>
-<p>Others.</p>
+<p>And others ways as well.</p>
 </li>
 </ul>
 </div>
@@ -237,21 +239,21 @@
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-the previous chapter 2.1.1 workshop steps are required to continue with the setup.
+the previous step from chapter 2.1.1 workshop is a prerequisite to continue with the setup.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Once deployed, follow the steps below:</p>
+<p>After deployment, follow the steps below:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Open a browser window and log in to the Red Hat Single Sign-On administration web console.</p>
+<p>Open a browser and log in to the Red Hat Single Sign-On administration web console.</p>
 </li>
 <li>
-<p>Go to <code>Authentication</code> → <code>Flows</code>, select <code>Browser</code> in the drop down list, and click <code>Copy</code>.</p>
+<p>Navigate to <code>Authentication</code>, then <code>Flows</code>, select <code>Browser</code> in the drop-down list, and click <code>Copy</code>.</p>
 </li>
 </ul>
 </div>
@@ -280,7 +282,7 @@ the previous chapter 2.1.1 workshop steps are required to continue with the setu
 <div class="ulist">
 <ul>
 <li>
-<p>Select <code>Actions</code> → <code>Add execution</code> of the  <code>Browser With Telegram Browser - Conditional OTP</code>.</p>
+<p>Select <code>Actions</code>, then <code>Add execution</code> of the  <code>Browser With Telegram Browser - Conditional OTP</code>.</p>
 </li>
 </ul>
 </div>
@@ -352,7 +354,7 @@ the previous chapter 2.1.1 workshop steps are required to continue with the setu
 <div class="ulist">
 <ul>
 <li>
-<p>Select <code>Telegram ID</code> in the drop down list. Click <code>Ok</code>.</p>
+<p>Select <code>Telegram ID</code> in the drop-down list. Click <code>Ok</code>.</p>
 </li>
 </ul>
 </div>
@@ -364,7 +366,7 @@ the previous chapter 2.1.1 workshop steps are required to continue with the setu
 <div class="ulist">
 <ul>
 <li>
-<p>Go to <code>Authentication</code> → <code>Bindings</code>. In the <code>Browser Flow</code> drop down list select <code>Browser with Telegram</code>. Click <code>Save</code>.</p>
+<p>Go to <code>Authentication</code> → <code>Bindings</code>. In the <code>Browser Flow</code> drop-down list, select <code>Browser with Telegram</code>. Click <code>Save</code>.</p>
 </li>
 </ul>
 </div>
@@ -379,13 +381,13 @@ the previous chapter 2.1.1 workshop steps are required to continue with the setu
 <div class="ulist">
 <ul>
 <li>
-<p>Open a new incognito browser session.</p>
+<p>Open a new private or incognito browser window.</p>
 </li>
 <li>
-<p>Browse to the context root of the Quarkus Petclinic application. The request will be redirected to the Red Hat Single Sign-On login page.</p>
+<p>Navigate to the context root of the Quarkus Petclinic application. The request will be redirected to the Red Hat Single Sign-On login page.</p>
 </li>
 <li>
-<p>Login as <code>angel</code>.</p>
+<p>Log in as the user <code>angel</code>.</p>
 </li>
 </ul>
 </div>
@@ -395,7 +397,7 @@ the previous chapter 2.1.1 workshop steps are required to continue with the setu
 </div>
 </div>
 <div class="paragraph">
-<p>As it is the first time that the user <code>angel</code> logs in into the system since the 2FA has been implemented, the 2fa enrollment process is presented to the user.</p>
+<p>Since this is the first time the user <code>angel</code> logs in since the two-factor authentication has been implemented, the 2FA enrollment process is presented to the user.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -420,10 +422,10 @@ the previous chapter 2.1.1 workshop steps are required to continue with the setu
 </div>
 </div>
 <div class="paragraph">
-<p>We will be logged in into the application successfully.</p>
+<p>After completing the enrollment process, the user will be successfully logged in to the application.</p>
 </div>
 <div class="paragraph">
-<p>The enrollment process (the required action SPI) updates the user profile adding the Telegram attributes on it&#8217;s profile. Let&#8217;s check it:</p>
+<p>The enrollment process (the required action SPI) updates the user profile by adding the Telegram attributes to it. To check it:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -431,7 +433,7 @@ the previous chapter 2.1.1 workshop steps are required to continue with the setu
 <p>Open a browser window and log in to the Red Hat Single Sign-On administration web console.</p>
 </li>
 <li>
-<p>Navigate to <code>Demo</code> realm → <code>Users</code>, click <code>View all users</code> and select the <code>angel</code> user ID.</p>
+<p>Navigate to <code>Demo</code> realm, then <code>Users</code>, click <code>View all users</code> and select the <code>angel</code> user ID.</p>
 </li>
 </ul>
 </div>
@@ -453,7 +455,7 @@ the previous chapter 2.1.1 workshop steps are required to continue with the setu
 </div>
 </div>
 <div class="paragraph">
-<p>We will see the new added <code>telegram_id</code> and <code>telegram_username</code> attributes of the <code>angel</code> user.</p>
+<p>We will see the newly added <code>telegram_id</code> and <code>telegram_username</code> attributes of the <code>angel</code> user.</p>
 </div>
 <div class="paragraph">
 <p>The next login attempts for the same user will require the 2FA code. Let&#8217;s try it.</p>
@@ -467,7 +469,7 @@ the previous chapter 2.1.1 workshop steps are required to continue with the setu
 <p>Browse to the context root of the Quarkus Petclinic application. The request will be redirected to the Red Hat Single Sign-On login page.</p>
 </li>
 <li>
-<p>Login as <code>angel</code>. We will be asked for the 2FA code.</p>
+<p>Login as the user <code>angel</code>. You will be asked for the 2FA code.</p>
 </li>
 </ul>
 </div>
@@ -477,7 +479,7 @@ the previous chapter 2.1.1 workshop steps are required to continue with the setu
 </div>
 </div>
 <div class="paragraph">
-<p>The 2FA code will be sent to us via the Telegram bot.</p>
+<p>The 2FA code will be sent to you via the Telegram bot.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -497,7 +499,7 @@ the previous chapter 2.1.1 workshop steps are required to continue with the setu
 </div>
 </div>
 <div class="paragraph">
-<p>We will be logged in into the application successfully.</p>
+<p>You will be logged in to the application successfully.</p>
 </div>
 </div>
 </div>

@@ -37,6 +37,8 @@
             <a class="navbar-item" href="https://devsecops-workshop.github.io/" target="_blank">DevSecOps</a>
             <a class="navbar-item" href="https://acidonper.github.io/redhat-workshop-cicd-gitops/redhat-workshop-cicd-gitops/" target="_blank">CI/CD & GitOps</a>
             <a class="navbar-item" href="https://atarazana.github.io/gramola-gitops-guide/gramola-gitops-guide/" target="_blank">Gramola GitOps Guide</a>
+            <a class="navbar-item" href="https://luisarizmendi.github.io/tutorial-secure-onboarding/" target="_blank">Secure Edge device onboarding with RHEL and FDO</a>
+            <a class="navbar-item" href="https://xbryan1.github.io/rhte-2023-acm-docs/" target="_blank">Multicluster Application Deployment with Advanced Cluster Management and GitOps</a>
           </div>
         </div>
       </div>
@@ -188,7 +190,7 @@
 <h2 id="_vault_spi"><a class="anchor" href="#_vault_spi"></a>Vault SPI</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You can use the vault SPI to write custom extension for Red Hat Single Sign-On to connect to arbitrary vault implementation.</p>
+<p>You can use the vault SPI to write custom extension for Red Hat Single Sign-On that connects to an arbitrary vault implementation.</p>
 </div>
 <div class="sect2">
 <h3 id="vault-spi-conjur"><a class="anchor" href="#vault-spi-conjur"></a>Integrating Red Hat Single Sign-On with CyberArk Conjur for secrets management</h3>
@@ -228,7 +230,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Load the provided Conjur policy and create a secret for the demo.</p>
+<p>Load the provided Conjur policy and create a secret for the demo by running the following commands in the terminal:</p>
 </li>
 </ul>
 </div>
@@ -250,7 +252,7 @@ curl -H "Authorization: Token token=\"${TOKEN}\"" -d "password" <a href="https:/
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-we are using the REST API, but other approach like Conjur CLI (or others) can be used either.
+we are using the REST API, but other approaches like Conjur CLI (or others) can also be used.
 </td>
 </tr>
 </table>
@@ -298,7 +300,7 @@ export CONJUR_AUTHN_LOGIN=admin</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Ensure that 389 Directory Server is up and running.</p>
+<p>Ensure that the 389 Directory Server is up and running and that you have deployed the Conjur extension and configured the Vault SPI as described in the previous steps.</p>
 </div>
 <div class="listingblock lines_space console-input">
 <div class="content">
@@ -338,7 +340,7 @@ export CONJUR_AUTHN_LOGIN=admin</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>Fill the user federation provider settings. If we haven&#8217;t done it before, the connection can be tested clicking <code>Test connection</code> button.</p>
+<p>Fill in the user federation provider settings with the appropiate values for your LDAP server. Click the <code>Test connection</code> button to check the connection. If successful, you should see a message saying "Success! LDAP connection successful".</p>
 </li>
 </ul>
 </div>
@@ -350,7 +352,7 @@ export CONJUR_AUTHN_LOGIN=admin</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>Test the authentication with a random wrong password, it should fail.</p>
+<p>Test the authentication with a random wrong password. It should fail.</p>
 </li>
 </ul>
 </div>
@@ -362,7 +364,7 @@ export CONJUR_AUTHN_LOGIN=admin</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>Introduce the field as the vault value, <code>${vault.ldap/password}</code>. Check that the authentication now works.</p>
+<p>Enter the field as the vault value, <code>${vault.ldap/password}</code> for the <code>Bind Credential</code> field. Test the authentication again. It should now work.</p>
 </li>
 </ul>
 </div>

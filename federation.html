@@ -37,6 +37,8 @@
             <a class="navbar-item" href="https://devsecops-workshop.github.io/" target="_blank">DevSecOps</a>
             <a class="navbar-item" href="https://acidonper.github.io/redhat-workshop-cicd-gitops/redhat-workshop-cicd-gitops/" target="_blank">CI/CD & GitOps</a>
             <a class="navbar-item" href="https://atarazana.github.io/gramola-gitops-guide/gramola-gitops-guide/" target="_blank">Gramola GitOps Guide</a>
+            <a class="navbar-item" href="https://luisarizmendi.github.io/tutorial-secure-onboarding/" target="_blank">Secure Edge device onboarding with RHEL and FDO</a>
+            <a class="navbar-item" href="https://xbryan1.github.io/rhte-2023-acm-docs/" target="_blank">Multicluster Application Deployment with Advanced Cluster Management and GitOps</a>
           </div>
         </div>
       </div>
@@ -196,7 +198,7 @@
 <p>Open a browser window and log in to the FreeIPA administration web console.</p>
 </li>
 <li>
-<p>Create the user <code>robert</code>. Browse to <code>Identity</code> → <code>Users</code>. Click <code>Add</code>.</p>
+<p>Create the user <code>robert</code>. Browse to <code>Identity</code>, then <code>Users</code>. Click <code>Add</code>.</p>
 </li>
 </ul>
 </div>
@@ -371,7 +373,7 @@
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-We are using a plain ldap connection for this workshop. If you&#8217;d like to use SSL, use the <code>636</code> service port and <code>ldaps</code> instead.
+We are using a plain LDAP connection for this workshop. If you&#8217;d like to use SSL, use the <code>636</code> service port and <code>ldaps</code> instead.
 </td>
 </tr>
 </table>
@@ -383,7 +385,7 @@ We are using a plain ldap connection for this workshop. If you&#8217;d like to u
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The <code>Bind Credential</code> is the <code>Directory manager password</code> created when FreeIPA has been deployed.
+The <code>Bind Credential</code> is the password for the <code>Directory manager</code> account in FreeIPA. This account is created during the installation of FreeIPA and has full administrative privileges over the FreeIPA instance.
 </td>
 </tr>
 </table>
@@ -391,7 +393,7 @@ The <code>Bind Credential</code> is the <code>Directory manager password</code> 
 <div class="ulist">
 <ul>
 <li>
-<p>Add the group Mapper. Click the <code>Mappers</code> tab. Click <code>Create</code>.</p>
+<p>Add the group Mapper. Click on the <code>Mappers</code> tab. Click <code>Create</code>.</p>
 </li>
 </ul>
 </div>
@@ -403,7 +405,7 @@ The <code>Bind Credential</code> is the <code>Directory manager password</code> 
 <div class="ulist">
 <ul>
 <li>
-<p>Set <code>group</code> as the Name. Mapper Type <code>group-ldap-mapper</code>. Fill the remain data. Click <code>Save</code>.</p>
+<p>Set <code>group</code> as the Name. Mapper Type <code>group-ldap-mapper</code>. Fill in the remaining data. Click <code>Save</code>.</p>
 </li>
 </ul>
 </div>
@@ -418,7 +420,7 @@ The <code>Bind Credential</code> is the <code>Directory manager password</code> 
 <p>Click <code>Sync LDAP Groups To Keycloak</code>.</p>
 </li>
 <li>
-<p>Check the <code>Groups</code> section if the group has been imported successfully.</p>
+<p>Check the <code>Groups</code> section to see if the group has been imported successfully.</p>
 </li>
 </ul>
 </div>
@@ -430,7 +432,7 @@ The <code>Bind Credential</code> is the <code>Directory manager password</code> 
 <div class="ulist">
 <ul>
 <li>
-<p>Check also if the user <code>robert</code> has been imported successfully.</p>
+<p>Also, check if the user <code>robert</code> has been imported successfully.</p>
 </li>
 </ul>
 </div>
@@ -445,29 +447,29 @@ The <code>Bind Credential</code> is the <code>Directory manager password</code> 
 <h2 id="user-storage-spi"><a class="anchor" href="#user-storage-spi"></a>User Storage SPI</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We have an external system that stores and manage users, the data is available through a REST API.</p>
+<p>We have an external system that stores and manages user data which is accessible via a REST API.</p>
 </div>
 <div class="paragraph">
-<p>Due some constraints, we don&#8217;t want to migrate that existing system to Red Hat Single Sign-On data model, because of that, we are interested in expanding and integrate our Red Hat Single Sign-On deployment with this external user storage system.</p>
+<p>However, due to certain constraints, we do not want to migrate this existing system to Red Hat Single Sign-On data model. Therefore, we are interested in expanding and integrate our Red Hat Single Sign-On deployment with this external user storage system.</p>
 </div>
 <div class="paragraph">
-<p>The REST API has been coded in Quarkus, the project name is <code>jaxrs-user-store</code> and it provides the following two endpoints:</p>
+<p>The REST API has been developed using Quarkus and is named <code>jaxrs-user-store</code>. It provides two endpoints:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>/api/v1/users</code>, returns a set of all the users in the system.</p>
+<p><code>/api/v1/users</code>, which returns a set of all the users in the system.</p>
 </li>
 <li>
-<p><code>/api/v1/users/{id}</code>, returns the user that <code>userId</code> matches with <code>id</code>.</p>
+<p><code>/api/v1/users/{id}</code>, which returns the user that matches the <code>userId</code> with <code>id</code>.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Both endpoints expects a <code>GET</code> request.</p>
+<p>Both endpoints accept <code>GET</code> requests.</p>
 </div>
 <div class="paragraph">
-<p>The application is prepared to be deployed on top of OpenShift. Deploy it by executing the <code>ocp-deploy.sh</code> script or alternatively:</p>
+<p>The application is designed to be deployed on top of OpenShift. You can deploy it by running the <code>ocp-deploy.sh</code> script or alternatively:</p>
 </div>
 <div class="listingblock lines_space console-input">
 <div class="content">
@@ -526,35 +528,35 @@ content-length: 120
 </div>
 </div>
 <div class="paragraph">
-<p>For extending Red Hat Single Sign-On to connect it to the external system we use the <code>User Storage SPI</code> (<code>Service Provider Interface</code>).</p>
+<p>For extending Red Hat Single Sign-On to connect to the external system, we use the <code>User Storage SPI</code> (<code>Service Provider Interface</code>).</p>
 </div>
 <div class="paragraph">
-<p>The provider implementation is <code>custom-user-storage-spi</code> and can be deployed in some different ways:</p>
+<p>The provider implementation is <code>custom-user-storage-spi</code> and can be deployed in several ways:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Extending the Red Hat Single Sign-On image.</p>
+<p>By extending the Red Hat Single Sign-On image.</p>
 </li>
 <li>
-<p>Mounting a volume with the file.</p>
+<p>By mounting a volume with the file.</p>
 </li>
 <li>
-<p>Using a configmap (not recommended, as the configmap has a limited size and should be used for storing metadata mainly).</p>
+<p>By using a configmap (although this is not recommended as the configmap has a limited size and should be used mainly for storing metadata).</p>
 </li>
 <li>
-<p>Copying it into the pod (ephemeral).</p>
+<p>By copying it into the pod (which is ephemeral).</p>
 </li>
 <li>
-<p>Others.</p>
+<p>And others ways as well.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The provider checks the value of the <code>USER_STORAGE_CUSTOM_SPI_TARGET_HOST</code> environment variable in the following format: <code>HOST:PORT</code> or <code>HOST</code> if the port defaults to http/80. The value can be provided as an environment variable in the <code>DeploymentConfig</code>.</p>
+<p>The provider checks the value of the <code>USER_STORAGE_CUSTOM_SPI_TARGET_HOST</code> environment variable in the following format: <code>HOST:PORT</code> or <code>HOST</code> if the port defaults to <code>http/80</code>. The value can be provided as an environment variable in the <code>DeploymentConfig</code>.</p>
 </div>
 <div class="paragraph">
-<p>Once the environment variable and the package is correctly deployed, we will see the new provider listed under the <code>User Federation</code> of the Red Hat Single Sign-On administration web console.</p>
+<p>Once the environment variable and the package are correctly deployed, we will see the new provider listed under the <code>User Federation</code> section of the Red Hat Single Sign-On administration web console.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -571,7 +573,7 @@ content-length: 120
 <div class="ulist">
 <ul>
 <li>
-<p>Verify that it is <code>Enabled</code> and <code>Save</code>.</p>
+<p>Verify that it is <code>Enabled</code> and click <code>Save</code>.</p>
 </li>
 </ul>
 </div>
@@ -588,7 +590,7 @@ content-length: 120
 <div class="ulist">
 <ul>
 <li>
-<p>Click <code>Users</code>. The external storage users should be loaded into Red Hat Single Sign-On.</p>
+<p>Click <code>Users</code>. The external storage users should now be loaded into Red Hat Single Sign-On.</p>
 </li>
 </ul>
 </div>
