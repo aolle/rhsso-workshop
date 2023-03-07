@@ -6,13 +6,13 @@ The repository for this modified version is:
 
 https://github.com/aolle/quarkus-petclinic.git
 
-To get started, clone the repository and switch to the `sso-base` branch:
+To get started, clone the repository and switch to the `rh-sso-base-7.6` branch:
 
 [.lines_space]
 [.console-input]
 [source,bash, subs="+macros,+attributes"]
 ----
-git clone -b sso-base https://github.com/aolle/quarkus-petclinic.git
+git clone -b rh-sso-base-7.6 https://github.com/aolle/quarkus-petclinic.git
 ----
 
 The application is prepared to be deployed on top of Red Hat OpenShift. The application project contains the Quarkus OpenShift extension (`k8s` with `s2i`) to automatically generate the OpenShift resources and deploy it.
@@ -180,4 +180,4 @@ quarkus.keycloak.policy-enforcer.enable=true
 ** Login as `angel`.
 ** Browse through the application, try to access the VETERINARIANS section. The access should be granted, as `angel` has the `vet` role. 
 
-NOTE: A complete OIDC working Petclinic Quarkus application is available at `sso-oidc` branch.
+NOTE: A complete OIDC working Petclinic Quarkus application is available at `rh-sso-oidc-7.6` branch.
