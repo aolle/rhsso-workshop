@@ -15,7 +15,7 @@ asciidoc:
   attributes:
     release-version: main
     page-pagination: true
-    openshift-version: '4.11.30'
+    openshift-version: '4.12'
     sso-version: '7.6.1'
     freeipa-version: '4.9.8'
   extensions:
