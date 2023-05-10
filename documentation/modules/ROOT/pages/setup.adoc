@@ -17,6 +17,9 @@ The following tools are required to run the exercises in this tutorial. Please e
 
 include::partial$tools.adoc[]
 
+NOTE: The extensions source code used during this workshop can be found at the following URL:
+https://github.com/aolle/rhsso-workshop-code
+
 [#deployrhsso]
 == Deploying Red Hat Single Sign-On for OpenShift
 

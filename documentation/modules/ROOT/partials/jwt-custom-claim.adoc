@@ -1,0 +1,60 @@
+Once we have secured the application using OIDC (see section `2.1.2 - Securing Quarkus web applications using OpenID Connect (OIDC)`), we may have a need to add a custom claim to the JWT token based on a user attribute, in order to use that attribute for authorization.
+
+In this section, we will see how Red Hat Single Sign-On allows us to map user attributes to claims.
+
+* Open a web browser and log in to the Red Hat Single Sign-On administration console. Navigate to `Clients` and select the `quarkus-petclinic` client from our `Demo` realm. Then, click on the `Mappers` tab and select the `Create` button.
+
+image::jwt/mapper1.png[]
+
+* Fill out the information for the attribute that we want to map to a claim. Under the `Mapper Type` option, select `User attribute`. Then, select the data type for the JSON claim.
+
+For our example, we will map the `admin` attribute, which is a `boolean`. Once we have completed these steps, click on the `Save` button.
+
+image::jwt/mapper2.png[]
+
+* After creating the mapper, we need to add the attribute to our test user. Navigate to `Users` and click on View all users. Select the previously created user, angel, to edit.
+
+image::jwt/edit-user.png[]
+
+* Go to the `Attributes` tab, fill in the fields and click `Add`. Then, click on `Save`.
+
+image::jwt/new-user-attr.png[]
+
+We should now have the new claim present in the JWT. In my case, I will verify this by inspecting its value from the Quarkus petclinic application. I will use CDI to inject the `JsonWebToken` and then inspect it. Of course, any other valid procedure could be used.
+
+After logging in to the application with an authorized user, we can check the JWT.
+
+[.lines_space]
+[.console-output]
+[source,text, subs="+macros,+attributes"]
+----
+eyJhbGciOiJS...xmRqTndw
+----
+
+If we decode the JWT, we can see that the new attribute has been added.
+
+[.lines_space]
+[.console-output]
+[source,text, subs="+macros,+attributes"]
+----
+{
+  "alg": "RS256",
+  ...
+}
+{
+  ...
+  "azp": "quarkus-petclinic",
+  ...
+  "realm_access": {
+    "roles": [
+      "vet"
+    ]
+  },
+  ...
+  "admin": true,
+  "preferred_username": "angel"
+}
+{
+  ...
+}
+----
