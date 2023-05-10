@@ -103,7 +103,16 @@
     <a class="nav-link" href="#ldap">2.2.1 LDAP User Federation</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
     <a class="nav-link" href="#user-storage-spi">2.2.2 User Storage SPI</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="#user-storage-spi-jpa">2.2.2.1 External user database store</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="#user-storage-spi-rest">2.2.2.2 External user REST service store</a>
+  </li>
+</ul>
   </li>
 </ul>
   </li>
@@ -137,6 +146,15 @@
     <a class="nav-link" href="vault.html#vault-spi-conjur">2.4.1.1 Integrating Red Hat Single Sign-On with CyberArk Conjur for secrets management</a>
   </li>
 </ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="jwt.html">2.5 JSON Web Tokens (JWT)</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="jwt.html#custom-claim">2.5.1 Adding a custom JWT claim</a>
   </li>
 </ul>
   </li>
@@ -446,7 +464,15 @@ The <code>Bind Credential</code> is the password for the <code>Directory manager
 <div class="sect1">
 <h2 id="user-storage-spi"><a class="anchor" href="#user-storage-spi"></a>User Storage SPI</h2>
 <div class="sectionbody">
-<div class="paragraph">
+<div class="sect2">
+<h3 id="_external_user_database_store"><a class="anchor" href="#_external_user_database_store"></a>External user database store</h3>
+<div id="user-storage-spi-jpa" class="paragraph">
+<p>TODO</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_external_user_rest_service_store"><a class="anchor" href="#_external_user_rest_service_store"></a>External user REST service store</h3>
+<div id="user-storage-spi-rest" class="paragraph">
 <p>We have an external system that stores and manages user data which is accessible via a REST API.</p>
 </div>
 <div class="paragraph">
@@ -597,6 +623,7 @@ content-length: 120
 <div class="imageblock">
 <div class="content">
 <img src="_images/federation/users-loaded.png" alt="users loaded">
+</div>
 </div>
 </div>
 </div>

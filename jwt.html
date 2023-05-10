@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Authentication :: Red Hat Single Sign-On Workshop</title>
-    <link rel="canonical" href="https://olleb.com/rhsso-workshop/authentication.html">
-    <link rel="prev" href="federation.html">
-    <link rel="next" href="vault.html">
+    <title>JSON Web Tokens (JWT) :: Red Hat Single Sign-On Workshop</title>
+    <link rel="canonical" href="https://olleb.com/rhsso-workshop/jwt.html">
+    <link rel="prev" href="vault.html">
+    <link rel="next" href="troubleshooting.html">
     <meta name="generator" content="Antora 3.0.3">
     <link rel="stylesheet" href="./_/css/site.css">
 <link rel="icon" href="./_/img/favicon.ico" type="image/x-icon">
@@ -116,19 +116,19 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
+  <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="authentication.html">2.3 Authentication</a>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="3">
+  <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="authentication.html">2.3.1 Authentication SPI</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="#presetup">2.3.1.1 Configuring the plugin and flows</a>
+    <a class="nav-link" href="authentication.html#presetup">2.3.1.1 Configuring the plugin and flows</a>
   </li>
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="#telegram2fa">2.3.1.2 Telegram two-factor authentication with authentication SPI</a>
+    <a class="nav-link" href="authentication.html#telegram2fa">2.3.1.2 Telegram two-factor authentication with authentication SPI</a>
   </li>
 </ul>
   </li>
@@ -149,12 +149,12 @@
   </li>
 </ul>
   </li>
-  <li class="nav-item" data-depth="2">
+  <li class="nav-item is-current-page" data-depth="2">
     <button class="nav-item-toggle"></button>
     <a class="nav-link" href="jwt.html">2.5 JSON Web Tokens (JWT)</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="jwt.html#custom-claim">2.5.1 Adding a custom JWT claim</a>
+    <a class="nav-link" href="#custom-claim">2.5.1 Adding a custom JWT claim</a>
   </li>
 </ul>
   </li>
@@ -196,335 +196,139 @@
   <ul>
     <li><a href="index.html">Red Hat Single Sign-On Workshop</a></li>
     <li>2. Red Hat Single Sign-On</li>
-    <li><a href="authentication.html">2.3 Authentication</a></li>
+    <li><a href="jwt.html">2.5 JSON Web Tokens (JWT)</a></li>
   </ul>
 </nav>
   <div style="padding: 0 0.5rem 0 0.75rem;"><a href="https://olleb.com" target="_blank" rel="noopener noreferrer"> © 2023 - Àngel Ollé Blázquez</a></div>
 </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Authentication</h1>
-<div class="sect1">
-<h2 id="authentication-spi"><a class="anchor" href="#authentication-spi"></a>Authentication SPI</h2>
+<h1 class="page">JSON Web Tokens (JWT)</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Red Hat Single Sign-On provides an authentication SPI that can be used to create new authentication mechanisms. In this example, we will demonstrate a simple implementation of two-factor authentication that uses Red Hat Single Sign-On and a Telegram bot.</p>
+<p>JWT stands for "JSON Web Token," which is an open standard (RFC 7519) for securely transmitting information between parties as a JSON object. It&#8217;s often used for authentication and authorization in web applications, APIs, and microservices.</p>
 </div>
 <div class="paragraph">
-<p>The custom authenticator consists of three components:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Authenticator: The component that requires the user to enter the two-factor authentication code provided via Telegram.</p>
-</li>
-<li>
-<p>A Required Action: The component that provides an enrollment process to the user. If the user&#8217;s Telegram ID is not present in their user profile during the authentication flow, the enrollment process is triggered as required.</p>
-</li>
-<li>
-<p>The Telegram Service: The component that handles communication with the external Telegram API.</p>
-</li>
-</ul>
-</div>
-<div class="sect2">
-<h3 id="presetup"><a class="anchor" href="#presetup"></a>Configuring the plugin and flows</h3>
-<div class="paragraph">
-<p>The plugin implementation is <code>telegram-authentication-spi</code> and it can be deployed in several different ways:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>By extending the Red Hat Single Sign-On image.</p>
-</li>
-<li>
-<p>By mounting a volume with the file.</p>
-</li>
-<li>
-<p>By using a configmap (although this is not recommended as the configmap has a limited size and should be used mainly for storing metadata).</p>
-</li>
-<li>
-<p>By copying it into the pod (which is ephemeral).</p>
-</li>
-<li>
-<p>And others ways as well.</p>
-</li>
-</ul>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-the previous step from chapter 2.1.1 workshop is a prerequisite to continue with the setup.
-</td>
-</tr>
-</table>
+<p>JWTs consist of three parts: a header, a payload, and a signature. The header typically contains metadata about the token, such as the algorithm used for signing the token. The payload contains the actual data being transmitted, such as user information or permissions. The signature is used to verify that the token was not tampered with during transmission.</p>
 </div>
 <div class="paragraph">
-<p>After deployment, follow the steps below:</p>
+<p>JWTs are commonly used in OAuth 2.0 and OpenID Connect (OIDC) flows, where they are used to securely transmit information about the user and their authorization status between the client and the authorization server.</p>
+</div>
+<div class="paragraph">
+<p>One of the key advantages of JWTs is that they are stateless, meaning that the server doesn&#8217;t need to maintain a session or store the token. This makes JWTs ideal for use in microservices and distributed systems.</p>
+</div>
+<div class="paragraph">
+<p>In terms of security, JWTs are generally considered to be secure as long as the signature is properly implemented and verified. The signature is generated using a secret key that is known only to the issuing server, and is used to verify that the token has not been tampered with during transmission.</p>
+</div>
+<div class="paragraph">
+<p>Note that while this section on JWTs could be included in the context of the section 2.1.2, I decided to create a separate section to specifically address the topic. However, it&#8217;s important to note that the scenarios we&#8217;re starting from are those of a web application that has already been secured using OpenID Connect (OIDC).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="custom-claim"><a class="anchor" href="#custom-claim"></a>Adding a custom JWT claim</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Once we have secured the application using OIDC (see section <code>2.1.2 - Securing Quarkus web applications using OpenID Connect (OIDC)</code>), we may have a need to add a custom claim to the JWT token based on a user attribute, in order to use that attribute for authorization.</p>
+</div>
+<div class="paragraph">
+<p>In this section, we will see how Red Hat Single Sign-On allows us to map user attributes to claims.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Open a browser and log in to the Red Hat Single Sign-On administration web console.</p>
-</li>
-<li>
-<p>Navigate to <code>Authentication</code>, then <code>Flows</code>, select <code>Browser</code> in the drop-down list, and click <code>Copy</code>.</p>
+<p>Open a web browser and log in to the Red Hat Single Sign-On administration console. Navigate to <code>Clients</code> and select the <code>quarkus-petclinic</code> client from our <code>Demo</code> realm. Then, click on the <code>Mappers</code> tab and select the <code>Create</code> button.</p>
 </li>
 </ul>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/authentication/authentication-menu.png" alt="authentication menu">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/authentication/copy-browser-flow.png" alt="copy browser flow">
+<img src="_images/jwt/mapper1.png" alt="mapper1">
 </div>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Set the desired name for the new browser authentication flow.</p>
+<p>Fill out the information for the attribute that we want to map to a claim. Under the <code>Mapper Type</code> option, select <code>User attribute</code>. Then, select the data type for the JSON claim.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>For our example, we will map the <code>admin</code> attribute, which is a <code>boolean</code>. Once we have completed these steps, click on the <code>Save</code> button.</p>
+</div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/authentication/new-browser-authentication-flow-name.png" alt="new browser authentication flow name">
+<img src="_images/jwt/mapper2.png" alt="mapper2">
 </div>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Select <code>Actions</code>, then <code>Add execution</code> of the  <code>Browser With Telegram Browser - Conditional OTP</code>.</p>
+<p>After creating the mapper, we need to add the attribute to our test user. Navigate to <code>Users</code> and click on View all users. Select the previously created user, angel, to edit.</p>
 </li>
 </ul>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/authentication/add-execution.png" alt="add execution">
+<img src="_images/jwt/edit-user.png" alt="edit user">
 </div>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Select <code>Telegram Authentication</code>. Click <code>Save</code>.</p>
+<p>Go to the <code>Attributes</code> tab, fill in the fields and click <code>Add</code>. Then, click on <code>Save</code>.</p>
 </li>
 </ul>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/authentication/telegram-authentication-exec.png" alt="telegram authentication exec">
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Set <code>Browser With Telegram Browser - Conditional OTP</code> as <code>REQURIED</code>, <code>OTP Form</code> as <code>DISABLED</code> and <code>Telegram Authentication</code> as <code>REQUIRED</code>.</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/authentication/authentication-flow-cfg.png" alt="authentication flow cfg">
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Click <code>Actions</code> of the <code>Telegram Authentication</code> and select <code>Config</code>.</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/authentication/telegram-authentication-action-config.png" alt="telegram authentication action config">
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Set an alias and click <code>Save</code>.</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/authentication/telegram-authentication-config.png" alt="telegram authentication config">
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Navigate to <code>Authentication</code> → <code>Required Actions</code>. Click <code>Register</code>.</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/authentication/default-required-actions.png" alt="default required actions">
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Select <code>Telegram ID</code> in the drop-down list. Click <code>Ok</code>.</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/authentication/telegram-id-ra.png" alt="telegram id ra">
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Go to <code>Authentication</code> → <code>Bindings</code>. In the <code>Browser Flow</code> drop-down list, select <code>Browser with Telegram</code>. Click <code>Save</code>.</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/authentication/telegram-binding.png" alt="telegram binding">
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="telegram2fa"><a class="anchor" href="#telegram2fa"></a>Telegram two-factor authentication with authentication SPI</h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Open a new private or incognito browser window.</p>
-</li>
-<li>
-<p>Navigate to the context root of the Quarkus Petclinic application. The request will be redirected to the Red Hat Single Sign-On login page.</p>
-</li>
-<li>
-<p>Log in as the user <code>angel</code>.</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/authentication/user-first-login.png" alt="user first login">
+<img src="_images/jwt/new-user-attr.png" alt="new user attr">
 </div>
 </div>
 <div class="paragraph">
-<p>Since this is the first time the user <code>angel</code> logs in since the two-factor authentication has been implemented, the 2FA enrollment process is presented to the user.</p>
+<p>We should now have the new claim present in the JWT. In my case, I will verify this by inspecting its value from the Quarkus petclinic application. I will use CDI to inject the <code>JsonWebToken</code> and then inspect it. Of course, any other valid procedure could be used.</p>
 </div>
-<div class="imageblock">
+<div class="paragraph">
+<p>After logging in to the application with an authorized user, we can check the JWT.</p>
+</div>
+<div class="listingblock lines_space console-output">
 <div class="content">
-<img src="_images/authentication/2fa-enroll.png" alt="2fa enroll">
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Open Telegram and send the enrollment code to the Telegram bot. The bot will respond with the enrollment secure code, submit that secure code.</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/authentication/telegram-enroll.png" alt="telegram enroll">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/authentication/2fa-enrollment-code-submit.png" alt="2fa enrollment code submit">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">eyJhbGciOiJS...xmRqTndw</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>After completing the enrollment process, the user will be successfully logged in to the application.</p>
+<p>If we decode the JWT, we can see that the new attribute has been added.</p>
 </div>
-<div class="paragraph">
-<p>The enrollment process (the required action SPI) updates the user profile by adding the Telegram attributes to it. To check it:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Open a browser window and log in to the Red Hat Single Sign-On administration web console.</p>
-</li>
-<li>
-<p>Navigate to <code>Demo</code> realm, then <code>Users</code>, click <code>View all users</code> and select the <code>angel</code> user ID.</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
+<div class="listingblock lines_space console-output">
 <div class="content">
-<img src="_images/authentication/user-id.png" alt="user id">
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Click <code>Attributes</code>.</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/authentication/telegram-user-attributes.png" alt="telegram user attributes">
-</div>
-</div>
-<div class="paragraph">
-<p>We will see the newly added <code>telegram_id</code> and <code>telegram_username</code> attributes of the <code>angel</code> user.</p>
-</div>
-<div class="paragraph">
-<p>The next login attempts for the same user will require the 2FA code. Let&#8217;s try it.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Open a new incognito browser session.</p>
-</li>
-<li>
-<p>Browse to the context root of the Quarkus Petclinic application. The request will be redirected to the Red Hat Single Sign-On login page.</p>
-</li>
-<li>
-<p>Login as the user <code>angel</code>. You will be asked for the 2FA code.</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/authentication/2fa-code-form.png" alt="2fa code form">
-</div>
-</div>
-<div class="paragraph">
-<p>The 2FA code will be sent to you via the Telegram bot.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/authentication/2fa-telegram-code.png" alt="2fa telegram code">
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Submit the 2FA code.</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/authentication/submit-2fa.png" alt="submit 2fa">
-</div>
-</div>
-<div class="paragraph">
-<p>You will be logged in to the application successfully.</p>
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">{
+  "alg": "RS256",
+  ...
+}
+{
+  ...
+  "azp": "quarkus-petclinic",
+  ...
+  "realm_access": {
+    "roles": [
+      "vet"
+    ]
+  },
+  ...
+  "admin": true,
+  "preferred_username": "angel"
+}
+{
+  ...
+}</code></pre>
 </div>
 </div>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="federation.html">2.2 User Federation</a></span>
-  <span class="next"><a href="vault.html">2.4 Vault</a></span>
+  <span class="prev"><a href="vault.html">2.4 Vault</a></span>
+  <span class="next"><a href="troubleshooting.html">2.4 FAQs &amp; Troubleshooting</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
