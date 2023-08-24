@@ -14,6 +14,8 @@ image::jwt/mapper2.png[]
 
 * After creating the mapper, we need to add the attribute to our test user. Navigate to `Users` and click on View all users. Select the previously created user, angel, to edit.
 
+NOTE: We may want the attribute to be added to the ID token. If so, please configure it to "On".
+
 image::jwt/edit-user.png[]
 
 * Go to the `Attributes` tab, fill in the fields and click `Add`. Then, click on `Save`.
