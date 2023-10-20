@@ -24,7 +24,7 @@ asciidoc:
 
 ui:
   bundle:
-    url: https://github.com/aolle/rhd-tutorial-ui/releases/download/v0.1.13/ui-bundle.zip
+    url: https://github.com/aolle/rhd-tutorial-ui/releases/download/v0.1.14/ui-bundle.zip
     snapshot: true
   supplemental_files:
     - path: partials/toolbar.hbs
