@@ -21,7 +21,7 @@
       https://access.redhat.com/articles/2342881
       RH-SSO 7.6 version => Keycloak 18.0
     -->
-    <keycloak.version>18.0.2</keycloak.version>
+    <keycloak.version>22.0.1</keycloak.version>
   </properties>
 
   <dependencyManagement>
