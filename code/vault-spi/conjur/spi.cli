@@ -1,0 +1,4 @@
+/subsystem=keycloak-server/spi=vault:add
+/subsystem=keycloak-server/spi=vault/provider=conjur-vault:add(enabled=true)
+/subsystem=keycloak-server/spi=vault:write-attribute(name=default-provider,value=conjur-vault)
+:reload

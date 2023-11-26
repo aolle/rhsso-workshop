@@ -1,0 +1,4 @@
+export CONJUR_ACCOUNT=demoAccount
+export CONJUR_AUTHN_API_KEY=$APIKEY
+export CONJUR_APPLIANCE_URL=http://localhost:18080
+export CONJUR_AUTHN_LOGIN=admin

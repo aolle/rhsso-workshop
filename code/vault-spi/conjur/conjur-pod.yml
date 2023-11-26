@@ -1,0 +1,154 @@
+# Generation of Kubernetes YAML is still under development!
+#
+# Save the output of this file and use kubectl create -f to import
+# it into Kubernetes.
+#
+# Created with podman-3.0.1
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2023-01-09T14:08:10Z"
+  labels:
+    app: conjur-pod
+  name: conjur-pod
+spec:
+  containers:
+  - args:
+    - server
+    command:
+    - conjurctl
+    env:
+    - name: PATH
+      value: /usr/local/pgsql/bin:/var/lib/ruby/bin:/usr/local/ssl/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    - name: TERM
+      value: xterm
+    - name: container
+      value: podman
+    - name: LD_LIBRARY_PATH
+      value: /usr/local/ssl/lib
+    - name: OPENSSL_FIPS
+      value: "1"
+    - name: RAILS_ENV
+      value: production
+    - name: DATABASE_URL
+      value: postgresql://postgres:secret@postgres/postgres
+    - name: CONJUR_DATA_KEY
+      value: tnwICwIa2kOVH2KkWvpPw+VA5AagyJPtu4nEim1UwCc=
+    image: docker.io/cyberark/conjur
+    name: conjur
+    ports:
+    - containerPort: 5432
+      hostPort: 8432
+      protocol: TCP
+    - containerPort: 443
+      hostPort: 18443
+      protocol: TCP
+    resources: {}
+    securityContext:
+      allowPrivilegeEscalation: true
+      capabilities:
+        drop:
+        - CAP_MKNOD
+        - CAP_NET_RAW
+        - CAP_AUDIT_WRITE
+      privileged: false
+      readOnlyRootFilesystem: false
+      seLinuxOptions: {}
+    tty: true
+    workingDir: /opt/conjur-server
+  - args:
+    - postgres
+    command:
+    - docker-entrypoint.sh
+    env:
+    - name: PATH
+      value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/10/bin
+    - name: TERM
+      value: xterm
+    - name: container
+      value: podman
+    - name: LANG
+      value: en_US.utf8
+    - name: PG_MAJOR
+      value: "10"
+    - name: PGDATA
+      value: /var/lib/postgresql/data
+    - name: GOSU_VERSION
+      value: "1.12"
+    - name: PG_VERSION
+      value: 10.16-1.pgdg90+1
+    - name: POSTGRES_HOST_AUTH_METHOD
+      value: trust
+    image: docker.io/postgres:10.16
+    name: postgres
+    resources: {}
+    securityContext:
+      allowPrivilegeEscalation: true
+      capabilities:
+        drop:
+        - CAP_MKNOD
+        - CAP_NET_RAW
+        - CAP_AUDIT_WRITE
+      privileged: false
+      readOnlyRootFilesystem: false
+      seLinuxOptions: {}
+    tty: true
+    workingDir: /
+  - command:
+    - /usr/sbin/apache2ctl
+    - -D
+    - FOREGROUND
+    env:
+    - name: PATH
+      value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    - name: TERM
+      value: xterm
+    - name: container
+      value: podman
+    - name: DEBIAN_FRONTEND
+      value: noninteractive
+    image: localhost/httpd-conjur-proxy:latest
+    name: httpd-conjur-proxy
+    resources: {}
+    securityContext:
+      allowPrivilegeEscalation: true
+      capabilities:
+        drop:
+        - CAP_MKNOD
+        - CAP_NET_RAW
+        - CAP_AUDIT_WRITE
+      privileged: false
+      readOnlyRootFilesystem: false
+      seLinuxOptions: {}
+    tty: true
+    workingDir: /
+  - args:
+    - infinity
+    command:
+    - sleep
+    env:
+    - name: PATH
+      value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    - name: TERM
+      value: xterm
+    - name: container
+      value: podman
+    image: localhost/conjur-cli:latest
+    name: conjur-cli
+    resources: {}
+    securityContext:
+      allowPrivilegeEscalation: true
+      capabilities:
+        drop:
+        - CAP_MKNOD
+        - CAP_NET_RAW
+        - CAP_AUDIT_WRITE
+      privileged: false
+      readOnlyRootFilesystem: false
+      seLinuxOptions: {}
+    tty: true
+    workingDir: /
+  dnsConfig: {}
+  restartPolicy: Never
+status: {}
+

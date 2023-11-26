@@ -1,0 +1,25 @@
+FROM debian:latest
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update \
+&& apt-get -y install \
+apache2 \
+ssl-cert
+
+RUN a2enmod proxy \
+&& a2enmod proxy_http \
+&& a2enmod ssl
+
+COPY conjur-ssl.conf /etc/apache2/sites-available/
+RUN sed -i '0,/Listen [0-9]*/s///' /etc/apache2/ports.conf
+#RUN sed -i 's/\(Listen 80\)/\180/' /etc/apache2/ports.conf
+
+RUN a2ensite conjur-ssl \
+&& a2dissite 000-default
+
+#WORKDIR /var/www/html
+
+EXPOSE 443
+
+ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]

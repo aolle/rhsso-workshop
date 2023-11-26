@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.olleb</groupId>
+  <artifactId>custom-user-storage-spi</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+    <!--  
+      RH-SSO 7.6 version => Wildfly 15
+    -->
+    <version.server.bom>15.0.1.Final</version.server.bom>
+    <!--  
+      https://access.redhat.com/articles/2342881
+      RH-SSO v7.6 => Keycloak v18.0
+    -->
+    <keycloak.version>18.0.2</keycloak.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- 
+        JBoss distributes a complete set of Java EE APIs including a Bill of Materials (BOM).
+        A BOM specifies the versions of a "stack" (or a collection) of artifacts.
+        We use this here so that we always get the correct versions of artifacts.
+        Here we use the jboss-eap-javaee8-with-tools stack (you can read this as the JBoss stack of the Java EE APIs, with some extras tools
+            for your project, such as Arquillian for testing) 
+      -->
+      <dependency>
+        <groupId>org.wildfly.bom</groupId>
+        <artifactId>wildfly-javaee8-with-tools</artifactId>
+        <version>${version.server.bom}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <!-- Import the JAX-RS API, we use provided scope as the API is included in JBoss EAP -->
+    <!-- 
+      The developer: this dependency is used because the current GA version of RH-SSO runs
+    on top of EAP. For comfortability, altertatively JsonSimpleHttp or SimpleHttp from keycloak (private spi) can be used for the same tasks  
+    -->
+    <dependency>
+      <groupId>org.jboss.spec.javax.ws.rs</groupId>
+      <artifactId>jboss-jaxrs-api_2.1_spec</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jboss.logging</groupId>
+      <artifactId>jboss-logging</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- 
+      Upstream note (latest upstream version). It doesn apply on this concrete example, as we are aligned with RH-SSO equivalent version.
+      This functionality depends on APIs bundled in the keycloak-model-legacy module. It will soon be replaced with the new map storage API
+    which provides a uniform way to access both local and external information about users and other entities, and the old APIs will be removed eventually.
+    -->
+    <dependency>
+      <groupId>org.keycloak</groupId>
+      <artifactId>keycloak-server-spi</artifactId>
+      <version>${keycloak.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.keycloak</groupId>
+      <artifactId>keycloak-core</artifactId>
+      <version>${keycloak.version}</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.wildfly.plugins</groupId>
+          <artifactId>wildfly-jar-maven-plugin</artifactId>
+          <version>${version.wildfly-jar.maven.plugin}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>

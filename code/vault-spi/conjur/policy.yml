@@ -1,0 +1,5 @@
+- !policy
+  id: ldap
+  body:
+    - !host ldap
+    - !variable password
