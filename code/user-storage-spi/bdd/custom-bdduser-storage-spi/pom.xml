@@ -16,7 +16,7 @@
 
     <version>7.6.0.GA</version>
     <wildfly.version>7.4.4.GA-redhat-00011</wildfly.version>
-    <keycloak.version>18.0.0.redhat-00001</keycloak.version>
+    <keycloak.version>23.0.4</keycloak.version>
 
     <jboss.logging.version>3.4.1.Final-redhat-00001</jboss.logging.version>
     <hibernate.core.version>5.3.25.Final-redhat-00002</hibernate.core.version>
