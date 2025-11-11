@@ -1,12 +1,12 @@
-= Securing web applications and services with Red Hat Single Sign-On
+= Securing Applications and Services
 include::_attributes.adoc[]
 
-[#presetup]
-== Configuring the Realm, roles, groups and users
+[#realm-config]
+== Configuring Realm, Roles, Groups and Users
 
 include::partial$presetup.adoc[]
 
 [#quarkus-app]
-== Securing Quarkus web applications using OpenID Connect (OIDC)
+== Securing Quarkus Applications with OIDC
 
 include::partial$quarkus-app.adoc[]

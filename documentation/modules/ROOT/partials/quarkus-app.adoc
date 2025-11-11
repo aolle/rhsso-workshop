@@ -1,7 +1,6 @@
-The sample application that we will use in this section is the `Quarkus Petclinic project`.
+The sample application used in this section is the `Quarkus Petclinic project`.
 
-In this tutorial, we will work with a version that has been modified for the tutorial.
-
+For this tutorial, we will work with a version modified specifically for the exercises.
 The repository for this modified version is:
 
 https://github.com/aolle/quarkus-petclinic.git
@@ -15,13 +14,14 @@ To get started, clone the repository and switch to the `rh-sso-base-7.6` branch:
 git clone -b rh-sso-base-7.6 https://github.com/aolle/quarkus-petclinic.git
 ----
 
-The application is prepared to be deployed on top of Red Hat OpenShift. The application project contains the Quarkus OpenShift extension (`k8s` with `s2i`) to automatically generate the OpenShift resources and deploy it.
+The application is prepared for deployment on Red Hat OpenShift.
+It includes the Quarkus OpenShift extension (`k8s` with `s2i`) to automatically generate the OpenShift resources and deploy the application.
 
-Test the application, follow these steps:
+Test the application by following these steps:
 
 * Log into your Red Hat OpenShift cluster.
-* Switch to the `sso` project if you are not currently using it.
-* Deploy the application by executing the `ocp-deploy.sh` script or alternatively:
+* Switch to the `sso` project if you are not already using it.
+* Deploy the application by executing the `ocp-deploy.sh` script or, alternatively:
 
 [.lines_space]
 [.console-input]
@@ -30,51 +30,53 @@ Test the application, follow these steps:
 ./mvnw install -Dquarkus.kubernetes.deploy=true
 ----
 
-NOTE: During the build, you may encounter the `SSLHandshakeException/ValidatorException` exception due to self-signed certificate. To solve this, add `-Dquarkus.kubernetes-client.trust-certs=true` during the build process.
+NOTE: During the build, you may encounter an `SSLHandshakeException/ValidatorException` due to a self-signed certificate.
+To resolve this, add `-Dquarkus.kubernetes-client.trust-certs=true` during the build.
 
 * Open a browser window and visit the application URL.
 
 image::secapp/petclinic-main.png[]
 
-NOTE: Make a note of the application URL as it will be required during the security configuration process.
+NOTE: Make a note of the application URL, as it will be required later during the security configuration.
 
-Before securing the application, let's configure a new client in our Red Hat Single Sign-On realm.
+Before securing the application, configure a new client in the Red Hat Single Sign-On `demo` realm:
 
-* Open a browser window and log in to the Red Hat Single Sign-On administration web console.
-
-* Select our `demo` realm and click `Clients`. Click `Create`.
+* Open the Red Hat Single Sign-On administration console.
+* Select the `demo` realm and click `Clients`. Click `Create`.
 
 image::secapp/client.png[]
 
 image::secapp/create-new-client.png[]
 
-* Set `quarkus-petclinic` as `Client ID`. Click `Save`.
+* Set `quarkus-petclinic` as the `Client ID` and click `Save`.
 
 image::secapp/quarkus-petclinic-client.png[]
 
 * On the `quarkus-petclinic` client configuration page:
-** Change the `Access Type` from `public` to `confidential`.
-** Set `Authorization Enabled` to `ON`.
-** Set `Valid Redirect URIs` to include the root context of your application. For example, if your petclinic application is available at `http://domain.example.com/`, write `http://domain.example.com/*`.
+** Change `Access Type` from `public` to `confidential`.
+** Enable `Authorization Enabled`.
+** Set `Valid Redirect URIs` to include the root context of your application, e.g., `http://domain.example.com/*`.
 ** Click `Save`.
 
 image::secapp/quarkus-petclinic-client-cfg.png[]
 
-At this point, we have the `demo` realm with the `quarkus-petclinic` client; additionally, we created two roles and two users: the user `angel` that has the `vet` role and the user `elisabeth` that has the role `assistant`.
+At this point, we have:
 
-* The authorization granularity that we want to configure based on our application is the following:
-** Any user that belongs to the `demo` realm, like `elisabeth`, can browse the application except the `VETERINARIANS` resource.
-** Only the users with the role `vet` can view the `VETERINARIANS` resource (which has the `/vets.html` context).
-** Any other user access outside the realm will be rejected.
+* The `demo` realm with the `quarkus-petclinic` client.
+* Two roles: `vet` and `assistant`.
+* Two users: `angel` (role `vet`) and `elisabeth` (role `assistant`).
+
+Authorization rules for our application:
+
+* Any user in the `demo` realm, like `elisabeth`, can browse the application except the `VETERINARIANS` resource.
+* Only users with the `vet` role can access the `/vets.html` resource.
+* Any other user outside the realm will be denied access.
 
 image::secapp/quarkus-petclinic-menu.png[]
 
-Let's configure our client authorization.
+Configuring Client Authorization
 
-* Open a browser window and log in to the Red Hat Single Sign-On administration web console. Browse to our `quarkus-petclinic` client and click the `Authorization` and then `Resources` tabs.
-
-// due: https://github.com/keycloak/keycloak/discussions/12041
-//for the export: Delete the `Default Policy`, click `Delete` and confirm.
+* Open the Red Hat Single Sign-On administration console, select the `quarkus-petclinic` client, then browse to the `Authorization` tab and click `Resources`.
 
 image::secapp/auth-resource-tab.png[]
 
@@ -82,53 +84,50 @@ image::secapp/auth-resource-tab.png[]
 
 image::secapp/quarkus-petclinic-auth-create-permission-default.png[]
 
-*  Click on `Create Policy...` and select `Group`.
+* Click `Create Policy...` and select `Group`.
 
 image::secapp/new-group-policy.png[]
 
-* Set `Default Group Policy` as the `Name`. Select `staff` from the `Groups` list and click `Select`. Make sure that the `Logic` is set to `Positive` and `Extend to Children` is checked (we will use this logic in later chapters). Finally, click `Save`.
+* Set `Default Group Policy` as the `Name`. Select `staff` from the `Groups` list, ensure `Logic` is `Positive`, and check `Extend to Children`. Click `Save`.
 
 image::secapp/group-policy.png[]
 
-* You will be redirected back to the `Add Resource Permission` page. Set `Default Resource Permission` as `Name` and select `Default Resource` as `Resources`. The recently created policy should have been added automatically. Click `Save`.
+* Back on the `Add Resource Permission` page, set `Default Resource Permission` as `Name`, select `Default Resource` as `Resources`. The recently created policy should be applied automatically. Click `Save`.
 
 image::secapp/quarkus-petclinic-default-resource-permission.png[]
 
-* Create a new resource by clicking on `Create`.
+* Create a new resource:
 
 image::secapp/quarkus-petclinic-create-new-resource.png[]
 
-* Set `Vets Resource` as `Name` and `Display name`, and `/vets.html` as URI. Click `Save`.
+* Set `Vets Resource` as the `Name` and `Display Name`, and `/vets.html` as the URI. Click `Save`.
 
 image::secapp/quarkus-petclinic-new-resource.png[]
 
-* Browse to `Authorization` and `Policies` tabs. Click on `Create Policy...` and select `Role`.
+* Browse to `Authorization` → `Policies`. Click `Create Policy...` and select `Role`.
 
 image::secapp/quarkus-petclinic-new-policy.png[]
 
-* Set `Vet Role Policy` as the Name, `vet` as `Realm Roles`, and check required. Click `Save`.
+* Set `Vet Role Policy` as `Name`, select `vet` in `Realm Roles`, check `Required`, and click `Save`.
 
 image::secapp/quarkus-petclinic-role-policy.png[]
 
-* Browse to the `Authorization` and `Resources` tabs.
-
-* Click on `Create Permission` for the `Vets Resource`.
+* Browse to `Authorization` → `Resources`, click `Create Permission` for the `Vets Resource`.
 
 image::secapp/quarkus-petclinic-create-perms-vets.png[]
 
-* Set `Vets Resource Permission` as `Name`. And apply the `Vet Role Policy`. Click `Save`.
+* Set `Vets Resource Permission` as `Name` and apply the `Vet Role Policy`. Click `Save`.
 
 image::secapp/quarkus-petclinic-resource-permission.png[]
 
-At this point, the Red Hat Single Sign-On client is properly configured.
+Configuring the Application
 
-Let's configure the application side.
-
-* Open a browser window and log in to the Red Hat Single Sign-On administration web console. Browse to our `quarkus-petclinic` client and click the `Credentials` tab. Write down the `Secret` value, we will need it soon.
+* In the Red Hat Single Sign-On administration console, select the `quarkus-petclinic` client and click the `Credentials` tab.
+Write down the `Secret` value — it will be required later.
 
 image::secapp/client-secret.png[]
 
-* Create the ConfigMap with the `SSO_HOST` environment variable. Replace `{YOUR_SSO_HOST}` with the correct value.
+* Create a ConfigMap with the `SSO_HOST` environment variable:
 
 [.lines_space]
 [.console-input]
@@ -137,7 +136,7 @@ image::secapp/client-secret.png[]
 oc create configmap quarkus-petclinic-config --from-literal=SSO_HOST={YOUR_SSO_HOST} -n sso
 ----
 
-* Create the secret with the OIDC client credentials. Replace the `{YOUR_SSO_CLIENT_SECRET}` with the correct value.
+* Create a Secret with the OIDC client credentials:
 
 [.lines_space]
 [.console-input]
@@ -146,7 +145,7 @@ oc create configmap quarkus-petclinic-config --from-literal=SSO_HOST={YOUR_SSO_H
 oc create secret generic quarkus-petclinic-secret --from-literal=SSO_CLIENT_SECRET={YOUR_SSO_CLIENT_SECRET} -n sso
 ----
 
-* Add the following configuration in `application.properties` as shown:
+* Update `application.properties` with the following configuration:
 
 [.lines_space]
 [.console-input]
@@ -170,14 +169,11 @@ quarkus.oidc.webapp.roles.source=${quarkus.oidc.roles.source}
 quarkus.keycloak.policy-enforcer.enable=true
 ----
 
-* Redeploy and test the application accesses:
-** Open a new incognito browser session.
-** Browse to the context root of the Quarkus Petclinic application. The request will be redirected to the Red Hat Single Sign-On login page. Here, we checked that the anonymous access to the application is forbidden.
-** Log in as `elisabeth`. The request will be redirected to the application after a successful login.
-** Browse through the application, try to access the VETERINARIANS section. The access should be denied, as `elisabeth` has the `assistant` role and the access is restricted to the `vet` role. An error will be shown on the application page.
-** Close the browser and open a new one incognito session.
-** Visit the context root of the application again.
-** Login as `angel`.
-** Browse through the application, try to access the VETERINARIANS section. The access should be granted, as `angel` has the `vet` role. 
+* Redeploy and test application access:
 
-NOTE: A complete OIDC working Petclinic Quarkus application is available at `rh-sso-oidc-7.6` branch.
+** Open a new incognito browser session and browse to the application root. You will be redirected to the Red Hat Single Sign-On login page. Anonymous access is forbidden.
+** Log in as `elisabeth`. Access to `/vets.html` will be denied.
+** Close the browser, open a new incognito session, and log in as `angel`.
+** Access to `/vets.html` will be granted, as `angel` has the `vet` role.
+
+NOTE: A fully working OIDC Petclinic Quarkus application is available at the `rh-sso-oidc-7.6` branch.

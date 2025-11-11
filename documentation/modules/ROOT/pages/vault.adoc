@@ -1,10 +1,13 @@
-= Vault
+= Secrets and Vault Integration
 include::_attributes.adoc[]
 
 == Vault SPI
-You can use the vault SPI to write custom extension for Red Hat Single Sign-On that connects to an arbitrary vault implementation.
+
+The Vault SPI enables the creation of custom extensions for Red Hat Single Sign-On (RH-SSO) that integrate with any external vault implementation.
+
+Using the Vault SPI, RH-SSO can securely retrieve secrets—such as passwords, keys, or tokens—from the vault of your choice, providing a flexible and centralized way to manage sensitive data.
 
 [#vault-spi-conjur]
-=== Integrating Red Hat Single Sign-On with CyberArk Conjur for secrets management
+=== Integrating RH-SSO with Conjur using the Vault SPI
 
 include::partial$vault-spi-conjur.adoc[]

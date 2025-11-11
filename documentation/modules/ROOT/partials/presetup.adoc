@@ -1,56 +1,54 @@
-Before proceeding with the next sections, we need to configure the realm, roles and users in our Red Hat Single Sign-On instance.
+Before proceeding with the next sections, we need to configure the **realm**, **roles**, and **users** in our Red Hat Single Sign-On instance.
 
-* Open a browser window and log in to the Red Hat Single Sign-On administration web console.
+* Open a browser window and log in to the Red Hat Single Sign-On administration console.
 
-* Create the `demo` realm. Click on the `Add realm` button, provide the realm name, and click `Create`.
+* Create the `demo` realm: click `Add realm`, provide the realm name, and click `Create`.
 
 image::secapp/addrealm.png[]
 
 image::secapp/add-demo-realm.png[]
 
-* Create the `staff` group. Click on `Groups`.
+* Create the `staff` group: click on `Groups`, then click `New`.
 
 image::secapp/groups.png[]
 
-* Then click `New`.
-
 image::secapp/new-group.png[]
 
-* Set `staff` as the group name, and click `Save`.
+* Set `staff` as the group name and click `Save`.
 
 image::secapp/staff-group.png[]
 
-* Create the subgroup named `Personal staff`. Click on `Groups`, select the `staff` group, and click `New`.
+* Create the subgroup `Personal staff`: click `Groups`, select the `staff` group, and click `New`.
 
 image::secapp/new-subgroup.png[]
 
-* Set `Personal staff` as the name, and click `Save`.
+* Set `Personal staff` as the subgroup name and click `Save`.
 
 image::secapp/subgroup.png[]
 
-* Create the role `vet`. Click on `Roles`, then `Add Role`.
+* Create the role `vet`: click `Roles`, then `Add Role`.
 
 image::secapp/demo-roles.png[]
 
 image::secapp/demo-add-role.png[]
 
-* Set the Role name, and click `Save`.
+* Set the role name and click `Save`.
 
 image::secapp/demo-save-new-role.png[]
 
-* Repeat the same steps for creating a role named `assistant`.
+* Repeat the steps to create a role named `assistant`.
 
-* Create the user `angel`. Click on `Users`, then `Add user`.
+* Create the user `angel`: click `Users`, then `Add user`.
 
 image::secapp/demo-users.png[]
 
 image::secapp/demo-add-user.png[]
 
-* Set the username, and click `Save`.
+* Set the username and click `Save`.
 
 image::secapp/add-new-user.png[]
 
-* Open the `Credentials` tab and set the password for the user. Make sure to set `Temporary` to `OFF` before setting the password.
+* Open the `Credentials` tab and set a password for the user. Make sure **Temporary** is set to `OFF` before setting the password.
 
 image::secapp/user-setting-password.png[]
 
@@ -58,12 +56,13 @@ image::secapp/user-setting-password.png[]
 
 image::secapp/user-roles.png[]
 
-* Open the `Groups` tab and assign the user `angel` to the `Personal staff` group by clicking the group and the `Join` button.
+* Open the `Groups` tab and assign `angel` to the `Personal staff` group by clicking the group and the `Join` button.
 
 image::secapp/join-group.png[]
 
 image::secapp/joined-group.png[]
 
-* Repeat the same steps for creating a user named `elisabeth` but assign the `assistant` role. Also, remember to incude the user in the `Personal staff` group.
+* Repeat the steps to create a user named `elisabeth`. Assign the `assistant` role and include the user in the `Personal staff` group.
 
-TIP: Red Hat Single Sign-On allows defining one or more groups as default groups, where any new user will automatically join the defined groups, making it easier to assign users to the same group without repetitive and time-consuming tasks. The option is available by clicking on `Groups`, then `Default Groups`.
+TIP: Red Hat Single Sign-On allows defining one or more **default groups**, where any new user is automatically added.
+This makes it easier to assign multiple users to the same group without repeating the process. The option is available by clicking `Groups`, then `Default Groups`.

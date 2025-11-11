@@ -1,12 +1,16 @@
-Red Hat Single Sign-On can validate credentials from LDAP or Active Directory, in this section we will see how to integrate with IdM/FreeIPA.
+Red Hat Single Sign-On (RH-SSO) can validate credentials from LDAP or Active Directory. In this section, we will integrate RH-SSO with IdM/FreeIPA.
 
-* Open a browser window and log in to the FreeIPA administration web console.
+Creating a user in FreeIPA
 
-* Create the user `robert`. Browse to `Identity`, then `Users`. Click `Add`.
+* Open the FreeIPA administration web console.
+* Create a new user `robert`:
+  * Browse to `Identity` → `Users`.
+  * Click `Add`.
 
 image::federation/ldap-users-add.png[]
 
-* Fill the form with the following data:
+* Fill in the user form:
+
 ** User login: `robert`
 ** First name: `Robert`
 ** Last name: `Garcia`
@@ -18,6 +22,8 @@ image::federation/ldap-add-user.png[]
 
 image::federation/ldap-added-user.png[]
 
+Creating a group in FreeIPA
+
 * Go to `Identity` → `Groups`. Click `Add`.
 
 image::federation/ldap-add-group.png[]
@@ -28,24 +34,25 @@ image::federation/ldap-group-add.png[]
 
 image::federation/ldap-groups-list.png[]
 
-* Click `Identity` → `Users`. Click the `robert` user.
+* Assign `robert` to the `special_staff` group:
+  * Browse to `Identity` → `Users`. Select the user `robert`.
 
 image::federation/ldap-users-list.png[]
 
-* Click the `User Groups` tab. Click `Add`.
+  * Click the `User Groups` tab, then `Add`.
 
 image::federation/ldap-user-add-to-group.png[]
 
-* Add `robert` to the `special_staff` group. Click `Add`.
+  * Select `special_staff` and click `Add`.
 
 image::federation/ldap-added-user-to-group.png[]
 
 image::federation/ldap-user-groups-list.png[]
 
-* Open a browser window and log in to the Red Hat Single Sign-On administration web console.
+Configuring LDAP in RH-SSO
 
+* Open the RH-SSO administration web console.
 * Select the `Demo` realm.
-
 * Click `User Federation`.
 
 image::federation/sso-user-federation.png[]
@@ -54,31 +61,35 @@ image::federation/sso-user-federation.png[]
 
 image::federation/sso-ldap-provider.png[]
 
-* Fill the user federation provider required settings. Click `Save`.
+* Fill in the required settings for the LDAP provider and click `Save`.
 
 image::federation/sso-ldap-config.png[]
 
 * Click `Synchronize all users`.
 
-NOTE: We are using a plain LDAP connection for this workshop. If you'd like to use SSL, use the `636` service port and `ldaps` instead.
+NOTE: We are using a plain LDAP connection for this workshop. To use SSL, change the service port to `636` and the protocol to `ldaps`.
 
-NOTE: The `Bind Credential` is the password for the `Directory manager` account in FreeIPA. This account is created during the installation of FreeIPA and has full administrative privileges over the FreeIPA instance.
+NOTE: The `Bind Credential` is the password for the `Directory Manager` account in FreeIPA. This account is created during the FreeIPA installation and has full administrative privileges.
 
-* Add the group Mapper. Click on the `Mappers` tab. Click `Create`.
+Configuring the group mapper
+
+* Click the `Mappers` tab. Click `Create`.
 
 image::federation/sso-ldap-create-mapper.png[]
 
-* Set `group` as the Name. Mapper Type `group-ldap-mapper`. Fill in the remaining data. Click `Save`.
+* Configure the mapper:
+
+** Name: `group`
+** Mapper Type: `group-ldap-mapper`
+** Fill in the remaining fields and click `Save`.
 
 image::federation/sso-ldap-mapper-cfg.png[]
 
 * Click `Sync LDAP Groups To Keycloak`.
-
-* Check the `Groups` section to see if the group has been imported successfully.
+* Verify that the group has been imported successfully:
 
 image::federation/sso-imported-group.png[]
 
-* Also, check if the user `robert` has been imported successfully.
+* Also, check that the user `robert` has been imported:
 
 image::federation/sso-imported-user.png[]
- 

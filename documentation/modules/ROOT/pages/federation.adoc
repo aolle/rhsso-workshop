@@ -9,10 +9,10 @@ include::partial$ldap-federation.adoc[]
 [#user-storage-spi]
 == User Storage SPI
 
-=== External user database store
+=== External User Database Store
 [#user-storage-spi-jpa]
 include::partial$user-storage-spi-jpa.adoc[]
 
-=== External user REST service store
+=== External User REST Service Store
 [#user-storage-spi-rest]
 include::partial$user-storage-spi-rest.adoc[]

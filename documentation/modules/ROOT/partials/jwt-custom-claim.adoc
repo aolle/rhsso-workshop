@@ -1,30 +1,35 @@
-Once we have secured the application using OIDC (see section `2.1.2 - Securing Quarkus web applications using OpenID Connect (OIDC)`), we may have a need to add a custom claim to the JWT token based on a user attribute, in order to use that attribute for authorization.
+Once the application has been secured using OIDC (see section xref:secapp-oidc[2.1.2 - Securing Quarkus web applications using OpenID Connect (OIDC)]), we may need to include a custom claim in the JWT token based on a user attribute. This allows us to use that attribute for fine-grained authorization in the application.
 
-In this section, we will see how Red Hat Single Sign-On allows us to map user attributes to claims.
-
-* Open a web browser and log in to the Red Hat Single Sign-On administration console. Navigate to `Clients` and select the `quarkus-petclinic` client from our `Demo` realm. Then, click on the `Mappers` tab and select the `Create` button.
+* Open the Red Hat Single Sign-On administration console in a web browser.
+* Navigate to `Clients` → select the `quarkus-petclinic` client in the `Demo` realm.
+* Click on the `Mappers` tab and click `Create`.
 
 image::jwt/mapper1.png[]
 
-* Fill out the information for the attribute that we want to map to a claim. Under the `Mapper Type` option, select `User attribute`. Then, select the data type for the JSON claim.
+* Configure the mapper:
 
-For our example, we will map the `admin` attribute, which is a `boolean`. Once we have completed these steps, click on the `Save` button.
+** Mapper Type: `User attribute`
+** User Attribute: the attribute you want to map (for example, `admin`)
+** Token Claim Name: choose the claim name for the JSON payload
+** Claim JSON Type: select the data type (for example, `boolean`)
+** Add to ID token: `ON` if you want it included in the ID token
+
+Once completed, click `Save`.
 
 image::jwt/mapper2.png[]
 
-* After creating the mapper, we need to add the attribute to our test user. Navigate to `Users` and click on View all users. Select the previously created user, angel, to edit.
+* Add the attribute to a test user:
 
-NOTE: We may want the attribute to be added to the ID token. If so, please configure it to "On".
+** Navigate to `Users` → `View all users` → select the user `angel`.
+** Click on the `Attributes` tab.
+** Fill in the `admin` field (or other attribute), click `Add`, then click `Save`.
 
 image::jwt/edit-user.png[]
-
-* Go to the `Attributes` tab, fill in the fields and click `Add`. Then, click on `Save`.
-
 image::jwt/new-user-attr.png[]
 
-We should now have the new claim present in the JWT. In my case, I will verify this by inspecting its value from the Quarkus petclinic application. I will use CDI to inject the `JsonWebToken` and then inspect it. Of course, any other valid procedure could be used.
+Verifying the Claim
 
-After logging in to the application with an authorized user, we can check the JWT.
+After logging in to the application with an authorized user, the custom claim should now be present in the JWT. You can inspect it from the Quarkus application by injecting the `JsonWebToken` via CDI, or using any valid JWT inspection method.
 
 [.lines_space]
 [.console-output]
@@ -33,7 +38,7 @@ After logging in to the application with an authorized user, we can check the JW
 eyJhbGciOiJS...xmRqTndw
 ----
 
-If we decode the JWT, we can see that the new attribute has been added.
+Decoding the JWT should reveal the new attribute:
 
 [.lines_space]
 [.console-output]

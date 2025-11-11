@@ -1,12 +1,10 @@
-This chapter explains how to integrate Red Hat Single Sign-On with Conjur using the Vault SPI. For the demo, we will obtain the 389 Directory Server credentials of the `cn=Directory Manager` user stored in Conjur that has to be used by Red Hat Single Sign-On for the user federation.
+This chapter explains how to integrate Red Hat Single Sign-On (RH-SSO) with Conjur using the Vault SPI. For this demo, we will retrieve the 389 Directory Server credentials of the `cn=Directory Manager` user stored in Conjur, which will be used by RH-SSO for user federation.
 
-Setup steps:
-
-* Run the provided Conjur OSS community collection provided with this workshop.
+* Run the provided Conjur OSS community collection included in this workshop.
 
 image::vault/conjur.png[]
 
-* Create the admin account `demoAccount`.
+* Create the admin account `demoAccount`:
 
 [.lines_space]
 [.console-input]
@@ -15,9 +13,9 @@ image::vault/conjur.png[]
 conjurctl account create demoAccount > /tmp/admin_data
 ----
 
-The `admin_data` file contains the public key and the API key of the admin user on that account.
+The `admin_data` file contains the public key and API key of the admin user.
 
-* Load the provided Conjur policy and create a secret for the demo by running the following commands in the terminal:
+* Load the provided Conjur policy and create a secret for the demo:
 
 [.lines_space]
 [.console-input]
@@ -32,11 +30,9 @@ curl -H "Authorization: Token token=\"${TOKEN}\"" -d "$(< policy.yml)" https://$
 curl -H "Authorization: Token token=\"${TOKEN}\"" -d "password" https://$CONJUR_HOST/secrets/demoAccount/variable/ldap/password
 ----
 
-NOTE: we are using the REST API, but other approaches like Conjur CLI (or others) can also be used.
+NOTE: We are using the REST API here, but other approaches like the Conjur CLI can also be used.
 
-* Export the required environment variables.
-
-NOTE: instead of exporting the Conjur API required configuration as environment variables, it can also be configured with SPI provider properties.
+* Export the required environment variables for the Vault SPI:
 
 [.lines_space]
 [.console-input]
@@ -48,7 +44,9 @@ export CONJUR_APPLIANCE_URL=https://$CONJUR_HOST
 export CONJUR_AUTHN_LOGIN=admin
 ----
 
-* Deploy the extension and configure the SPI.
+Alternatively, the SPI provider properties can be configured directly instead of using environment variables.
+
+* Deploy the extension and configure the Vault SPI in RH-SSO:
 
 [.lines_space]
 [.console-input]
@@ -60,7 +58,7 @@ export CONJUR_AUTHN_LOGIN=admin
 :reload
 ----
 
-Ensure that the 389 Directory Server is up and running and that you have deployed the Conjur extension and configured the Vault SPI as described in the previous steps.
+* Ensure the 389 Directory Server is running and that the Conjur extension and Vault SPI are configured.
 
 [.lines_space]
 [.console-input]
@@ -69,11 +67,9 @@ Ensure that the 389 Directory Server is up and running and that you have deploye
 </dev/tcp/<389_HOST>/3389
 ----
 
-* Open a browser window and log in to the Red Hat Single Sign-On administration web console.
+* Log in to the RH-SSO administration web console.
 
-* Select the `Demo` realm.
-
-* Click `User Federation`.
+* Select the `Demo` realm and click `User Federation`.
 
 image::federation/sso-user-federation.png[]
 
@@ -81,14 +77,14 @@ image::federation/sso-user-federation.png[]
 
 image::federation/sso-ldap-provider.png[]
 
-* Fill in the user federation provider settings with the appropiate values for your LDAP server. Click the `Test connection` button to check the connection. If successful, you should see a message saying "Success! LDAP connection successful".
+* Fill in the LDAP provider settings. Click `Test connection` to verify connectivity. A successful test will show:
 
 image::vault/ldap-conn-test.png[]
 
-* Test the authentication with a random wrong password. It should fail.
+* Test authentication with a wrong password. It should fail:
 
 image::vault/ldap-failed-auth.png[]
 
-* Enter the field as the vault value, `${vault.ldap/password}` for the `Bind Credential` field. Test the authentication again. It should now work.
+* Set the `Bind Credential` to the vault value `${vault.ldap/password}`. Test authentication again. It should succeed:
 
 image::vault/ldap-ok-auth.png[]

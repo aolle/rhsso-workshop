@@ -1,9 +1,9 @@
-= Environment Setup
+= Workshop Setup
 include::_attributes.adoc[]
 
 [NOTE,subs="attributes+,+macros"]
 ====
-This tutorial was developed and tested with:
+This tutorial was developed and tested with the following components:
 
 * Red Hat OpenShift `{openshift-version}`
 * Red Hat Single Sign-On `{sso-version}`
@@ -13,72 +13,84 @@ This tutorial was developed and tested with:
 [#tools]
 == Workshop Tools
 
-The following tools are required to run the exercises in this tutorial. Please ensure that they are installed and properly configured before proceeding with any of the tutorial chapters.
+The following tools are required to complete the exercises in this tutorial.
+Ensure that they are installed and properly configured before proceeding with any of the chapters.
 
 include::partial$tools.adoc[]
 
-NOTE: The extensions source code used during this workshop can be found at the following URL:
+NOTE: The source code for the extensions used in this workshop is available at:
 https://github.com/aolle/rhsso-workshop-code
 
 [#deployrhsso]
-== Deploying Red Hat Single Sign-On for OpenShift
+== Deploying Red Hat Single Sign-On on OpenShift
 
-Red Hat Single Sign-On can be deployed using either the Operator or the application template.
+Red Hat Single Sign-On can be deployed on OpenShift using either the **Operator** or the **application template**.
 
-The Operator automates and simplifies the administration tasks in Red Hat OpenShift using custom resources (CRs). It means that we can create Red Hat Single Sign-On resources using these custom resources instead of using the Red Hat Single Sign-On admin console.
+The Operator automates and simplifies administrative tasks in OpenShift through the use of **custom resources (CRs)**.
+This means that you can create and manage Red Hat Single Sign-On resources declaratively, instead of configuring them manually through the admin console.
 
-IMPORTANT: The Operator performs a one-way synchronization of the CRs. If we modify a CR directly (for example, using `oc`) the changes show up in the Red Hat Single Sign-On admin console. However, if the same resource is modified using the admin console, those changes have no effect on the CR.
+IMPORTANT: The Operator performs **one-way synchronization** of custom resources.
+If a CR is modified directly (for example, using `oc`), the change appears in the Red Hat Single Sign-On admin console.
+However, modifications made in the console do **not** propagate back to the CR definition.
 
-WARNING: If the Red Hat Single Sign-On fails during deployment, check if a `LimitRange` exists in the current Red Hat OpenShift project. Sometimes, the `RHPDS` environment automatically creates a `LimitRange` when a new project is created. Also, check the health check probes. The initial delay may require a higher value.
+WARNING: If the Red Hat Single Sign-On deployment fails, check whether a `LimitRange` exists in the current OpenShift project.
+Some `RHPDS` environments automatically create a `LimitRange` when new projects are provisioned.
+Also verify the **liveness and readiness probes** — the initial delay may need to be increased.
 
-NOTE: For this workshop, we assume that Red Hat Single Sign-On has been installed using the templates and imagestream method explained in xref:setup.adoc#deployrhsso-templates[1.2.2 Deploying Red Hat Single Sign-On for Red Hat OpenShift using the templates].
-Additionally, for convenience and simplification purposes, we will depoy applications and services in the same project where Red Hat Single Sign-On is deployed.
+NOTE: For this workshop, Red Hat Single Sign-On is assumed to be installed using the **template and imagestream** method described in
+xref:setup.adoc#deployrhsso-templates[Deploying Red Hat Single Sign-On for OpenShift using templates].
+Additionally, for convenience and simplicity, all applications and services will be deployed in the same OpenShift project as Red Hat Single Sign-On.
 
 [#deployrhsso-operator]
-=== Deploying Red Hat Single Sign-On for OpenShift using the Operator
+=== Deploying Red Hat Single Sign-On Using the Operator
 
-You can use the Red Hat OpenShift Container Platform web console to subscribe and deploy the `Red Hat Single Sign-on Operator`. The Red Hat Single Sign-On Operator simplifies the deployment process and it is ease to use, but less flexible than the template-based deployment.
+You can use the Red Hat OpenShift Container Platform web console to subscribe to and deploy the `Red Hat Single Sign-On Operator`.
+The Operator simplifies the deployment process and is easy to use, though it is less flexible than the template-based deployment method.
 
-Check the supported CRs here:
+Check the supported custom resources (CRs) here:
 
 https://github.com/keycloak/keycloak-operator#supported-custom-resources
 
 * Open a browser window and log in to the Red Hat OpenShift Container Platform web console.
 
-* From the Administrator perspective, click `Operators`, then `OperatorHub`.
+* From the **Administrator** perspective, click `Operators`, then `OperatorHub`.
 
-* In the Filter by keyword field, type `rhsso`.
+* In the **Filter by keyword** field, type `rhsso`.
 
 image::install/operatorhub-sso.png[]
 
-* Select the Red Hat Single Sign-On Operator tile and click `Install`.
+* Select the **Red Hat Single Sign-On Operator** tile and click `Install`.
 
 image::install/install-sso-operator.png[]
 
-* On the Install Operator page, leave `stable` from the list of available `Update Channel` options. The Operator supports only the `A specific namespace on the cluster` as installation mode. Create the `sso` project. Choose `Automatic` update approval.
+* On the **Install Operator** page, leave `stable` as the selected `Update Channel`.
+  The Operator supports only the **A specific namespace on the cluster** installation mode.
+  Create a new project named `sso`, and choose **Automatic** update approval.
 
 image::install/sso-operator-opts.png[]
 
 * Click `Install`.
 
-Installing Red Hat Single Sign-On using a custom resource:
+Installing Red Hat Single Sign-On using a Custom Resource
 
-* From the Administrator perspective, click on `Operators`, then select `Installed Operators`. Make sure to select `sso` project. Select Red Hat Single Sign-On Operator.
+* From the **Administrator** perspective, click `Operators`, then select `Installed Operators`.
+  Make sure the `sso` project is selected. Then, select the **Red Hat Single Sign-On Operator**.
 
-* Click `Create instance` of the Keycloak tile.
+* Click `Create instance` on the **Keycloak** tile.
 
 image::install/keycloak-tile.png[]
 
-* Change the `Name` if desired. Then, click `Create`.
+* Change the `Name` if desired, then click `Create`.
 
 [#deployrhsso-templates]
-=== Deploying Red Hat Single Sign-On for OpenShift using the templates
+=== Deploying Red Hat Single Sign-On Using Templates
 
 * Create the templates and install the Red Hat Single Sign-On image stream.
 
 // https://github.com/jboss-container-images/redhat-sso-7-openshift-image/pull/268
 
-NOTE: For this workshop, we will use the `sso76-ocp4-x509-postgresql-persistent` template, which is Red Hat Single Sign-On 7.6 on OpenJDK + PostgreSQL (Persistent) for Red Hat OpenShift 4.X. The template does not require the manual creation of the keystores or truststores.
+NOTE: For this workshop, we will use the `sso76-ocp4-x509-postgresql-persistent` template, which deploys Red Hat Single Sign-On 7.6 on OpenJDK with a persistent PostgreSQL database for Red Hat OpenShift 4.x.
+This template does not require manual creation of keystores or truststores.
 
 [.lines_space]
 [.console-input]
@@ -93,7 +105,7 @@ oc replace -n openshift --force -f \
 oc -n openshift import-image rh-sso-7/sso76-openshift-rhel8:7.6 --from=registry.redhat.io/rh-sso-7/sso76-openshift-rhel8:7.6 --confirm
 ----
 
-* Create the new project.
+* Create a new project.
 
 [.lines_space]
 [.console-input]
@@ -120,42 +132,45 @@ oc policy add-role-to-user view -z default -n sso
 oc new-app --template=sso76-ocp4-x509-postgresql-persistent
 ----
 
-NOTE: Write down the auto-generated `RH-SSO Administrator Username` and `RH-SSO Administrator Password` required for login in to the Red Hat Single Sign-On admin console.
+NOTE: Take note of the auto-generated `RH-SSO Administrator Username` and `RH-SSO Administrator Password`, as they will be required to log in to the Red Hat Single Sign-On admin console.
+
+TIP: You can verify that all pods are running successfully by executing `oc get pods -n sso` before accessing the admin console.
 
 [#deploy-ipa]
-== 1.3 Deploying an Identity Management (IdM/FreeIPA) on Red Hat OpenShift
+== Deploying Identity Management (IdM/FreeIPA)
 
-This section explains how to install FreeIPA, an Identity Management (IdM) solution that combines Linux, 389 Directory Server, MIT Kerberos, NTP, DNS and Dogtag.
+This section explains how to install FreeIPA — an Identity Management (IdM) solution that integrates Linux, 389 Directory Server, MIT Kerberos, NTP, DNS, and Dogtag Certificate System components.
 
 https://www.freeipa.org/page/About
 
-FreeIPA is the upstream version of Red Hat Identity Management.
+FreeIPA is the upstream project for Red Hat Identity Management.
 
-Later on, we will see how we can integrate Red Hat Single Sign-On with IdM/FreeIPA.
+Later in this workshop, we will integrate Red Hat Single Sign-On with IdM/FreeIPA.
 
-To get started, stay logged in into your Red Hat OpenShift platform, and for convenience, select the `sso` project that has been created previously. Follow the steps below for deploying a FreeIPA instance on top of Red Hat OpenShift.
+To get started, remain logged in to your Red Hat OpenShift platform and, for convenience, select the `sso` project that was created previously.
+Follow the steps below to deploy a FreeIPA instance on Red Hat OpenShift.
 
 [.lines_space]
 [.console-input]
 [source,bash, subs="+macros,+attributes"]
 ----
-# export the image that we are going to deploy
+# Export the image to be deployed
 export IMG=quay.io/freeipa/freeipa-openshift-container:latest
 export IMG_BASE=${IMG}
 
-# clone the repository and deploy the roles and scc
-# if preferred, a remote build could be performed instead of cloning the repository
+# Clone the repository and deploy the roles and SCC
+# Alternatively, a remote build can be performed instead of cloning the repository
 git clone https://github.com/freeipa/freeipa-openshift-container.git
 cd freeipa-openshift-container/
 kustomize build deploy/admin | oc create -f -
 
-# create the ocp template and deploy it
+# Create the OpenShift template and deploy it
 make template-create
 make template-new-app
 ----
 
-Write down the `IPA_ADMIN_PASSWORD` and `IPA_DM_PASSWORD` displayed on the terminal; we will need it later.
+NOTE: Write down the `IPA_ADMIN_PASSWORD` and `IPA_DM_PASSWORD` values displayed in the terminal — they will be required later.
 
-Open the FreeIPA administration console to verify that the access and credentials are working properly.
+Once the deployment is complete, open the FreeIPA administration console to verify that access and credentials are working correctly.
 
 image::install/freeIPAconsole.png[]

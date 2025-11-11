@@ -1,16 +1,18 @@
-We have an external system that stores and manages user data which is accessible via a REST API.
+We have an external system that stores and manages user data, accessible via a REST API.
 
-However, due to certain constraints, we do not want to migrate this existing system to Red Hat Single Sign-On data model. Therefore, we are interested in expanding and integrate our Red Hat Single Sign-On deployment with this external user storage system.
+However, due to certain constraints, we do not want to migrate this existing system to the Red Hat Single Sign-On (RH-SSO) data model.
+Instead, we aim to integrate our RH-SSO deployment with this external user storage system.
 
-The REST API has been developed using Quarkus and is named `jaxrs-user-store`. It provides two endpoints:
+The REST API is implemented using Quarkus and is named `jaxrs-user-store`. It provides two endpoints:
 
-* `/api/v1/users`, which returns a set of all the users in the system.
-
-* `/api/v1/users/{id}`, which returns the user that matches the `userId` with `id`.
+* `/api/v1/users` – returns all users in the system.
+* `/api/v1/users/{id}` – returns the user matching the `userId` with `id`.
 
 Both endpoints accept `GET` requests.
 
-The application is designed to be deployed on top of OpenShift. You can deploy it by running the `ocp-deploy.sh` script or alternatively:
+Deploying the application
+
+The application is designed to run on OpenShift. You can deploy it by executing the `ocp-deploy.sh` script or, alternatively:
 
 [.lines_space]
 [.console-input]
@@ -19,7 +21,7 @@ The application is designed to be deployed on top of OpenShift. You can deploy i
 ./mvnw install -Dquarkus.kubernetes.deploy=true
 ----
 
-Test the application endpoints:
+Testing the application endpoints
 
 [.lines_space]
 [.console-output]
@@ -73,30 +75,33 @@ content-length: 120
 }
 ----
 
-For extending Red Hat Single Sign-On to connect to the external system, we use the `User Storage SPI` (`Service Provider Interface`).
+Extending RH-SSO with the User Storage SPI
 
-The provider implementation is `custom-user-storage-spi` and can be deployed in several ways:
+To connect RH-SSO to the external system, we use the `User Storage SPI` (`Service Provider Interface`).
 
-* By extending the Red Hat Single Sign-On image.
-* By mounting a volume with the file.
-* By using a configmap (although this is not recommended as the configmap has a limited size and should be used mainly for storing metadata).
-* By copying it into the pod (which is ephemeral).
-* And others ways as well.
+The provider implementation is called `custom-user-storage-spi` and can be deployed using several methods:
 
-The provider checks the value of the `USER_STORAGE_CUSTOM_SPI_TARGET_HOST` environment variable in the following format: `HOST:PORT` or `HOST` if the port defaults to `http/80`. The value can be provided as an environment variable in the `DeploymentConfig`.
+* Extending the RH-SSO image.
+* Mounting a volume with the JAR file.
+* Using a ConfigMap (not recommended for large files; better for metadata only).
+* Copying the JAR into the pod (ephemeral storage).
+* Other deployment methods as required.
 
-Once the environment variable and the package are correctly deployed, we will see the new provider listed under the `User Federation` section of the Red Hat Single Sign-On administration web console.
+The provider reads the `USER_STORAGE_CUSTOM_SPI_TARGET_HOST` environment variable in the following format: `HOST:PORT` or just `HOST` (defaults to port 80).
+This value can be provided in the `DeploymentConfig` environment variables.
+
+Once the package is deployed and the environment variable is set, the new provider will appear in the RH-SSO admin console under `User Federation`.
 
 * Click `demo-user-provider`.
 
 image::federation/user-storage-spi-provider-listed.png[]
 
-* Verify that it is `Enabled` and click `Save`.
+* Verify that the provider is `Enabled` and click `Save`.
 
 image::federation/add-new-user-storage-spi.png[]
 
 image::federation/custom-user-storage-spi-enabled.png[]
 
-* Click `Users`. The external storage users should now be loaded into Red Hat Single Sign-On.
+* Click `Users`. The external storage users should now be loaded into RH-SSO.
 
 image::federation/users-loaded.png[]

@@ -1,7 +1,7 @@
-= Authentication
+= Authentication Extensions
 include::_attributes.adoc[]
 
-[#authentication-spi]
+[#auth-spi]
 == Authentication SPI
 
 include::partial$authentication-spi.adoc[]

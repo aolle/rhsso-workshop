@@ -1,121 +1,103 @@
-Red Hat Single Sign-On provides an authentication SPI that can be used to create new authentication mechanisms. In this example, we will demonstrate a simple implementation of two-factor authentication that uses Red Hat Single Sign-On and a Telegram bot.
+Red Hat Single Sign-On (RH-SSO) provides an **Authentication SPI** that can be used to implement custom authentication mechanisms. In this example, we will demonstrate a simple **two-factor authentication (2FA)** flow using RH-SSO and a Telegram bot.
 
 The custom authenticator consists of three components:
 
-* Authenticator: The component that requires the user to enter the two-factor authentication code provided via Telegram.
+* **Authenticator:** Prompts the user to enter the 2FA code provided via Telegram.
+* **Required Action:** Provides an enrollment process if the user's Telegram ID is not present in their profile.
+* **Telegram Service:** Handles communication with the external Telegram API.
 
-* A Required Action: The component that provides an enrollment process to the user. If the user's Telegram ID is not present in their user profile during the authentication flow, the enrollment process is triggered as required.
+[#auth-plugin-setup]
+=== Configuring Plugins and Authentication Flows
 
-* The Telegram Service: The component that handles communication with the external Telegram API.
+The plugin implementation `telegram-authentication-spi` can be deployed in several ways:
 
-[#presetup]
-=== Configuring the plugin and flows
+* Extending the RH-SSO image.
+* Mounting a volume with the plugin file.
+* Using a configmap (recommended only for metadata).
+* Copying the plugin into the pod (ephemeral).
+* Other methods.
 
-The plugin implementation is `telegram-authentication-spi` and it can be deployed in several different ways:
+Steps to configure the authentication flow:
 
-* By extending the Red Hat Single Sign-On image.
-* By mounting a volume with the file.
-* By using a configmap (although this is not recommended as the configmap has a limited size and should be used mainly for storing metadata).
-* By copying it into the pod (which is ephemeral).
-* And others ways as well.
-
-NOTE: the previous step from chapter 2.1.1 workshop is a prerequisite to continue with the setup.
-
-After deployment, follow the steps below:
-
-* Open a browser and log in to the Red Hat Single Sign-On administration web console.
-
-* Navigate to `Authentication`, then `Flows`, select `Browser` in the drop-down list, and click `Copy`.
+* Open the RH-SSO administration web console.
+* Navigate to `Authentication` → `Flows`.
+* Select `Browser` in the drop-down list and click `Copy`.
 
 image::authentication/authentication-menu.png[]
-
 image::authentication/copy-browser-flow.png[]
 
-* Set the desired name for the new browser authentication flow.
+* Provide a name for the new browser flow.
 
 image::authentication/new-browser-authentication-flow-name.png[]
 
-* Select `Actions`, then `Add execution` of the  `Browser With Telegram Browser - Conditional OTP`.
+* Click `Actions` → `Add execution`. Select `Browser With Telegram Browser - Conditional OTP`.
 
 image::authentication/add-execution.png[]
 
-* Select `Telegram Authentication`. Click `Save`.
+* Choose **Telegram Authentication** and click `Save`.
 
 image::authentication/telegram-authentication-exec.png[]
 
-* Set `Browser With Telegram Browser - Conditional OTP` as `REQURIED`, `OTP Form` as `DISABLED` and `Telegram Authentication` as `REQUIRED`.
+* Configure the execution:
+  * `Browser With Telegram Browser - Conditional OTP` → REQUIRED
+  * `OTP Form` → DISABLED
+  * `Telegram Authentication` → REQUIRED
 
 image::authentication/authentication-flow-cfg.png[]
 
-* Click `Actions` of the `Telegram Authentication` and select `Config`.
+* Click `Actions` → `Config` on `Telegram Authentication`. Set an alias and click `Save`.
 
 image::authentication/telegram-authentication-action-config.png[]
-
-* Set an alias and click `Save`.
-
 image::authentication/telegram-authentication-config.png[]
 
-* Navigate to `Authentication` → `Required Actions`. Click `Register`.
-
-image::authentication/default-required-actions.png[]
-
-* Select `Telegram ID` in the drop-down list. Click `Ok`.
+* Navigate to `Authentication` → `Required Actions` → `Register`.
+* Select **Telegram ID** in the drop-down list. Click `Ok`.
 
 image::authentication/telegram-id-ra.png[]
 
-* Go to `Authentication` → `Bindings`. In the `Browser Flow` drop-down list, select `Browser with Telegram`. Click `Save`.
+* Bind the new flow:
+  * Navigate to `Authentication` → `Bindings`.
+  * Select **Browser with Telegram** in the `Browser Flow` drop-down list.
+  * Click `Save`.
 
 image::authentication/telegram-binding.png[]
 
 [#telegram2fa]
-=== Telegram two-factor authentication with authentication SPI
+=== Two-Factor Authentication with Telegram
 
-* Open a new private or incognito browser window.
-* Navigate to the context root of the Quarkus Petclinic application. The request will be redirected to the Red Hat Single Sign-On login page.
-* Log in as the user `angel`.
+* Open a new private/incognito browser session.
+* Navigate to the Quarkus Petclinic application. You will be redirected to the RH-SSO login page.
+* Log in as user `angel`.
 
 image::authentication/user-first-login.png[]
 
-Since this is the first time the user `angel` logs in since the two-factor authentication has been implemented, the 2FA enrollment process is presented to the user.
+Since this is the first login after 2FA setup, the **enrollment process** is triggered.
 
 image::authentication/2fa-enroll.png[]
 
-* Open Telegram and send the enrollment code to the Telegram bot. The bot will respond with the enrollment secure code, submit that secure code.
+* Open Telegram and send the enrollment code to the bot. Submit the secure code received from the bot.
 
 image::authentication/telegram-enroll.png[]
-
 image::authentication/2fa-enrollment-code-submit.png[]
 
-After completing the enrollment process, the user will be successfully logged in to the application.
+After successful enrollment, the user is logged in, and the Telegram attributes are added to the user profile.
 
-The enrollment process (the required action SPI) updates the user profile by adding the Telegram attributes to it. To check it:
-
-* Open a browser window and log in to the Red Hat Single Sign-On administration web console.
-
-* Navigate to `Demo` realm, then `Users`, click `View all users` and select the `angel` user ID.
+* Verify the Telegram attributes in RH-SSO:
+  * Navigate to `Demo` realm → `Users` → `View all users`.
+  * Select user `angel` and click `Attributes`.
 
 image::authentication/user-id.png[]
-
-* Click `Attributes`.
-
 image::authentication/telegram-user-attributes.png[]
 
-We will see the newly added `telegram_id` and `telegram_username` attributes of the `angel` user.
-
-The next login attempts for the same user will require the 2FA code. Let's try it.
-
-* Open a new incognito browser session.
-* Browse to the context root of the Quarkus Petclinic application. The request will be redirected to the Red Hat Single Sign-On login page.
-* Login as the user `angel`. You will be asked for the 2FA code.
+* Subsequent logins require the 2FA code:
+  * Open a new incognito session.
+  * Log in as `angel`. The 2FA code will be requested.
 
 image::authentication/2fa-code-form.png[]
 
-The 2FA code will be sent to you via the Telegram bot.
+* The code is sent via Telegram bot. Submit the code.
 
 image::authentication/2fa-telegram-code.png[]
-
-* Submit the 2FA code.
-
 image::authentication/submit-2fa.png[]
 
-You will be logged in to the application successfully.
+The user is successfully logged in to the application with 2FA enabled.
