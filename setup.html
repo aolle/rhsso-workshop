@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Environment Setup :: Red Hat Single Sign-On Workshop</title>
+    <title>Workshop Setup :: Red Hat Single Sign-On Workshop</title>
     <link rel="canonical" href="https://olleb.com/rhsso-workshop/setup.html">
     <link rel="prev" href="index.html">
     <link rel="next" href="secapp.html">
@@ -59,127 +59,121 @@
 <ul class="nav-list">
   <li class="nav-item is-current-page" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="setup.html">1. Environment Setup</a>
+    <a class="nav-link" href="setup.html">Workshop Setup</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#tools">1.1. Workshop Tools</a>
+    <a class="nav-link" href="#tools">Workshop Tools</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="#deployrhsso">1.2. Deploying Red Hat Single Sign-On for OpenShift</a>
+    <a class="nav-link" href="#deployrhsso">Deploying Red Hat Single Sign-On on OpenShift</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="#deployrhsso-operator">1.2.1 Deploying Red Hat Single Sign-On for OpenShift using the Operator</a>
+    <a class="nav-link" href="#deployrhsso-operator">Deploying Red Hat Single Sign-On Using the Operator</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="#deployrhsso-templates">1.2.2 Deploying Red Hat Single Sign-On for OpenShift using the templates</a>
+    <a class="nav-link" href="#deployrhsso-templates">Deploying Red Hat Single Sign-On Using Templates</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#deploy-ipa">1.3 Deploying an Identity Management (IdM/FreeIPA) on Red Hat OpenShift</a>
+    <a class="nav-link" href="#deploy-ipa">Deploying Identity Management (IdM/FreeIPA)</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">2. Red Hat Single Sign-On</span>
+    <a class="nav-link" href="secapp.html">Securing Applications and Services</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="secapp.html">2.1 Securing web applications and services with Red Hat Single Sign-On</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="secapp.html#presetup">2.1.1 Configuring the realm, roles, groups and users</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="secapp.html#quarkus-app">2.1.2 Securing Quarkus web applications using OpenID Connect (OIDC)</a>
-  </li>
-</ul>
+    <a class="nav-link" href="secapp.html#realm-config">Configuring Realm, Roles, Groups and Users</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="federation.html">2.2 User Federation</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="federation.html#ldap">2.2.1 LDAP User Federation</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="federation.html#user-storage-spi">2.2.2 User Storage SPI</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="federation.html#user-storage-spi-jpa">2.2.2.1 External user database store</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="federation.html#user-storage-spi-rest">2.2.2.2 External user REST service store</a>
+    <a class="nav-link" href="secapp.html#quarkus-app">Securing Quarkus Applications with OIDC</a>
   </li>
 </ul>
   </li>
-</ul>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="federation.html">User Federation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="federation.html#ldap">LDAP User Federation</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="authentication.html">2.3 Authentication</a>
+    <a class="nav-link" href="federation.html#user-storage-spi">User Storage SPI</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="federation.html#user-storage-spi-jpa">External User Database Store</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="federation.html#user-storage-spi-rest">External User REST Service Store</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="authentication.html">2.3.1 Authentication SPI</a>
+    <a class="nav-link" href="authentication.html">Authentication Extensions</a>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="authentication.html#presetup">2.3.1.1 Configuring the plugin and flows</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="authentication.html#telegram2fa">2.3.1.2 Telegram two-factor authentication with authentication SPI</a>
-  </li>
-</ul>
-  </li>
-</ul>
-  </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="vault.html">2.4 Vault</a>
+    <a class="nav-link" href="authentication.html#auth-spi">Authentication SPI</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="authentication.html#auth-plugin-setup">Configuring Plugins and Authentication Flows</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="authentication.html#telegram2fa">Two-Factor Authentication with Telegram</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="vault.html">2.4.1 Vault SPI</a>
+    <a class="nav-link" href="vault.html">Secrets and Vault Integration</a>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="vault.html#vault-spi-conjur">2.4.1.1 Integrating Red Hat Single Sign-On with CyberArk Conjur for secrets management</a>
-  </li>
-</ul>
-  </li>
-</ul>
-  </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="jwt.html">2.5 JSON Web Tokens (JWT)</a>
+    <a class="nav-link" href="vault.html#vault-spi">Vault SPI</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="jwt.html#custom-claim">2.5.1 Adding a custom JWT claim</a>
+    <a class="nav-link" href="vault.html#vault-conjur">Integrating RH-SSO with Conjur using the Vault SPI</a>
   </li>
 </ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="jwt.html">JSON Web Tokens (JWT)</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jwt.html#custom-claim">Adding a Custom JWT Claim</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="troubleshooting.html">FAQs &amp; Troubleshooting</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="troubleshooting.html#version">Which Keycloak version is this SSO based on?</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="troubleshooting.html">2.4 FAQs &amp; Troubleshooting</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="troubleshooting.html">2.4.1 Which Keycloak version is Red Hat Single Sign-On based on?</a>
+    <a class="nav-link" href="troubleshooting.html#extend-image">How to Extend the SSO Image</a>
   </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="troubleshooting.html">2.4.2 How to Extend Red Hat Single Sign-On OpenShift Image</a>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="troubleshooting.html#register-provider">How to Register Provider Implementations</a>
   </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="troubleshooting.html">2.4.3 How to Register Provider Implementations</a>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="troubleshooting.html#admin-creds">How to Obtain Admin Credentials</a>
   </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="troubleshooting.html">2.4.4 How to Obtain the Red Hat Single Sign-On Admin Credentials</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="troubleshooting.html">2.4.5 How to Enable TRACE Logging</a>
-  </li>
-</ul>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="troubleshooting.html#trace-logging">How to Enable TRACE Logging</a>
   </li>
 </ul>
   </li>
@@ -197,14 +191,14 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Red Hat Single Sign-On Workshop</a></li>
-    <li><a href="setup.html">1. Environment Setup</a></li>
+    <li><a href="setup.html">Workshop Setup</a></li>
   </ul>
 </nav>
   <div style="padding: 0 0.5rem 0 0.75rem;"><a href="https://olleb.com" target="_blank" rel="noopener noreferrer"> © 2023 - Àngel Ollé Blázquez</a></div>
 </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Environment Setup</h1>
+<h1 class="page">Workshop Setup</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="admonitionblock note">
@@ -215,7 +209,7 @@
 </td>
 <td class="content">
 <div class="paragraph">
-<p>This tutorial was developed and tested with:</p>
+<p>This tutorial was developed and tested with the following components:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -240,7 +234,8 @@
 <h2 id="tools"><a class="anchor" href="#tools"></a>Workshop Tools</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The following tools are required to run the exercises in this tutorial. Please ensure that they are installed and properly configured before proceeding with any of the tutorial chapters.</p>
+<p>The following tools are required to complete the exercises in this tutorial.
+Ensure that they are installed and properly configured before proceeding with any of the chapters.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -291,7 +286,7 @@
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The extensions source code used during this workshop can be found at the following URL:
+The source code for the extensions used in this workshop is available at:
 <a href="https://github.com/aolle/rhsso-workshop-code" class="bare">https://github.com/aolle/rhsso-workshop-code</a>
 </td>
 </tr>
@@ -300,13 +295,14 @@ The extensions source code used during this workshop can be found at the followi
 </div>
 </div>
 <div class="sect1">
-<h2 id="deployrhsso"><a class="anchor" href="#deployrhsso"></a>Deploying Red Hat Single Sign-On for OpenShift</h2>
+<h2 id="deployrhsso"><a class="anchor" href="#deployrhsso"></a>Deploying Red Hat Single Sign-On on OpenShift</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Red Hat Single Sign-On can be deployed using either the Operator or the application template.</p>
+<p>Red Hat Single Sign-On can be deployed on OpenShift using either the <strong>Operator</strong> or the <strong>application template</strong>.</p>
 </div>
 <div class="paragraph">
-<p>The Operator automates and simplifies the administration tasks in Red Hat OpenShift using custom resources (CRs). It means that we can create Red Hat Single Sign-On resources using these custom resources instead of using the Red Hat Single Sign-On admin console.</p>
+<p>The Operator automates and simplifies administrative tasks in OpenShift through the use of <strong>custom resources (CRs)</strong>.
+This means that you can create and manage Red Hat Single Sign-On resources declaratively, instead of configuring them manually through the admin console.</p>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -315,7 +311,9 @@ The extensions source code used during this workshop can be found at the followi
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-The Operator performs a one-way synchronization of the CRs. If we modify a CR directly (for example, using <code>oc</code>) the changes show up in the Red Hat Single Sign-On admin console. However, if the same resource is modified using the admin console, those changes have no effect on the CR.
+The Operator performs <strong>one-way synchronization</strong> of custom resources.
+If a CR is modified directly (for example, using <code>oc</code>), the change appears in the Red Hat Single Sign-On admin console.
+However, modifications made in the console do <strong>not</strong> propagate back to the CR definition.
 </td>
 </tr>
 </table>
@@ -327,7 +325,9 @@ The Operator performs a one-way synchronization of the CRs. If we modify a CR di
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-If the Red Hat Single Sign-On fails during deployment, check if a <code>LimitRange</code> exists in the current Red Hat OpenShift project. Sometimes, the <code>RHPDS</code> environment automatically creates a <code>LimitRange</code> when a new project is created. Also, check the health check probes. The initial delay may require a higher value.
+If the Red Hat Single Sign-On deployment fails, check whether a <code>LimitRange</code> exists in the current OpenShift project.
+Some <code>RHPDS</code> environments automatically create a <code>LimitRange</code> when new projects are provisioned.
+Also verify the <strong>liveness and readiness probes</strong> — the initial delay may need to be increased.
 </td>
 </tr>
 </table>
@@ -339,19 +339,21 @@ If the Red Hat Single Sign-On fails during deployment, check if a <code>LimitRan
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-For this workshop, we assume that Red Hat Single Sign-On has been installed using the templates and imagestream method explained in <a href="#deployrhsso-templates">1.2.2 Deploying Red Hat Single Sign-On for Red Hat OpenShift using the templates</a>.
-Additionally, for convenience and simplification purposes, we will depoy applications and services in the same project where Red Hat Single Sign-On is deployed.
+For this workshop, Red Hat Single Sign-On is assumed to be installed using the <strong>template and imagestream</strong> method described in
+<a href="#deployrhsso-templates">Deploying Red Hat Single Sign-On for OpenShift using templates</a>.
+Additionally, for convenience and simplicity, all applications and services will be deployed in the same OpenShift project as Red Hat Single Sign-On.
 </td>
 </tr>
 </table>
 </div>
 <div class="sect2">
-<h3 id="deployrhsso-operator"><a class="anchor" href="#deployrhsso-operator"></a>Deploying Red Hat Single Sign-On for OpenShift using the Operator</h3>
+<h3 id="deployrhsso-operator"><a class="anchor" href="#deployrhsso-operator"></a>Deploying Red Hat Single Sign-On Using the Operator</h3>
 <div class="paragraph">
-<p>You can use the Red Hat OpenShift Container Platform web console to subscribe and deploy the <code>Red Hat Single Sign-on Operator</code>. The Red Hat Single Sign-On Operator simplifies the deployment process and it is ease to use, but less flexible than the template-based deployment.</p>
+<p>You can use the Red Hat OpenShift Container Platform web console to subscribe to and deploy the <code>Red Hat Single Sign-On Operator</code>.
+The Operator simplifies the deployment process and is easy to use, though it is less flexible than the template-based deployment method.</p>
 </div>
 <div class="paragraph">
-<p>Check the supported CRs here:</p>
+<p>Check the supported custom resources (CRs) here:</p>
 </div>
 <div class="paragraph">
 <p><a href="https://github.com/keycloak/keycloak-operator#supported-custom-resources" class="bare">https://github.com/keycloak/keycloak-operator#supported-custom-resources</a></p>
@@ -362,10 +364,10 @@ Additionally, for convenience and simplification purposes, we will depoy applica
 <p>Open a browser window and log in to the Red Hat OpenShift Container Platform web console.</p>
 </li>
 <li>
-<p>From the Administrator perspective, click <code>Operators</code>, then <code>OperatorHub</code>.</p>
+<p>From the <strong>Administrator</strong> perspective, click <code>Operators</code>, then <code>OperatorHub</code>.</p>
 </li>
 <li>
-<p>In the Filter by keyword field, type <code>rhsso</code>.</p>
+<p>In the <strong>Filter by keyword</strong> field, type <code>rhsso</code>.</p>
 </li>
 </ul>
 </div>
@@ -377,7 +379,7 @@ Additionally, for convenience and simplification purposes, we will depoy applica
 <div class="ulist">
 <ul>
 <li>
-<p>Select the Red Hat Single Sign-On Operator tile and click <code>Install</code>.</p>
+<p>Select the <strong>Red Hat Single Sign-On Operator</strong> tile and click <code>Install</code>.</p>
 </li>
 </ul>
 </div>
@@ -389,7 +391,9 @@ Additionally, for convenience and simplification purposes, we will depoy applica
 <div class="ulist">
 <ul>
 <li>
-<p>On the Install Operator page, leave <code>stable</code> from the list of available <code>Update Channel</code> options. The Operator supports only the <code>A specific namespace on the cluster</code> as installation mode. Create the <code>sso</code> project. Choose <code>Automatic</code> update approval.</p>
+<p>On the <strong>Install Operator</strong> page, leave <code>stable</code> as the selected <code>Update Channel</code>.
+The Operator supports only the <strong>A specific namespace on the cluster</strong> installation mode.
+Create a new project named <code>sso</code>, and choose <strong>Automatic</strong> update approval.</p>
 </li>
 </ul>
 </div>
@@ -406,15 +410,16 @@ Additionally, for convenience and simplification purposes, we will depoy applica
 </ul>
 </div>
 <div class="paragraph">
-<p>Installing Red Hat Single Sign-On using a custom resource:</p>
+<p>Installing Red Hat Single Sign-On using a Custom Resource</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>From the Administrator perspective, click on <code>Operators</code>, then select <code>Installed Operators</code>. Make sure to select <code>sso</code> project. Select Red Hat Single Sign-On Operator.</p>
+<p>From the <strong>Administrator</strong> perspective, click <code>Operators</code>, then select <code>Installed Operators</code>.
+Make sure the <code>sso</code> project is selected. Then, select the <strong>Red Hat Single Sign-On Operator</strong>.</p>
 </li>
 <li>
-<p>Click <code>Create instance</code> of the Keycloak tile.</p>
+<p>Click <code>Create instance</code> on the <strong>Keycloak</strong> tile.</p>
 </li>
 </ul>
 </div>
@@ -426,13 +431,13 @@ Additionally, for convenience and simplification purposes, we will depoy applica
 <div class="ulist">
 <ul>
 <li>
-<p>Change the <code>Name</code> if desired. Then, click <code>Create</code>.</p>
+<p>Change the <code>Name</code> if desired, then click <code>Create</code>.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deployrhsso-templates"><a class="anchor" href="#deployrhsso-templates"></a>Deploying Red Hat Single Sign-On for OpenShift using the templates</h3>
+<h3 id="deployrhsso-templates"><a class="anchor" href="#deployrhsso-templates"></a>Deploying Red Hat Single Sign-On Using Templates</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -447,7 +452,8 @@ Additionally, for convenience and simplification purposes, we will depoy applica
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-For this workshop, we will use the <code>sso76-ocp4-x509-postgresql-persistent</code> template, which is Red Hat Single Sign-On 7.6 on OpenJDK + PostgreSQL (Persistent) for Red Hat OpenShift 4.X. The template does not require the manual creation of the keystores or truststores.
+For this workshop, we will use the <code>sso76-ocp4-x509-postgresql-persistent</code> template, which deploys Red Hat Single Sign-On 7.6 on OpenJDK with a persistent PostgreSQL database for Red Hat OpenShift 4.x.
+This template does not require manual creation of keystores or truststores.
 </td>
 </tr>
 </table>
@@ -466,7 +472,7 @@ oc -n openshift import-image rh-sso-7/sso76-openshift-rhel8:7.6 --from=registry.
 <div class="ulist">
 <ul>
 <li>
-<p>Create the new project.</p>
+<p>Create a new project.</p>
 </li>
 </ul>
 </div>
@@ -506,7 +512,19 @@ oc -n openshift import-image rh-sso-7/sso76-openshift-rhel8:7.6 --from=registry.
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Write down the auto-generated <code>RH-SSO Administrator Username</code> and <code>RH-SSO Administrator Password</code> required for login in to the Red Hat Single Sign-On admin console.
+Take note of the auto-generated <code>RH-SSO Administrator Username</code> and <code>RH-SSO Administrator Password</code>, as they will be required to log in to the Red Hat Single Sign-On admin console.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can verify that all pods are running successfully by executing <code>oc get pods -n sso</code> before accessing the admin console.
 </td>
 </tr>
 </table>
@@ -515,45 +533,55 @@ Write down the auto-generated <code>RH-SSO Administrator Username</code> and <co
 </div>
 </div>
 <div class="sect1">
-<h2 id="deploy-ipa"><a class="anchor" href="#deploy-ipa"></a>1.3 Deploying an Identity Management (IdM/FreeIPA) on Red Hat OpenShift</h2>
+<h2 id="deploy-ipa"><a class="anchor" href="#deploy-ipa"></a>Deploying Identity Management (IdM/FreeIPA)</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section explains how to install FreeIPA, an Identity Management (IdM) solution that combines Linux, 389 Directory Server, MIT Kerberos, NTP, DNS and Dogtag.</p>
+<p>This section explains how to install FreeIPA — an Identity Management (IdM) solution that integrates Linux, 389 Directory Server, MIT Kerberos, NTP, DNS, and Dogtag Certificate System components.</p>
 </div>
 <div class="paragraph">
 <p><a href="https://www.freeipa.org/page/About" class="bare">https://www.freeipa.org/page/About</a></p>
 </div>
 <div class="paragraph">
-<p>FreeIPA is the upstream version of Red Hat Identity Management.</p>
+<p>FreeIPA is the upstream project for Red Hat Identity Management.</p>
 </div>
 <div class="paragraph">
-<p>Later on, we will see how we can integrate Red Hat Single Sign-On with IdM/FreeIPA.</p>
+<p>Later in this workshop, we will integrate Red Hat Single Sign-On with IdM/FreeIPA.</p>
 </div>
 <div class="paragraph">
-<p>To get started, stay logged in into your Red Hat OpenShift platform, and for convenience, select the <code>sso</code> project that has been created previously. Follow the steps below for deploying a FreeIPA instance on top of Red Hat OpenShift.</p>
+<p>To get started, remain logged in to your Red Hat OpenShift platform and, for convenience, select the <code>sso</code> project that was created previously.
+Follow the steps below to deploy a FreeIPA instance on Red Hat OpenShift.</p>
 </div>
 <div class="listingblock lines_space console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># export the image that we are going to deploy
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># Export the image to be deployed
 export IMG=quay.io/freeipa/freeipa-openshift-container:latest
 export IMG_BASE=${IMG}
 
-# clone the repository and deploy the roles and scc
-# if preferred, a remote build could be performed instead of cloning the repository
+# Clone the repository and deploy the roles and SCC
+# Alternatively, a remote build can be performed instead of cloning the repository
 git clone <a href="https://github.com/freeipa/freeipa-openshift-container.git" class="bare">https://github.com/freeipa/freeipa-openshift-container.git</a>
 cd freeipa-openshift-container/
 kustomize build deploy/admin | oc create -f -
 
-# create the ocp template and deploy it
+# Create the OpenShift template and deploy it
 make template-create
 make template-new-app</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Write down the <code>IPA_ADMIN_PASSWORD</code> and <code>IPA_DM_PASSWORD</code> displayed on the terminal; we will need it later.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Write down the <code>IPA_ADMIN_PASSWORD</code> and <code>IPA_DM_PASSWORD</code> values displayed in the terminal — they will be required later.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>Open the FreeIPA administration console to verify that the access and credentials are working properly.</p>
+<p>Once the deployment is complete, open the FreeIPA administration console to verify that access and credentials are working correctly.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -564,7 +592,7 @@ make template-new-app</code></pre>
 </div>
 <nav class="pagination">
   <span class="prev"><a href="index.html">Red Hat Single Sign-On Workshop</a></span>
-  <span class="next"><a href="secapp.html">2.1 Securing web applications and services with Red Hat Single Sign-On</a></span>
+  <span class="next"><a href="secapp.html">Securing Applications and Services</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

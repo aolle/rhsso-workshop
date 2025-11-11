@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Securing web applications and services with Red Hat Single Sign-On :: Red Hat Single Sign-On Workshop</title>
+    <title>Securing Applications and Services :: Red Hat Single Sign-On Workshop</title>
     <link rel="canonical" href="https://olleb.com/rhsso-workshop/secapp.html">
     <link rel="prev" href="setup.html">
     <link rel="next" href="federation.html">
@@ -59,127 +59,121 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="setup.html">1. Environment Setup</a>
+    <a class="nav-link" href="setup.html">Workshop Setup</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="setup.html#tools">1.1. Workshop Tools</a>
+    <a class="nav-link" href="setup.html#tools">Workshop Tools</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="setup.html#deployrhsso">1.2. Deploying Red Hat Single Sign-On for OpenShift</a>
+    <a class="nav-link" href="setup.html#deployrhsso">Deploying Red Hat Single Sign-On on OpenShift</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="setup.html#deployrhsso-operator">1.2.1 Deploying Red Hat Single Sign-On for OpenShift using the Operator</a>
+    <a class="nav-link" href="setup.html#deployrhsso-operator">Deploying Red Hat Single Sign-On Using the Operator</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="setup.html#deployrhsso-templates">1.2.2 Deploying Red Hat Single Sign-On for OpenShift using the templates</a>
+    <a class="nav-link" href="setup.html#deployrhsso-templates">Deploying Red Hat Single Sign-On Using Templates</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="setup.html#deploy-ipa">1.3 Deploying an Identity Management (IdM/FreeIPA) on Red Hat OpenShift</a>
+    <a class="nav-link" href="setup.html#deploy-ipa">Deploying Identity Management (IdM/FreeIPA)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="secapp.html">Securing Applications and Services</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#realm-config">Configuring Realm, Roles, Groups and Users</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#quarkus-app">Securing Quarkus Applications with OIDC</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">2. Red Hat Single Sign-On</span>
+    <a class="nav-link" href="federation.html">User Federation</a>
 <ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="secapp.html">2.1 Securing web applications and services with Red Hat Single Sign-On</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="#presetup">2.1.1 Configuring the realm, roles, groups and users</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="#quarkus-app">2.1.2 Securing Quarkus web applications using OpenID Connect (OIDC)</a>
-  </li>
-</ul>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="federation.html#ldap">LDAP User Federation</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="federation.html">2.2 User Federation</a>
+    <a class="nav-link" href="federation.html#user-storage-spi">User Storage SPI</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="federation.html#ldap">2.2.1 LDAP User Federation</a>
+    <a class="nav-link" href="federation.html#user-storage-spi-jpa">External User Database Store</a>
   </li>
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="federation.html#user-storage-spi-rest">External User REST Service Store</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="federation.html#user-storage-spi">2.2.2 User Storage SPI</a>
+    <a class="nav-link" href="authentication.html">Authentication Extensions</a>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="federation.html#user-storage-spi-jpa">2.2.2.1 External user database store</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="federation.html#user-storage-spi-rest">2.2.2.2 External user REST service store</a>
-  </li>
-</ul>
-  </li>
-</ul>
-  </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="authentication.html">2.3 Authentication</a>
+    <a class="nav-link" href="authentication.html#auth-spi">Authentication SPI</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="authentication.html#auth-plugin-setup">Configuring Plugins and Authentication Flows</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="authentication.html#telegram2fa">Two-Factor Authentication with Telegram</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="authentication.html">2.3.1 Authentication SPI</a>
+    <a class="nav-link" href="vault.html">Secrets and Vault Integration</a>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="authentication.html#presetup">2.3.1.1 Configuring the plugin and flows</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="authentication.html#telegram2fa">2.3.1.2 Telegram two-factor authentication with authentication SPI</a>
-  </li>
-</ul>
-  </li>
-</ul>
-  </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="vault.html">2.4 Vault</a>
+    <a class="nav-link" href="vault.html#vault-spi">Vault SPI</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="vault.html#vault-conjur">Integrating RH-SSO with Conjur using the Vault SPI</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="vault.html">2.4.1 Vault SPI</a>
+    <a class="nav-link" href="jwt.html">JSON Web Tokens (JWT)</a>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="vault.html#vault-spi-conjur">2.4.1.1 Integrating Red Hat Single Sign-On with CyberArk Conjur for secrets management</a>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jwt.html#custom-claim">Adding a Custom JWT Claim</a>
   </li>
 </ul>
   </li>
-</ul>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="troubleshooting.html">FAQs &amp; Troubleshooting</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="troubleshooting.html#version">Which Keycloak version is this SSO based on?</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="jwt.html">2.5 JSON Web Tokens (JWT)</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="jwt.html#custom-claim">2.5.1 Adding a custom JWT claim</a>
-  </li>
-</ul>
+    <a class="nav-link" href="troubleshooting.html#extend-image">How to Extend the SSO Image</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="troubleshooting.html">2.4 FAQs &amp; Troubleshooting</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="troubleshooting.html">2.4.1 Which Keycloak version is Red Hat Single Sign-On based on?</a>
+    <a class="nav-link" href="troubleshooting.html#register-provider">How to Register Provider Implementations</a>
   </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="troubleshooting.html">2.4.2 How to Extend Red Hat Single Sign-On OpenShift Image</a>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="troubleshooting.html#admin-creds">How to Obtain Admin Credentials</a>
   </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="troubleshooting.html">2.4.3 How to Register Provider Implementations</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="troubleshooting.html">2.4.4 How to Obtain the Red Hat Single Sign-On Admin Credentials</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="troubleshooting.html">2.4.5 How to Enable TRACE Logging</a>
-  </li>
-</ul>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="troubleshooting.html#trace-logging">How to Enable TRACE Logging</a>
   </li>
 </ul>
   </li>
@@ -197,28 +191,27 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Red Hat Single Sign-On Workshop</a></li>
-    <li>2. Red Hat Single Sign-On</li>
-    <li><a href="secapp.html">2.1 Securing web applications and services with Red Hat Single Sign-On</a></li>
+    <li><a href="secapp.html">Securing Applications and Services</a></li>
   </ul>
 </nav>
   <div style="padding: 0 0.5rem 0 0.75rem;"><a href="https://olleb.com" target="_blank" rel="noopener noreferrer"> © 2023 - Àngel Ollé Blázquez</a></div>
 </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Securing web applications and services with Red Hat Single Sign-On</h1>
+<h1 class="page">Securing Applications and Services</h1>
 <div class="sect1">
-<h2 id="presetup"><a class="anchor" href="#presetup"></a>Configuring the Realm, roles, groups and users</h2>
+<h2 id="realm-config"><a class="anchor" href="#realm-config"></a>Configuring Realm, Roles, Groups and Users</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Before proceeding with the next sections, we need to configure the realm, roles and users in our Red Hat Single Sign-On instance.</p>
+<p>Before proceeding with the next sections, we need to configure the <strong>realm</strong>, <strong>roles</strong>, and <strong>users</strong> in our Red Hat Single Sign-On instance.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Open a browser window and log in to the Red Hat Single Sign-On administration web console.</p>
+<p>Open a browser window and log in to the Red Hat Single Sign-On administration console.</p>
 </li>
 <li>
-<p>Create the <code>demo</code> realm. Click on the <code>Add realm</code> button, provide the realm name, and click <code>Create</code>.</p>
+<p>Create the <code>demo</code> realm: click <code>Add realm</code>, provide the realm name, and click <code>Create</code>.</p>
 </li>
 </ul>
 </div>
@@ -235,7 +228,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Create the <code>staff</code> group. Click on <code>Groups</code>.</p>
+<p>Create the <code>staff</code> group: click on <code>Groups</code>, then click <code>New</code>.</p>
 </li>
 </ul>
 </div>
@@ -243,13 +236,6 @@
 <div class="content">
 <img src="_images/secapp/groups.png" alt="groups">
 </div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Then click <code>New</code>.</p>
-</li>
-</ul>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -259,7 +245,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Set <code>staff</code> as the group name, and click <code>Save</code>.</p>
+<p>Set <code>staff</code> as the group name and click <code>Save</code>.</p>
 </li>
 </ul>
 </div>
@@ -271,7 +257,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Create the subgroup named <code>Personal staff</code>. Click on <code>Groups</code>, select the <code>staff</code> group, and click <code>New</code>.</p>
+<p>Create the subgroup <code>Personal staff</code>: click <code>Groups</code>, select the <code>staff</code> group, and click <code>New</code>.</p>
 </li>
 </ul>
 </div>
@@ -283,7 +269,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Set <code>Personal staff</code> as the name, and click <code>Save</code>.</p>
+<p>Set <code>Personal staff</code> as the subgroup name and click <code>Save</code>.</p>
 </li>
 </ul>
 </div>
@@ -295,7 +281,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Create the role <code>vet</code>. Click on <code>Roles</code>, then <code>Add Role</code>.</p>
+<p>Create the role <code>vet</code>: click <code>Roles</code>, then <code>Add Role</code>.</p>
 </li>
 </ul>
 </div>
@@ -312,7 +298,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Set the Role name, and click <code>Save</code>.</p>
+<p>Set the role name and click <code>Save</code>.</p>
 </li>
 </ul>
 </div>
@@ -324,10 +310,10 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Repeat the same steps for creating a role named <code>assistant</code>.</p>
+<p>Repeat the steps to create a role named <code>assistant</code>.</p>
 </li>
 <li>
-<p>Create the user <code>angel</code>. Click on <code>Users</code>, then <code>Add user</code>.</p>
+<p>Create the user <code>angel</code>: click <code>Users</code>, then <code>Add user</code>.</p>
 </li>
 </ul>
 </div>
@@ -344,7 +330,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Set the username, and click <code>Save</code>.</p>
+<p>Set the username and click <code>Save</code>.</p>
 </li>
 </ul>
 </div>
@@ -356,7 +342,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Open the <code>Credentials</code> tab and set the password for the user. Make sure to set <code>Temporary</code> to <code>OFF</code> before setting the password.</p>
+<p>Open the <code>Credentials</code> tab and set a password for the user. Make sure <strong>Temporary</strong> is set to <code>OFF</code> before setting the password.</p>
 </li>
 </ul>
 </div>
@@ -380,7 +366,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Open the <code>Groups</code> tab and assign the user <code>angel</code> to the <code>Personal staff</code> group by clicking the group and the <code>Join</code> button.</p>
+<p>Open the <code>Groups</code> tab and assign <code>angel</code> to the <code>Personal staff</code> group by clicking the group and the <code>Join</code> button.</p>
 </li>
 </ul>
 </div>
@@ -397,7 +383,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Repeat the same steps for creating a user named <code>elisabeth</code> but assign the <code>assistant</code> role. Also, remember to incude the user in the <code>Personal staff</code> group.</p>
+<p>Repeat the steps to create a user named <code>elisabeth</code>. Assign the <code>assistant</code> role and include the user in the <code>Personal staff</code> group.</p>
 </li>
 </ul>
 </div>
@@ -408,7 +394,8 @@
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Red Hat Single Sign-On allows defining one or more groups as default groups, where any new user will automatically join the defined groups, making it easier to assign users to the same group without repetitive and time-consuming tasks. The option is available by clicking on <code>Groups</code>, then <code>Default Groups</code>.
+Red Hat Single Sign-On allows defining one or more <strong>default groups</strong>, where any new user is automatically added.
+This makes it easier to assign multiple users to the same group without repeating the process. The option is available by clicking <code>Groups</code>, then <code>Default Groups</code>.
 </td>
 </tr>
 </table>
@@ -416,16 +403,14 @@ Red Hat Single Sign-On allows defining one or more groups as default groups, whe
 </div>
 </div>
 <div class="sect1">
-<h2 id="quarkus-app"><a class="anchor" href="#quarkus-app"></a>Securing Quarkus web applications using OpenID Connect (OIDC)</h2>
+<h2 id="quarkus-app"><a class="anchor" href="#quarkus-app"></a>Securing Quarkus Applications with OIDC</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The sample application that we will use in this section is the <code>Quarkus Petclinic project</code>.</p>
+<p>The sample application used in this section is the <code>Quarkus Petclinic project</code>.</p>
 </div>
 <div class="paragraph">
-<p>In this tutorial, we will work with a version that has been modified for the tutorial.</p>
-</div>
-<div class="paragraph">
-<p>The repository for this modified version is:</p>
+<p>For this tutorial, we will work with a version modified specifically for the exercises.
+The repository for this modified version is:</p>
 </div>
 <div class="paragraph">
 <p><a href="https://github.com/aolle/quarkus-petclinic.git" class="bare">https://github.com/aolle/quarkus-petclinic.git</a></p>
@@ -439,10 +424,11 @@ Red Hat Single Sign-On allows defining one or more groups as default groups, whe
 </div>
 </div>
 <div class="paragraph">
-<p>The application is prepared to be deployed on top of Red Hat OpenShift. The application project contains the Quarkus OpenShift extension (<code>k8s</code> with <code>s2i</code>) to automatically generate the OpenShift resources and deploy it.</p>
+<p>The application is prepared for deployment on Red Hat OpenShift.
+It includes the Quarkus OpenShift extension (<code>k8s</code> with <code>s2i</code>) to automatically generate the OpenShift resources and deploy the application.</p>
 </div>
 <div class="paragraph">
-<p>Test the application, follow these steps:</p>
+<p>Test the application by following these steps:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -450,10 +436,10 @@ Red Hat Single Sign-On allows defining one or more groups as default groups, whe
 <p>Log into your Red Hat OpenShift cluster.</p>
 </li>
 <li>
-<p>Switch to the <code>sso</code> project if you are not currently using it.</p>
+<p>Switch to the <code>sso</code> project if you are not already using it.</p>
 </li>
 <li>
-<p>Deploy the application by executing the <code>ocp-deploy.sh</code> script or alternatively:</p>
+<p>Deploy the application by executing the <code>ocp-deploy.sh</code> script or, alternatively:</p>
 </li>
 </ul>
 </div>
@@ -469,7 +455,8 @@ Red Hat Single Sign-On allows defining one or more groups as default groups, whe
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-During the build, you may encounter the <code>SSLHandshakeException/ValidatorException</code> exception due to self-signed certificate. To solve this, add <code>-Dquarkus.kubernetes-client.trust-certs=true</code> during the build process.
+During the build, you may encounter an <code>SSLHandshakeException/ValidatorException</code> due to a self-signed certificate.
+To resolve this, add <code>-Dquarkus.kubernetes-client.trust-certs=true</code> during the build.
 </td>
 </tr>
 </table>
@@ -493,21 +480,21 @@ During the build, you may encounter the <code>SSLHandshakeException/ValidatorExc
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Make a note of the application URL as it will be required during the security configuration process.
+Make a note of the application URL, as it will be required later during the security configuration.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Before securing the application, let&#8217;s configure a new client in our Red Hat Single Sign-On realm.</p>
+<p>Before securing the application, configure a new client in the Red Hat Single Sign-On <code>demo</code> realm:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Open a browser window and log in to the Red Hat Single Sign-On administration web console.</p>
+<p>Open the Red Hat Single Sign-On administration console.</p>
 </li>
 <li>
-<p>Select our <code>demo</code> realm and click <code>Clients</code>. Click <code>Create</code>.</p>
+<p>Select the <code>demo</code> realm and click <code>Clients</code>. Click <code>Create</code>.</p>
 </li>
 </ul>
 </div>
@@ -524,7 +511,7 @@ Make a note of the application URL as it will be required during the security co
 <div class="ulist">
 <ul>
 <li>
-<p>Set <code>quarkus-petclinic</code> as <code>Client ID</code>. Click <code>Save</code>.</p>
+<p>Set <code>quarkus-petclinic</code> as the <code>Client ID</code> and click <code>Save</code>.</p>
 </li>
 </ul>
 </div>
@@ -540,13 +527,13 @@ Make a note of the application URL as it will be required during the security co
 <div class="ulist">
 <ul>
 <li>
-<p>Change the <code>Access Type</code> from <code>public</code> to <code>confidential</code>.</p>
+<p>Change <code>Access Type</code> from <code>public</code> to <code>confidential</code>.</p>
 </li>
 <li>
-<p>Set <code>Authorization Enabled</code> to <code>ON</code>.</p>
+<p>Enable <code>Authorization Enabled</code>.</p>
 </li>
 <li>
-<p>Set <code>Valid Redirect URIs</code> to include the root context of your application. For example, if your petclinic application is available at <code><a href="http://domain.example.com/" class="bare">http://domain.example.com/</a></code>, write <code><a href="http://domain.example.com/*" class="bare">http://domain.example.com/*</a></code>.</p>
+<p>Set <code>Valid Redirect URIs</code> to include the root context of your application, e.g., <code><a href="http://domain.example.com/*" class="bare">http://domain.example.com/*</a></code>.</p>
 </li>
 <li>
 <p>Click <code>Save</code>.</p>
@@ -562,25 +549,34 @@ Make a note of the application URL as it will be required during the security co
 </div>
 </div>
 <div class="paragraph">
-<p>At this point, we have the <code>demo</code> realm with the <code>quarkus-petclinic</code> client; additionally, we created two roles and two users: the user <code>angel</code> that has the <code>vet</code> role and the user <code>elisabeth</code> that has the role <code>assistant</code>.</p>
+<p>At this point, we have:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The authorization granularity that we want to configure based on our application is the following:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Any user that belongs to the <code>demo</code> realm, like <code>elisabeth</code>, can browse the application except the <code>VETERINARIANS</code> resource.</p>
+<p>The <code>demo</code> realm with the <code>quarkus-petclinic</code> client.</p>
 </li>
 <li>
-<p>Only the users with the role <code>vet</code> can view the <code>VETERINARIANS</code> resource (which has the <code>/vets.html</code> context).</p>
+<p>Two roles: <code>vet</code> and <code>assistant</code>.</p>
 </li>
 <li>
-<p>Any other user access outside the realm will be rejected.</p>
+<p>Two users: <code>angel</code> (role <code>vet</code>) and <code>elisabeth</code> (role <code>assistant</code>).</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>Authorization rules for our application:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Any user in the <code>demo</code> realm, like <code>elisabeth</code>, can browse the application except the <code>VETERINARIANS</code> resource.</p>
+</li>
+<li>
+<p>Only users with the <code>vet</code> role can access the <code>/vets.html</code> resource.</p>
+</li>
+<li>
+<p>Any other user outside the realm will be denied access.</p>
 </li>
 </ul>
 </div>
@@ -590,12 +586,12 @@ Make a note of the application URL as it will be required during the security co
 </div>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s configure our client authorization.</p>
+<p>Configuring Client Authorization</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Open a browser window and log in to the Red Hat Single Sign-On administration web console. Browse to our <code>quarkus-petclinic</code> client and click the <code>Authorization</code> and then <code>Resources</code> tabs.</p>
+<p>Open the Red Hat Single Sign-On administration console, select the <code>quarkus-petclinic</code> client, then browse to the <code>Authorization</code> tab and click <code>Resources</code>.</p>
 </li>
 </ul>
 </div>
@@ -619,7 +615,7 @@ Make a note of the application URL as it will be required during the security co
 <div class="ulist">
 <ul>
 <li>
-<p>Click on <code>Create Policy&#8230;&#8203;</code> and select <code>Group</code>.</p>
+<p>Click <code>Create Policy&#8230;&#8203;</code> and select <code>Group</code>.</p>
 </li>
 </ul>
 </div>
@@ -631,7 +627,7 @@ Make a note of the application URL as it will be required during the security co
 <div class="ulist">
 <ul>
 <li>
-<p>Set <code>Default Group Policy</code> as the <code>Name</code>. Select <code>staff</code> from the <code>Groups</code> list and click <code>Select</code>. Make sure that the <code>Logic</code> is set to <code>Positive</code> and <code>Extend to Children</code> is checked (we will use this logic in later chapters). Finally, click <code>Save</code>.</p>
+<p>Set <code>Default Group Policy</code> as the <code>Name</code>. Select <code>staff</code> from the <code>Groups</code> list, ensure <code>Logic</code> is <code>Positive</code>, and check <code>Extend to Children</code>. Click <code>Save</code>.</p>
 </li>
 </ul>
 </div>
@@ -643,7 +639,7 @@ Make a note of the application URL as it will be required during the security co
 <div class="ulist">
 <ul>
 <li>
-<p>You will be redirected back to the <code>Add Resource Permission</code> page. Set <code>Default Resource Permission</code> as <code>Name</code> and select <code>Default Resource</code> as <code>Resources</code>. The recently created policy should have been added automatically. Click <code>Save</code>.</p>
+<p>Back on the <code>Add Resource Permission</code> page, set <code>Default Resource Permission</code> as <code>Name</code>, select <code>Default Resource</code> as <code>Resources</code>. The recently created policy should be applied automatically. Click <code>Save</code>.</p>
 </li>
 </ul>
 </div>
@@ -655,7 +651,7 @@ Make a note of the application URL as it will be required during the security co
 <div class="ulist">
 <ul>
 <li>
-<p>Create a new resource by clicking on <code>Create</code>.</p>
+<p>Create a new resource:</p>
 </li>
 </ul>
 </div>
@@ -667,7 +663,7 @@ Make a note of the application URL as it will be required during the security co
 <div class="ulist">
 <ul>
 <li>
-<p>Set <code>Vets Resource</code> as <code>Name</code> and <code>Display name</code>, and <code>/vets.html</code> as URI. Click <code>Save</code>.</p>
+<p>Set <code>Vets Resource</code> as the <code>Name</code> and <code>Display Name</code>, and <code>/vets.html</code> as the URI. Click <code>Save</code>.</p>
 </li>
 </ul>
 </div>
@@ -679,7 +675,7 @@ Make a note of the application URL as it will be required during the security co
 <div class="ulist">
 <ul>
 <li>
-<p>Browse to <code>Authorization</code> and <code>Policies</code> tabs. Click on <code>Create Policy&#8230;&#8203;</code> and select <code>Role</code>.</p>
+<p>Browse to <code>Authorization</code> → <code>Policies</code>. Click <code>Create Policy&#8230;&#8203;</code> and select <code>Role</code>.</p>
 </li>
 </ul>
 </div>
@@ -691,7 +687,7 @@ Make a note of the application URL as it will be required during the security co
 <div class="ulist">
 <ul>
 <li>
-<p>Set <code>Vet Role Policy</code> as the Name, <code>vet</code> as <code>Realm Roles</code>, and check required. Click <code>Save</code>.</p>
+<p>Set <code>Vet Role Policy</code> as <code>Name</code>, select <code>vet</code> in <code>Realm Roles</code>, check <code>Required</code>, and click <code>Save</code>.</p>
 </li>
 </ul>
 </div>
@@ -703,10 +699,7 @@ Make a note of the application URL as it will be required during the security co
 <div class="ulist">
 <ul>
 <li>
-<p>Browse to the <code>Authorization</code> and <code>Resources</code> tabs.</p>
-</li>
-<li>
-<p>Click on <code>Create Permission</code> for the <code>Vets Resource</code>.</p>
+<p>Browse to <code>Authorization</code> → <code>Resources</code>, click <code>Create Permission</code> for the <code>Vets Resource</code>.</p>
 </li>
 </ul>
 </div>
@@ -718,7 +711,7 @@ Make a note of the application URL as it will be required during the security co
 <div class="ulist">
 <ul>
 <li>
-<p>Set <code>Vets Resource Permission</code> as <code>Name</code>. And apply the <code>Vet Role Policy</code>. Click <code>Save</code>.</p>
+<p>Set <code>Vets Resource Permission</code> as <code>Name</code> and apply the <code>Vet Role Policy</code>. Click <code>Save</code>.</p>
 </li>
 </ul>
 </div>
@@ -728,15 +721,13 @@ Make a note of the application URL as it will be required during the security co
 </div>
 </div>
 <div class="paragraph">
-<p>At this point, the Red Hat Single Sign-On client is properly configured.</p>
-</div>
-<div class="paragraph">
-<p>Let&#8217;s configure the application side.</p>
+<p>Configuring the Application</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Open a browser window and log in to the Red Hat Single Sign-On administration web console. Browse to our <code>quarkus-petclinic</code> client and click the <code>Credentials</code> tab. Write down the <code>Secret</code> value, we will need it soon.</p>
+<p>In the Red Hat Single Sign-On administration console, select the <code>quarkus-petclinic</code> client and click the <code>Credentials</code> tab.
+Write down the <code>Secret</code> value — it will be required later.</p>
 </li>
 </ul>
 </div>
@@ -748,7 +739,7 @@ Make a note of the application URL as it will be required during the security co
 <div class="ulist">
 <ul>
 <li>
-<p>Create the ConfigMap with the <code>SSO_HOST</code> environment variable. Replace <code>{YOUR_SSO_HOST}</code> with the correct value.</p>
+<p>Create a ConfigMap with the <code>SSO_HOST</code> environment variable:</p>
 </li>
 </ul>
 </div>
@@ -760,7 +751,7 @@ Make a note of the application URL as it will be required during the security co
 <div class="ulist">
 <ul>
 <li>
-<p>Create the secret with the OIDC client credentials. Replace the <code>{YOUR_SSO_CLIENT_SECRET}</code> with the correct value.</p>
+<p>Create a Secret with the OIDC client credentials:</p>
 </li>
 </ul>
 </div>
@@ -772,7 +763,7 @@ Make a note of the application URL as it will be required during the security co
 <div class="ulist">
 <ul>
 <li>
-<p>Add the following configuration in <code>application.properties</code> as shown:</p>
+<p>Update <code>application.properties</code> with the following configuration:</p>
 </li>
 </ul>
 </div>
@@ -799,32 +790,20 @@ quarkus.keycloak.policy-enforcer.enable=true</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>Redeploy and test the application accesses:</p>
+<p>Redeploy and test application access:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Open a new incognito browser session.</p>
+<p>Open a new incognito browser session and browse to the application root. You will be redirected to the Red Hat Single Sign-On login page. Anonymous access is forbidden.</p>
 </li>
 <li>
-<p>Browse to the context root of the Quarkus Petclinic application. The request will be redirected to the Red Hat Single Sign-On login page. Here, we checked that the anonymous access to the application is forbidden.</p>
+<p>Log in as <code>elisabeth</code>. Access to <code>/vets.html</code> will be denied.</p>
 </li>
 <li>
-<p>Log in as <code>elisabeth</code>. The request will be redirected to the application after a successful login.</p>
+<p>Close the browser, open a new incognito session, and log in as <code>angel</code>.</p>
 </li>
 <li>
-<p>Browse through the application, try to access the VETERINARIANS section. The access should be denied, as <code>elisabeth</code> has the <code>assistant</code> role and the access is restricted to the <code>vet</code> role. An error will be shown on the application page.</p>
-</li>
-<li>
-<p>Close the browser and open a new one incognito session.</p>
-</li>
-<li>
-<p>Visit the context root of the application again.</p>
-</li>
-<li>
-<p>Login as <code>angel</code>.</p>
-</li>
-<li>
-<p>Browse through the application, try to access the VETERINARIANS section. The access should be granted, as <code>angel</code> has the <code>vet</code> role.</p>
+<p>Access to <code>/vets.html</code> will be granted, as <code>angel</code> has the <code>vet</code> role.</p>
 </li>
 </ul>
 </div>
@@ -838,7 +817,7 @@ quarkus.keycloak.policy-enforcer.enable=true</code></pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-A complete OIDC working Petclinic Quarkus application is available at <code>rh-sso-oidc-7.6</code> branch.
+A fully working OIDC Petclinic Quarkus application is available at the <code>rh-sso-oidc-7.6</code> branch.
 </td>
 </tr>
 </table>
@@ -846,8 +825,8 @@ A complete OIDC working Petclinic Quarkus application is available at <code>rh-s
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="setup.html">1. Environment Setup</a></span>
-  <span class="next"><a href="federation.html">2.2 User Federation</a></span>
+  <span class="prev"><a href="setup.html">Workshop Setup</a></span>
+  <span class="next"><a href="federation.html">User Federation</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

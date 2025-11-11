@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Vault :: Red Hat Single Sign-On Workshop</title>
+    <title>Secrets and Vault Integration :: Red Hat Single Sign-On Workshop</title>
     <link rel="canonical" href="https://olleb.com/rhsso-workshop/vault.html">
     <link rel="prev" href="authentication.html">
     <link rel="next" href="jwt.html">
@@ -59,127 +59,121 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="setup.html">1. Environment Setup</a>
+    <a class="nav-link" href="setup.html">Workshop Setup</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="setup.html#tools">1.1. Workshop Tools</a>
+    <a class="nav-link" href="setup.html#tools">Workshop Tools</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="setup.html#deployrhsso">1.2. Deploying Red Hat Single Sign-On for OpenShift</a>
+    <a class="nav-link" href="setup.html#deployrhsso">Deploying Red Hat Single Sign-On on OpenShift</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="setup.html#deployrhsso-operator">1.2.1 Deploying Red Hat Single Sign-On for OpenShift using the Operator</a>
+    <a class="nav-link" href="setup.html#deployrhsso-operator">Deploying Red Hat Single Sign-On Using the Operator</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="setup.html#deployrhsso-templates">1.2.2 Deploying Red Hat Single Sign-On for OpenShift using the templates</a>
+    <a class="nav-link" href="setup.html#deployrhsso-templates">Deploying Red Hat Single Sign-On Using Templates</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="setup.html#deploy-ipa">1.3 Deploying an Identity Management (IdM/FreeIPA) on Red Hat OpenShift</a>
+    <a class="nav-link" href="setup.html#deploy-ipa">Deploying Identity Management (IdM/FreeIPA)</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">2. Red Hat Single Sign-On</span>
+    <a class="nav-link" href="secapp.html">Securing Applications and Services</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="secapp.html">2.1 Securing web applications and services with Red Hat Single Sign-On</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="secapp.html#presetup">2.1.1 Configuring the realm, roles, groups and users</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="secapp.html#quarkus-app">2.1.2 Securing Quarkus web applications using OpenID Connect (OIDC)</a>
-  </li>
-</ul>
+    <a class="nav-link" href="secapp.html#realm-config">Configuring Realm, Roles, Groups and Users</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="federation.html">2.2 User Federation</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="federation.html#ldap">2.2.1 LDAP User Federation</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="federation.html#user-storage-spi">2.2.2 User Storage SPI</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="federation.html#user-storage-spi-jpa">2.2.2.1 External user database store</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="federation.html#user-storage-spi-rest">2.2.2.2 External user REST service store</a>
+    <a class="nav-link" href="secapp.html#quarkus-app">Securing Quarkus Applications with OIDC</a>
   </li>
 </ul>
   </li>
-</ul>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="federation.html">User Federation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="federation.html#ldap">LDAP User Federation</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="authentication.html">2.3 Authentication</a>
+    <a class="nav-link" href="federation.html#user-storage-spi">User Storage SPI</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="federation.html#user-storage-spi-jpa">External User Database Store</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="federation.html#user-storage-spi-rest">External User REST Service Store</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="authentication.html">2.3.1 Authentication SPI</a>
+    <a class="nav-link" href="authentication.html">Authentication Extensions</a>
 <ul class="nav-list">
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="authentication.html#presetup">2.3.1.1 Configuring the plugin and flows</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="authentication.html#telegram2fa">2.3.1.2 Telegram two-factor authentication with authentication SPI</a>
-  </li>
-</ul>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item is-current-page" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="vault.html">2.4 Vault</a>
-<ul class="nav-list">
-  <li class="nav-item is-current-page" data-depth="3">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="vault.html">2.4.1 Vault SPI</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="#vault-spi-conjur">2.4.1.1 Integrating Red Hat Single Sign-On with CyberArk Conjur for secrets management</a>
-  </li>
-</ul>
-  </li>
-</ul>
-  </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="jwt.html">2.5 JSON Web Tokens (JWT)</a>
+    <a class="nav-link" href="authentication.html#auth-spi">Authentication SPI</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="jwt.html#custom-claim">2.5.1 Adding a custom JWT claim</a>
+    <a class="nav-link" href="authentication.html#auth-plugin-setup">Configuring Plugins and Authentication Flows</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="authentication.html#telegram2fa">Two-Factor Authentication with Telegram</a>
   </li>
 </ul>
   </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="vault.html">Secrets and Vault Integration</a>
+<ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="troubleshooting.html">2.4 FAQs &amp; Troubleshooting</a>
+    <a class="nav-link" href="#vault-spi">Vault SPI</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="troubleshooting.html">2.4.1 Which Keycloak version is Red Hat Single Sign-On based on?</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="troubleshooting.html">2.4.2 How to Extend Red Hat Single Sign-On OpenShift Image</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="troubleshooting.html">2.4.3 How to Register Provider Implementations</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="troubleshooting.html">2.4.4 How to Obtain the Red Hat Single Sign-On Admin Credentials</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="troubleshooting.html">2.4.5 How to Enable TRACE Logging</a>
+    <a class="nav-link" href="#vault-conjur">Integrating RH-SSO with Conjur using the Vault SPI</a>
   </li>
 </ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="jwt.html">JSON Web Tokens (JWT)</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jwt.html#custom-claim">Adding a Custom JWT Claim</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="troubleshooting.html">FAQs &amp; Troubleshooting</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="troubleshooting.html#version">Which Keycloak version is this SSO based on?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="troubleshooting.html#extend-image">How to Extend the SSO Image</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="troubleshooting.html#register-provider">How to Register Provider Implementations</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="troubleshooting.html#admin-creds">How to Obtain Admin Credentials</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="troubleshooting.html#trace-logging">How to Enable TRACE Logging</a>
   </li>
 </ul>
   </li>
@@ -197,33 +191,32 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">Red Hat Single Sign-On Workshop</a></li>
-    <li>2. Red Hat Single Sign-On</li>
-    <li><a href="vault.html">2.4 Vault</a></li>
+    <li><a href="vault.html">Secrets and Vault Integration</a></li>
   </ul>
 </nav>
   <div style="padding: 0 0.5rem 0 0.75rem;"><a href="https://olleb.com" target="_blank" rel="noopener noreferrer"> © 2023 - Àngel Ollé Blázquez</a></div>
 </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">Vault</h1>
+<h1 class="page">Secrets and Vault Integration</h1>
 <div class="sect1">
 <h2 id="_vault_spi"><a class="anchor" href="#_vault_spi"></a>Vault SPI</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You can use the vault SPI to write custom extension for Red Hat Single Sign-On that connects to an arbitrary vault implementation.</p>
+<p>The Vault SPI enables the creation of custom extensions for Red Hat Single Sign-On (RH-SSO) that integrate with any external vault implementation.</p>
+</div>
+<div class="paragraph">
+<p>Using the Vault SPI, RH-SSO can securely retrieve secrets—such as passwords, keys, or tokens—from the vault of your choice, providing a flexible and centralized way to manage sensitive data.</p>
 </div>
 <div class="sect2">
-<h3 id="vault-spi-conjur"><a class="anchor" href="#vault-spi-conjur"></a>Integrating Red Hat Single Sign-On with CyberArk Conjur for secrets management</h3>
+<h3 id="vault-spi-conjur"><a class="anchor" href="#vault-spi-conjur"></a>Integrating RH-SSO with Conjur using the Vault SPI</h3>
 <div class="paragraph">
-<p>This chapter explains how to integrate Red Hat Single Sign-On with Conjur using the Vault SPI. For the demo, we will obtain the 389 Directory Server credentials of the <code>cn=Directory Manager</code> user stored in Conjur that has to be used by Red Hat Single Sign-On for the user federation.</p>
-</div>
-<div class="paragraph">
-<p>Setup steps:</p>
+<p>This chapter explains how to integrate Red Hat Single Sign-On (RH-SSO) with Conjur using the Vault SPI. For this demo, we will retrieve the 389 Directory Server credentials of the <code>cn=Directory Manager</code> user stored in Conjur, which will be used by RH-SSO for user federation.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Run the provided Conjur OSS community collection provided with this workshop.</p>
+<p>Run the provided Conjur OSS community collection included in this workshop.</p>
 </li>
 </ul>
 </div>
@@ -235,7 +228,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Create the admin account <code>demoAccount</code>.</p>
+<p>Create the admin account <code>demoAccount</code>:</p>
 </li>
 </ul>
 </div>
@@ -245,12 +238,12 @@
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>admin_data</code> file contains the public key and the API key of the admin user on that account.</p>
+<p>The <code>admin_data</code> file contains the public key and API key of the admin user.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Load the provided Conjur policy and create a secret for the demo by running the following commands in the terminal:</p>
+<p>Load the provided Conjur policy and create a secret for the demo:</p>
 </li>
 </ul>
 </div>
@@ -272,7 +265,7 @@ curl -H "Authorization: Token token=\"${TOKEN}\"" -d "password" <a href="https:/
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-we are using the REST API, but other approaches like Conjur CLI (or others) can also be used.
+We are using the REST API here, but other approaches like the Conjur CLI can also be used.
 </td>
 </tr>
 </table>
@@ -280,21 +273,9 @@ we are using the REST API, but other approaches like Conjur CLI (or others) can 
 <div class="ulist">
 <ul>
 <li>
-<p>Export the required environment variables.</p>
+<p>Export the required environment variables for the Vault SPI:</p>
 </li>
 </ul>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-instead of exporting the Conjur API required configuration as environment variables, it can also be configured with SPI provider properties.
-</td>
-</tr>
-</table>
 </div>
 <div class="listingblock lines_space console-input">
 <div class="content">
@@ -304,10 +285,13 @@ export CONJUR_APPLIANCE_URL=https://$CONJUR_HOST
 export CONJUR_AUTHN_LOGIN=admin</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>Alternatively, the SPI provider properties can be configured directly instead of using environment variables.</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Deploy the extension and configure the SPI.</p>
+<p>Deploy the extension and configure the Vault SPI in RH-SSO:</p>
 </li>
 </ul>
 </div>
@@ -319,8 +303,12 @@ export CONJUR_AUTHN_LOGIN=admin</code></pre>
 :reload</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Ensure that the 389 Directory Server is up and running and that you have deployed the Conjur extension and configured the Vault SPI as described in the previous steps.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ensure the 389 Directory Server is running and that the Conjur extension and Vault SPI are configured.</p>
+</li>
+</ul>
 </div>
 <div class="listingblock lines_space console-input">
 <div class="content">
@@ -330,13 +318,10 @@ export CONJUR_AUTHN_LOGIN=admin</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>Open a browser window and log in to the Red Hat Single Sign-On administration web console.</p>
+<p>Log in to the RH-SSO administration web console.</p>
 </li>
 <li>
-<p>Select the <code>Demo</code> realm.</p>
-</li>
-<li>
-<p>Click <code>User Federation</code>.</p>
+<p>Select the <code>Demo</code> realm and click <code>User Federation</code>.</p>
 </li>
 </ul>
 </div>
@@ -360,7 +345,7 @@ export CONJUR_AUTHN_LOGIN=admin</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>Fill in the user federation provider settings with the appropiate values for your LDAP server. Click the <code>Test connection</code> button to check the connection. If successful, you should see a message saying "Success! LDAP connection successful".</p>
+<p>Fill in the LDAP provider settings. Click <code>Test connection</code> to verify connectivity. A successful test will show:</p>
 </li>
 </ul>
 </div>
@@ -372,7 +357,7 @@ export CONJUR_AUTHN_LOGIN=admin</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>Test the authentication with a random wrong password. It should fail.</p>
+<p>Test authentication with a wrong password. It should fail:</p>
 </li>
 </ul>
 </div>
@@ -384,7 +369,7 @@ export CONJUR_AUTHN_LOGIN=admin</code></pre>
 <div class="ulist">
 <ul>
 <li>
-<p>Enter the field as the vault value, <code>${vault.ldap/password}</code> for the <code>Bind Credential</code> field. Test the authentication again. It should now work.</p>
+<p>Set the <code>Bind Credential</code> to the vault value <code>${vault.ldap/password}</code>. Test authentication again. It should succeed:</p>
 </li>
 </ul>
 </div>
@@ -397,8 +382,8 @@ export CONJUR_AUTHN_LOGIN=admin</code></pre>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="authentication.html">2.3 Authentication</a></span>
-  <span class="next"><a href="jwt.html">2.5 JSON Web Tokens (JWT)</a></span>
+  <span class="prev"><a href="authentication.html">Authentication Extensions</a></span>
+  <span class="next"><a href="jwt.html">JSON Web Tokens (JWT)</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
