@@ -3,12 +3,14 @@ include::_attributes.adoc[]
 
 This section provides answers to frequently asked questions and common troubleshooting topics related to Red Hat Single Sign-On (RH-SSO) and its integration in OpenShift environments.
 
+[#version]
 == Which Keycloak version is this SSO based on?
 
 You can verify the base Keycloak version used by your Red Hat Single Sign-On (RH-SSO) release at:
 
 https://access.redhat.com/articles/2342881[Red Hat Single Sign-On Component Details]
 
+[#extend-image]
 == How to Extend the SSO Image
 
 To properly customize the Red Hat Single Sign-On OpenShift image using the S2I strategy, refer to:
@@ -17,6 +19,7 @@ To properly customize the Red Hat Single Sign-On OpenShift image using the S2I s
 
 * https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.4/html-single/getting_started_with_jboss_eap_for_openshift_container_platform/index#s2i_modules_drivers_deployments[Configuring the JBoss EAP for OpenShift Image for Your Java Application]
 
+[#register-provider]
 == How to Register Provider Implementations
 
 Provider implementations can be registered using either the *deployer* or *module* approaches.
@@ -25,6 +28,7 @@ For detailed guidance, refer to:
 
 https://access.redhat.com/documentation/en-us/red_hat_single_sign-on/7.6/html/server_developer_guide/providers#registering_provider_implementations[Registering provider implementations]
 
+[#admin-creds]
 == How to Obtain Admin Credentials
 
 Admin credentials are stored in the following environment variables within the `DeploymentConfig` (or Pod):
@@ -32,6 +36,7 @@ Admin credentials are stored in the following environment variables within the `
 * `SSO_ADMIN_USERNAME`
 * `SSO_ADMIN_PASSWORD`
 
+[#trace-logging]
 == How to Enable TRACE Logging
 
 For instructions on enabling TRACE-level logging in Red Hat SSO, see:

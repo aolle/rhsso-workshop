@@ -12,7 +12,6 @@
 * xref:federation.adoc[User Federation]
 ** xref:federation.adoc#ldap[LDAP User Federation]
 ** xref:federation.adoc#user-storage-spi[User Storage SPI]
-*** xref:federation.adoc#user-storage-spi-jpa[External User Database Store]
 *** xref:federation.adoc#user-storage-spi-rest[External User REST Service Store]
 
 * xref:authentication.adoc[Authentication Extensions]
