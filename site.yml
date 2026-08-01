@@ -26,12 +26,7 @@ ui:
   bundle:
     url: https://github.com/zerodepth-hub/rhdp_showroom_theme/releases/download/v2.0.3/ui-bundle.zip
     snapshot: true
-  supplemental_files:
-    - path: partials/toolbar.hbs
-      contents: ./supplemental-ui/partials/toolbar.hbs
-    - path: .nojekyll
-    - path: ui.yml
-      contents: "static_files: [ .nojekyll ]"
+  supplemental_files: ./supplemental-ui
 
 output:
   dir: ./gh-pages
